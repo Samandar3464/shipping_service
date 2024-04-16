@@ -5,8 +5,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
-import uz.pdp.shippingservice.model.request.CarRegisterRequestDto;
-import uz.pdp.shippingservice.model.response.DenyCar;
+import uz.pdp.shippingservice.dto.request.CarRegisterRequestDto;
+import uz.pdp.shippingservice.dto.response.DenyCar;
 import uz.pdp.shippingservice.service.CarService;
 
 import java.util.UUID;

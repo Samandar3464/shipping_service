@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
-import uz.pdp.shippingservice.model.request.AnnouncementClientDto;
-import uz.pdp.shippingservice.model.request.GetByFilter;
+import uz.pdp.shippingservice.dto.request.AnnouncementClientDto;
+import uz.pdp.shippingservice.dto.request.GetByFilter;
 import uz.pdp.shippingservice.service.AnnouncementClientService;
 
 import java.util.UUID;

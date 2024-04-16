@@ -2,8 +2,7 @@ package uz.pdp.shippingservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.shippingservice.model.CountryDto;
-import uz.pdp.shippingservice.model.request.RegionRegisterRequestDto;
+import uz.pdp.shippingservice.dto.CountryDto;
 
 @Getter
 @Setter

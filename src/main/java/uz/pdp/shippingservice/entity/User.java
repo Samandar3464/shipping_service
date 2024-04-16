@@ -9,14 +9,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import uz.pdp.shippingservice.enums.Gender;
-import uz.pdp.shippingservice.model.request.UserRegisterDto;
+import uz.pdp.shippingservice.dto.request.UserRegisterDto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -25,43 +25,57 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @NotBlank
-    private String fullName;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "father_name")
+    private String fatherName;
 
     @NotBlank
     @Size(min = 9,max = 9)
+    @Column(name = "phone" ,unique = true)
     private String phone;
 
-    @NotBlank
     @Size(min = 6)
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    private LocalDateTime registeredDate;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
+    @Column(name = "is_blocked")
     private boolean isBlocked;
 
-    private String fireBaseToken;
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 
-    private Integer verificationCode;
+    @Column(name = "firebase_token")
+    private String firebaseToken;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
     private Gender gender;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Attachment profilePhoto;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Status status;
+    @Column(name = "avatar_id")
+    private Attachment avatarId;
 
     @ManyToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
+    @Column(name = "roles")
     private List<Role> roles;
 
     @Override
@@ -98,11 +112,10 @@ public class User implements UserDetails {
 
     public static User from(UserRegisterDto userRegisterDto){
         return User.builder()
-                .fullName(userRegisterDto.getFullName())
+                .name(userRegisterDto.getFullName())
                 .phone(userRegisterDto.getPhone())
                 .gender(userRegisterDto.getGender())
-                .registeredDate(LocalDateTime.now())
-                .status(userRegisterDto.getStatus())
+                .createdAt(LocalDateTime.now())
                 .isBlocked(true)
                 .build();
     }

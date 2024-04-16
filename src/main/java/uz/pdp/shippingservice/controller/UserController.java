@@ -6,10 +6,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
-import uz.pdp.shippingservice.model.request.*;
+import uz.pdp.shippingservice.dto.request.*;
 import uz.pdp.shippingservice.service.UserService;
 
-import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -44,7 +43,7 @@ public class UserController {
 
     @GetMapping("/getById/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse getUserById(@PathVariable UUID id) {
+    public ApiResponse getUserById(@PathVariable Long id) {
         return userService.getByUserId(id);
     }
     @PostMapping("/setStatus")
@@ -55,13 +54,13 @@ public class UserController {
 
     @PutMapping("/block/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse blockUserById(@PathVariable UUID id) {
+    public ApiResponse blockUserById(@PathVariable Long id) {
         return userService.addBlockUserByID(id);
     }
 
     @PutMapping("/openBlock/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse openBlockUserById(@PathVariable UUID id) {
+    public ApiResponse openBlockUserById(@PathVariable Long id) {
         return userService.openToBlockUserByID(id);
     }
 

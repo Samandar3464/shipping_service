@@ -9,11 +9,11 @@ import uz.pdp.shippingservice.entity.User;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.exception.AnnouncementAlreadyExistException;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
-import uz.pdp.shippingservice.model.request.AnnouncementClientDto;
-import uz.pdp.shippingservice.model.request.GetByFilter;
-import uz.pdp.shippingservice.model.response.AnnouncementClientResponse;
-import uz.pdp.shippingservice.model.response.AnnouncementClientResponseList;
-import uz.pdp.shippingservice.model.response.UserResponseDto;
+import uz.pdp.shippingservice.dto.request.AnnouncementClientDto;
+import uz.pdp.shippingservice.dto.request.GetByFilter;
+import uz.pdp.shippingservice.dto.response.AnnouncementClientResponse;
+import uz.pdp.shippingservice.dto.response.AnnouncementClientResponseList;
+import uz.pdp.shippingservice.dto.response.UserResponseDto;
 import uz.pdp.shippingservice.repository.*;
 
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class AnnouncementClientService {
 
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse getDriverAnnouncementByIdAndActiveTrue(UUID id) {
+    public ApiResponse getDriverAnnouncementByIdAndActiveTrue(Long id) {
         AnnouncementClient active = getByIdAndActiveAndDeletedFalse(id, true);
         User user = userService.checkUserExistById(active.getUser().getId());
         UserResponseDto userResponseDto = userService.fromUserToResponse(user);
@@ -112,7 +112,7 @@ public class AnnouncementClientService {
         return new ApiResponse(DELETED, true);
     }
 
-    public AnnouncementClient getByIdAndActiveAndDeletedFalse(UUID announcement_id, boolean active) {
+    public AnnouncementClient getByIdAndActiveAndDeletedFalse(Long announcement_id, boolean active) {
         return announcementClientRepository.findByIdAndActiveAndDeletedFalse(announcement_id, active)
                 .orElseThrow(() -> new AnnouncementNotFoundException(CLIENT_ANNOUNCEMENT_NOT_FOUND));
     }

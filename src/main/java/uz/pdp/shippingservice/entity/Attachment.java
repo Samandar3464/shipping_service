@@ -2,10 +2,7 @@ package uz.pdp.shippingservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,22 +12,25 @@ import java.util.UUID;
 @Entity
 public class Attachment  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(name = "origin_name")
     private String originName;
 
+    @Column(name = "size")
     private long size;
 
+    @Column(name = "new_name")
     private String newName;
 
+    @Column(name = "type")
     private String type;
 
+    @Column(name = "content_type")
     private String contentType;
 
+    @Column(name = "path")
     private String path;
 
-//    @ManyToOne
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    private Car car;
 }

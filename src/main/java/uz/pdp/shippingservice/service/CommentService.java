@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.Comments;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
-import uz.pdp.shippingservice.model.response.CommentsResponse;
+import uz.pdp.shippingservice.dto.response.CommentsResponse;
 import uz.pdp.shippingservice.repository.CommentRepository;
 
 import java.time.LocalDateTime;

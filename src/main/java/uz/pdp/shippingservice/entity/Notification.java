@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.shippingservice.enums.NotificationType;
-import uz.pdp.shippingservice.model.request.NotificationRequestDto;
+import uz.pdp.shippingservice.dto.request.NotificationRequestDto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

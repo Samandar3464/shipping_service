@@ -1,13 +1,7 @@
 package uz.pdp.shippingservice.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import uz.pdp.shippingservice.model.request.StatusDto;
-
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -18,23 +12,15 @@ import java.util.UUID;
 public class Status {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Long stars;
+    private int stars;
 
-    private Long count;
+    private String comment;
 
-    public Status(int stars, int count) {
-        this.stars = (long) stars;
-        this.count = (long) count;
-    }
+    private Long givenBy;
 
-    public static Status from(StatusDto statusDto, Status status) {
-        return Status.builder()
-                .id(status.getId())
-                .stars(status.getStars() + statusDto.getStars())
-                .count(status.getCount() + 1)
-                .build();
-    }
+    private Long givenTO;
+
 }

@@ -1,0 +1,49 @@
+#server:
+#  port: 8088
+#
+#spring:
+#  sql:
+#    init:
+#      mode: never
+#  jpa:
+#    hibernate:
+#      ddl-auto: none
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect:org.hibernate.dialect.PostgreSQLDialect
+#  datasource:
+#    url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}}/${DATABASE_NAME}
+#    jdbc-url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}}/${DATABASE_NAME}
+#    username: ${DATABASE_USER}
+#    password: ${DATABASE_PASSWORD}
+#    driver-class-name: org.postgresql.Driver
+#    configuration:
+#      jdbc-url: jdbc:postgresql://${DATABASE_HOST}:${DATABASE_PORT}}/${DATABASE_NAME}
+#      username: ${DATABASE_USER}
+#      password: ${DATABASE_PASSWORD}
+#
+#  servlet:
+#    multipart:
+#      max-file-size: 10MB
+#      max-request-size: 10MB
+#
+#  liquibase:
+#    url: ${spring.datasource.url}
+#    user: ${spring.datasource.username}
+#    password: ${spring.datasource.password}
+#    change-log: classpath:db/changeLog.xml
+#    enabled: true
+#
+#  rabbitmq:
+#    host: ${RABBIT_USER}
+#    port: ${RABBIT_PASSWORD}
+#    password: ${RABBIT_HOST}
+#    username: ${RABBIT_PORT}
+#
+#attach:
+#  upload:
+#    folder: D:/shippingService/src/main/resources/static/image/
+#
+#languages:
+#  primaryLang: en

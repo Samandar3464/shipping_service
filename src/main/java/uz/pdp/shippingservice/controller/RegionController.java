@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
-import uz.pdp.shippingservice.model.request.RegionRegisterRequestDto;
+import uz.pdp.shippingservice.dto.request.RegionRegisterRequestDto;
 import uz.pdp.shippingservice.service.RegionService;
 
 @RestController

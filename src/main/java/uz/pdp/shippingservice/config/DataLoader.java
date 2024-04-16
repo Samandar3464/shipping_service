@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import uz.pdp.shippingservice.entity.*;
 import uz.pdp.shippingservice.enums.Gender;
-import uz.pdp.shippingservice.model.CountryDto;
+import uz.pdp.shippingservice.dto.CountryDto;
 import uz.pdp.shippingservice.repository.*;
 
 import java.time.LocalDate;
@@ -42,19 +42,18 @@ public class DataLoader implements CommandLineRunner {
             Role save17 = roleRepository.save(haydovchi);
 
             User admin = User.builder()
-                    .fullName("ADMIN")
+                    .name("ADMIN")
                     .phone("111111111")
                     .birthDate(LocalDate.parse("1998-05-13"))
-                    .gender(Gender.ERKAK)
-                    .registeredDate(LocalDateTime.now())
-                    .verificationCode(0)
+                    .gender(Gender.MAN)
+                    .createdAt(LocalDateTime.now())
                     .password(passwordEncoder.encode("111111"))
                     .isBlocked(true)
                     .build();
             User save = userRepository.save(admin);
-            Status status = statusRepository.save(Status.builder().stars(5L).count(1L).build());
+            Status status = statusRepository.save(Status.builder().stars(5).build());
             save.setRoles(List.of(save15, save16, save17));
-            save.setStatus(status);
+
             userRepository.save(save);
 
             Country country = Country.from(new CountryDto("O'zbekistan"));

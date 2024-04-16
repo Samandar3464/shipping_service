@@ -14,12 +14,11 @@ import uz.pdp.shippingservice.enums.NotificationType;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
 import uz.pdp.shippingservice.exception.UserNotFoundException;
-import uz.pdp.shippingservice.model.request.AcceptRequestDto;
-import uz.pdp.shippingservice.model.request.NotificationRequestDto;
-import uz.pdp.shippingservice.model.response.*;
+import uz.pdp.shippingservice.dto.request.AcceptRequestDto;
+import uz.pdp.shippingservice.dto.request.NotificationRequestDto;
+import uz.pdp.shippingservice.dto.response.*;
 import uz.pdp.shippingservice.repository.AnnouncementClientRepository;
 import uz.pdp.shippingservice.repository.AnnouncementDriverRepository;
-import uz.pdp.shippingservice.repository.CarRepository;
 import uz.pdp.shippingservice.repository.NotificationRepository;
 
 import java.util.ArrayList;

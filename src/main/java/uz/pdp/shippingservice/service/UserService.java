@@ -24,11 +24,11 @@ import uz.pdp.shippingservice.entity.User;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.exception.UserAlreadyExistException;
 import uz.pdp.shippingservice.exception.UserNotFoundException;
-import uz.pdp.shippingservice.model.request.*;
-import uz.pdp.shippingservice.model.response.NotificationMessageResponse;
-import uz.pdp.shippingservice.model.response.TokenResponse;
-import uz.pdp.shippingservice.model.response.UserResponseDto;
-import uz.pdp.shippingservice.model.response.UserResponseListForAdmin;
+import uz.pdp.shippingservice.dto.request.*;
+import uz.pdp.shippingservice.dto.response.NotificationMessageResponse;
+import uz.pdp.shippingservice.dto.response.TokenResponse;
+import uz.pdp.shippingservice.dto.response.UserResponseDto;
+import uz.pdp.shippingservice.dto.response.UserResponseListForAdmin;
 import uz.pdp.shippingservice.repository.CountMassageRepository;
 import uz.pdp.shippingservice.repository.RoleRepository;
 import uz.pdp.shippingservice.repository.StatusRepository;
@@ -79,7 +79,6 @@ public class UserService {
     public ApiResponse verify(UserVerifyRequestDto userVerifyRequestDto) {
         User user = userRepository.findByPhoneAndVerificationCode(userVerifyRequestDto.getPhone(), userVerifyRequestDto.getVerificationCode())
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
-        user.setVerificationCode(0);
         user.setBlocked(true);
         userRepository.save(user);
         return new ApiResponse(USER_VERIFIED_SUCCESSFULLY, true,new TokenResponse(jwtGenerate.generateAccessToken(user), jwtGenerate.generateRefreshToken(user), fromUserToResponse(user)));
@@ -120,7 +119,7 @@ public class UserService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse getByUserId(UUID id) {
+    public ApiResponse getByUserId(Long id) {
         User user = checkUserExistById(id);
         return new ApiResponse(fromUserToResponse(user), true);
     }
@@ -128,31 +127,31 @@ public class UserService {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse setStatus(StatusDto statusDto) {
         User user = checkUserExistById(statusDto.getUserId());
-        Status status = Status.from(statusDto, user.getStatus());
-        statusRepository.save(status);
+//        Status status = Status.from(statusDto, user.getStatus());
+//        statusRepository.save(status);
         return new ApiResponse(SUCCESSFULLY, true);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @Transactional(rollbackFor = {Exception.class})
-    public ApiResponse addBlockUserByID(UUID id) {
+    public ApiResponse addBlockUserByID(Long id) {
         User user = checkUserExistById(id);
         Optional<User> byId = userRepository.findById(id);
         byId.get().setBlocked(false);
         userRepository.save(byId.get());
-        NotificationMessageResponse notificationMessageResponse = NotificationMessageResponse.from(user.getFireBaseToken(), BLOCKED, new HashMap<>());
+        NotificationMessageResponse notificationMessageResponse = NotificationMessageResponse.from(user.getFirebaseToken(), BLOCKED, new HashMap<>());
         fireBaseMessagingService.sendNotificationByToken(notificationMessageResponse);
         return new ApiResponse(DELETED, true);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @Transactional(rollbackFor = {Exception.class})
-    public ApiResponse openToBlockUserByID(UUID id) {
+    public ApiResponse openToBlockUserByID(Long id) {
         User user = checkUserExistById(id);
         Optional<User> byId = userRepository.findById(id);
         byId.get().setBlocked(true);
         userRepository.save(byId.get());
-        NotificationMessageResponse notificationMessageResponse = NotificationMessageResponse.from(user.getFireBaseToken(), OPEN, new HashMap<>());
+        NotificationMessageResponse notificationMessageResponse = NotificationMessageResponse.from(user.getFirebaseToken(), OPEN, new HashMap<>());
         fireBaseMessagingService.sendNotificationByToken(notificationMessageResponse);
         return new ApiResponse(DELETED, true);
     }
@@ -160,7 +159,7 @@ public class UserService {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse saveFireBaseToken(FireBaseTokenRegisterDto fireBaseTokenRegisterDto) {
         User user = checkUserExistById(fireBaseTokenRegisterDto.getUserId());
-        user.setFireBaseToken(fireBaseTokenRegisterDto.getFireBaseToken());
+        user.setFirebaseToken(fireBaseTokenRegisterDto.getFireBaseToken());
         userRepository.save(user);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -224,14 +223,13 @@ public class UserService {
         return userRepository.findByPhone(user.getPhone()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
     }
 
-    public User checkUserExistById(UUID id) {
+    public User checkUserExistById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
     }
 
     private User from(UserRegisterDto userRegisterDto, int verificationCode) {
-        userRegisterDto.setStatus(statusRepository.save(Status.builder().count(1L).stars(5L).build()));
+        userRegisterDto.setStatus(statusRepository.save(Status.builder().stars(5).build()));
         User user = User.from(userRegisterDto);
-        user.setVerificationCode(verificationCode);
         user.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
 //        user.setRoles(List.of(roleRepository.findByName(CARGO_OWNER)));
         user.setRoles(List.of(roleRepository.findByName(CLIENT), roleRepository.findByName(DRIVER)));
@@ -240,10 +238,10 @@ public class UserService {
 
     public UserResponseDto fromUserToResponse(User user) {
         String photoLink = "https://sb.kaleidousercontent.com/67418/992x558/7632960ff9/people.png";
-        if (user.getProfilePhoto() != null) {
-            Attachment attachment = user.getProfilePhoto();
-            photoLink = attachmentService.attachUploadFolder + attachment.getPath() + "/" + attachment.getNewName() + "." + attachment.getType();
-        }
+//        if (user.getProfilePhoto() != null) {
+//            Attachment attachment = user.getProfilePhoto();
+//            photoLink = attachmentService.attachUploadFolder + attachment.getPath() + "/" + attachment.getNewName() + "." + attachment.getType();
+//        }
         UserResponseDto userResponseDto = UserResponseDto.from(user);
         userResponseDto.setProfilePhotoUrl(photoLink);
         return userResponseDto;
@@ -266,14 +264,14 @@ public class UserService {
 
     public ApiResponse updateUser(UserUpdateDto userUpdateDto) {
         User user = checkUserExistByContext();
-        user.setFullName(userUpdateDto.getFullName());
+//        user.setFullName(userUpdateDto.getFullName());
         user.setGender(userUpdateDto.getGender());
         if (userUpdateDto.getProfilePhoto() != null) {
             Attachment attachment = attachmentService.saveToSystem(userUpdateDto.getProfilePhoto());
-            if (user.getProfilePhoto() != null) {
-                attachmentService.deleteNewNameId(user.getProfilePhoto().getNewName() + "." + user.getProfilePhoto().getType());
-            }
-            user.setProfilePhoto(attachment);
+//            if (user.getProfilePhoto() != null) {
+//                attachmentService.deleteNewNameId(user.getProfilePhoto().getNewName() + "." + user.getProfilePhoto().getType());
+//            }
+//            user.setProfilePhoto(attachment);
         }
         user.setBirthDate(userUpdateDto.getBrithDay());
         userRepository.save(user);

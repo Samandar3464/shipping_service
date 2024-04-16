@@ -2,7 +2,7 @@ package uz.pdp.shippingservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.shippingservice.model.request.AdvertisingRequestDto;
+import uz.pdp.shippingservice.dto.request.AdvertisingRequestDto;
 
 import java.util.UUID;
 

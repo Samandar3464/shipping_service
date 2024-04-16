@@ -11,9 +11,9 @@ import org.springframework.web.client.RestTemplate;
 import uz.pdp.shippingservice.entity.FireBaseToken;
 import uz.pdp.shippingservice.exception.SmsSendingFailException;
 import uz.pdp.shippingservice.exception.SmsServiceBroken;
-import uz.pdp.shippingservice.model.request.SmsModel;
-import uz.pdp.shippingservice.model.request.SmsToken;
-import uz.pdp.shippingservice.model.response.SmsResponse;
+import uz.pdp.shippingservice.dto.request.SmsModel;
+import uz.pdp.shippingservice.dto.request.SmsToken;
+import uz.pdp.shippingservice.dto.response.SmsResponse;
 import uz.pdp.shippingservice.repository.TokenRepository;
 
 import java.util.HashMap;

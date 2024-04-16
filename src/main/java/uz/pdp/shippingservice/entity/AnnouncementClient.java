@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import uz.pdp.shippingservice.model.request.AnnouncementClientDto;
+import uz.pdp.shippingservice.dto.request.AnnouncementClientDto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
