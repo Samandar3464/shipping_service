@@ -7,6 +7,6 @@ import uz.pdp.shippingservice.entity.Attachment;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface AttachmentRepository extends JpaRepository<Attachment, UUID> {
+public interface AttachmentRepository extends JpaRepository<Attachment, Long> {
     Optional<Attachment> findByNewName(String newName);
 }

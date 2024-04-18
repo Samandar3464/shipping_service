@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class FireBaseTokenRegisterDto {
 
-    private Long userId;
+    private Integer userId;
 
     private String fireBaseToken;
 }

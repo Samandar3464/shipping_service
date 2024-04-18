@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import uz.pdp.shippingservice.dto.request.CarRegisterRequestDto;
+import uz.pdp.shippingservice.entity.user.UserEntity;
 
 import java.util.List;
 import java.util.UUID;
@@ -48,7 +49,7 @@ public class Car {
     @JsonIgnore
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
+    private UserEntity userEntity;
 
     private boolean active;
 

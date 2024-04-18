@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.pdp.shippingservice.entity.User;
+import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.enums.Gender;
 
 import java.time.LocalDate;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponseDto {
-    private UUID id;
+    private Integer id;
 
     private String fullName;
 
@@ -38,15 +38,15 @@ public class UserResponseDto {
     private String profilePhotoUrl;
 
 
-    public static UserResponseDto from(User user) {
-        double status= (double) (user.getStatus().getStars()) /user.getStatus().getCount();
+    public static UserResponseDto from(UserEntity userEntity) {
+//        double status= (double) (userEntity.getStatus().getStars()) / userEntity.getStatus().getCount();
         return UserResponseDto.builder()
-                .id(user.getId())
-                .fullName(user.getFullName())
-                .phone(user.getPhone())
-                .birthDate(user.getBirthDate()==null ? null : user.getBirthDate())
-                .gender(user.getGender())
-                .status(status)
+                .id(userEntity.getId())
+//                .fullName(userEntity.getFullName())
+                .phone(userEntity.getUsername())
+//                .birthDate(userEntity.getBirthDate()==null ? null : userEntity.getBirthDate())
+//                .gender(userEntity.getGender())
+//                .status(status)
                 .build();
     }
 }

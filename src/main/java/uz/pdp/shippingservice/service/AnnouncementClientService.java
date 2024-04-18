@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.AnnouncementClient;
-import uz.pdp.shippingservice.entity.User;
+import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.exception.AnnouncementAlreadyExistException;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
@@ -35,18 +35,18 @@ public class AnnouncementClientService {
 
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse add(AnnouncementClientDto announcementClientDto) {
-        User user = userService.checkUserExistByContext();
+        UserEntity userEntity = userService.checkUserExistByContext();
 //        if (announcementDriverRepository.existsByUserIdAndActiveTrueAndDeletedFalse(user.getId())) {
 //            throw new AnnouncementAvailable(ANNOUNCEMENT_DRIVER_ALREADY_EXIST);
 //        }
 //        if (existByUserIdAndActiveTrueAndDeletedFalse(user.getId())) {
 //            throw new AnnouncementAlreadyExistException(ANNOUNCEMENT_PASSENGER_ALREADY_EXIST);
 //        }
-        List<AnnouncementClient> announcementClient1 = getAnnouncementClient(user, true);
+        List<AnnouncementClient> announcementClient1 = getAnnouncementClient(userEntity, true);
         if (announcementClient1.size() > 5) {
             throw new AnnouncementAlreadyExistException(YOU_CAN_ONLY_SET_5_ANNOUNCEMENT);
         }
-        AnnouncementClient announcementClient = fromRequest(announcementClientDto, user);
+        AnnouncementClient announcementClient = fromRequest(announcementClientDto, userEntity);
         announcementClientRepository.save(announcementClient);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -66,32 +66,34 @@ public class AnnouncementClientService {
 
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse getDriverAnnouncementByIdAndActiveTrue(Long id) {
+    public ApiResponse getDriverAnnouncementByIdAndActiveTrue(UUID id) {
         AnnouncementClient active = getByIdAndActiveAndDeletedFalse(id, true);
-        User user = userService.checkUserExistById(active.getUser().getId());
-        UserResponseDto userResponseDto = userService.fromUserToResponse(user);
-        AnnouncementClientResponse passengerResponse = AnnouncementClientResponse.from(active, userResponseDto);
-        return new ApiResponse(passengerResponse, true);
+//        UserEntity userEntity = userService.checkUserExistById(active.getUserEntity().getId());
+//        UserResponseDto userResponseDto = userService.fromUserToResponse(userEntity);
+//        AnnouncementClientResponse passengerResponse = AnnouncementClientResponse.from(active, userResponseDto);
+//        return new ApiResponse(passengerResponse, true);
+        return null;
     }
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse getByIdAndDeleteFalse(UUID id) {
         AnnouncementClient active = announcementClientRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new AnnouncementNotFoundException(CLIENT_ANNOUNCEMENT_NOT_FOUND));
-        User user = userService.checkUserExistById(active.getUser().getId());
-        UserResponseDto userResponseDto = userService.fromUserToResponse(user);
-        AnnouncementClientResponse passengerResponse =
-                AnnouncementClientResponse.from(active, userResponseDto);
-        return new ApiResponse(passengerResponse, true);
+//        UserEntity userEntity = userService.checkUserExistById(active.getUserEntity().getId());
+//        UserResponseDto userResponseDto = userService.fromUserToResponse(userEntity);
+//        AnnouncementClientResponse passengerResponse =
+//                AnnouncementClientResponse.from(active, userResponseDto);
+//        return new ApiResponse(passengerResponse, true);
+        return null;
     }
 
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse getClientOwnAnnouncements() {
-        User user = userService.checkUserExistByContext();
-        List<AnnouncementClient> announcementClients = announcementClientRepository.findAllByUserIdAndDeletedFalseOrderByCreatedTime(user.getId());
+        UserEntity userEntity = userService.checkUserExistByContext();
+//        List<AnnouncementClient> announcementClients = announcementClientRepository.findAllByUserIdAndDeletedFalseOrderByCreatedTime(userEntity.getId());
         List<AnnouncementClientResponseList> anonymousList = new ArrayList<>();
-        announcementClients.forEach(obj -> anonymousList.add(AnnouncementClientResponseList.from(obj)));
+//        announcementClients.forEach(obj -> anonymousList.add(AnnouncementClientResponseList.from(obj)));
         return new ApiResponse(anonymousList, true);
     }
 //    @ResponseStatus(HttpStatus.OK)
@@ -112,13 +114,14 @@ public class AnnouncementClientService {
         return new ApiResponse(DELETED, true);
     }
 
-    public AnnouncementClient getByIdAndActiveAndDeletedFalse(Long announcement_id, boolean active) {
+    public AnnouncementClient getByIdAndActiveAndDeletedFalse(UUID announcement_id, boolean active) {
         return announcementClientRepository.findByIdAndActiveAndDeletedFalse(announcement_id, active)
                 .orElseThrow(() -> new AnnouncementNotFoundException(CLIENT_ANNOUNCEMENT_NOT_FOUND));
     }
 
-    public List<AnnouncementClient> getAnnouncementClient(User passenger, boolean active) {
-        return announcementClientRepository.findAllByUserIdAndActiveAndDeletedFalseOrderByCreatedTimeDesc(passenger.getId(), active);
+    public List<AnnouncementClient> getAnnouncementClient(UserEntity passenger, boolean active) {
+//        return announcementClientRepository.findAllByUserIdAndActiveAndDeletedFalseOrderByCreatedTimeDesc(passenger.getId(), active);
+        return null;
     }
 
     public AnnouncementClient getByIdAndDeletedFalse(UUID announcement_id) {
@@ -126,9 +129,9 @@ public class AnnouncementClientService {
                 .orElseThrow(() -> new AnnouncementNotFoundException(CLIENT_ANNOUNCEMENT_NOT_FOUND));
     }
 
-    private AnnouncementClient fromRequest(AnnouncementClientDto announcementClientDto, User user) {
+    private AnnouncementClient fromRequest(AnnouncementClientDto announcementClientDto, UserEntity userEntity) {
         AnnouncementClient announcementClient = AnnouncementClient.from(announcementClientDto);
-        announcementClient.setUser(user);
+//        announcementClient.setUserEntity(userEntity);
         announcementClient.setFromCountry(countryRepository.getById(announcementClientDto.getFromRegionId()));
         announcementClient.setToCountry(countryRepository.getById(announcementClientDto.getFromRegionId()));
         announcementClient.setFromRegion(announcementClientDto.getFromRegionId() == null? null: regionRepository.getById(announcementClientDto.getFromRegionId()));

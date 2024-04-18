@@ -1,7 +1,7 @@
 package uz.pdp.shippingservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.pdp.shippingservice.entity.Region;
+import uz.pdp.shippingservice.entity.locations.Region;
 
 import java.util.Collection;
 

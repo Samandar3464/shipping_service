@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.Attachment;
+import uz.pdp.shippingservice.entity.UserRole;
 import uz.pdp.shippingservice.entity.Car;
-import uz.pdp.shippingservice.entity.Role;
-import uz.pdp.shippingservice.entity.User;
+import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.exception.CarAlreadyExistException;
 import uz.pdp.shippingservice.exception.CarNotFound;
@@ -49,22 +49,22 @@ public class CarService {
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse addCar(CarRegisterRequestDto carRegisterRequestDto) {
-        User user = userService.checkUserExistByContext();
-        List<Role> roles = user.getRoles();
-        Role byName = roleRepository.findByName(DRIVER);
-        if (!user.getRoles().contains(byName)) {
-            roles.add((byName));
+        UserEntity userEntity = userService.checkUserExistByContext();
+        List<UserRole> authroles = userEntity.getAuthroles();
+        UserRole byName = roleRepository.findByName(DRIVER);
+        if (!userEntity.getAuthroles().contains(byName)) {
+            authroles.add((byName));
         }
-        userRepository.save(user);
-        Car car = from(carRegisterRequestDto, user);
+        userRepository.save(userEntity);
+        Car car = from(carRegisterRequestDto, userEntity);
         carRepository.save(car);
         return new ApiResponse(SUCCESSFULLY, true);
     }
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse getCar() {
-        User user = userService.checkUserExistByContext();
-        Car car = getCarByUserId(user.getId());
+        UserEntity userEntity = userService.checkUserExistByContext();
+        Car car = getCarByUserId(userEntity.getId());
         return new ApiResponse(fromCarToResponse(car), true);
     }
 
@@ -82,8 +82,8 @@ public class CarService {
         return new ApiResponse(DELETED, true);
     }
 
-    private Car from(CarRegisterRequestDto carRegisterRequestDto, User user) {
-        Optional<Car> byUserIdAndActiveTrue = carRepository.findByUserIdAndActiveTrue(user.getId());
+    private Car from(CarRegisterRequestDto carRegisterRequestDto, UserEntity userEntity) {
+        Optional<Car> byUserIdAndActiveTrue = carRepository.findByUserIdAndActiveTrue(userEntity.getId());
         if (byUserIdAndActiveTrue.isPresent()) {
             throw new CarAlreadyExistException(CAR_ALREADY_EXIST);
         }
@@ -91,7 +91,7 @@ public class CarService {
         car.setPhotoDriverLicense(attachmentService.saveToSystem(carRegisterRequestDto.getPhotoDriverLicense()));
         car.setTexPassportPhoto(attachmentService.saveToSystem(carRegisterRequestDto.getTexPassportPhoto()));
         car.setCarPhotos(attachmentService.saveToSystemListFile(carRegisterRequestDto.getCarPhotoList()));
-        car.setUser(user);
+        car.setUserEntity(userEntity);
         return car;
     }
 
@@ -112,7 +112,7 @@ public class CarService {
         return carResponseDto;
     }
 
-    public Car getCarByUserId(UUID user_id) {
+    public Car getCarByUserId(Integer user_id) {
         return carRepository.findByUserIdAndActiveTrue(user_id).orElseThrow(() ->
                 new CarNotFound(CAR_NOT_FOUND));
     }
@@ -145,7 +145,7 @@ public class CarService {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse denyCar(DenyCar denyCar) {
         Car car = carRepository.findById(denyCar.getCarId()).orElseThrow(() -> new CarNotFound(CAR_NOT_FOUND));
-        User userByCar = userService.checkUserExistById(car.getUser().getId());
+        UserEntity userEntityByCar = userService.checkUserExistById(car.getUserEntity().getId());
 
         car.getCarPhotos().forEach(obj -> attachmentService.deleteNewNameId(obj.getNewName() + "." + obj.getType()));
         attachmentService.deleteNewNameId(car.getPhotoDriverLicense().getNewName() + "." + car.getPhotoDriverLicense().getType());
@@ -153,7 +153,7 @@ public class CarService {
         carRepository.deleteById(car.getId());
 
         service.sendSms(SmsModel.builder()
-                .mobile_phone(userByCar.getPhone())
+                .mobile_phone(userEntityByCar.getUsername())
                 .message("DexTaxi. Sizni mashina qo'shish bo'yicha arizangiz bekor qilindi" +
                         " . Sababi :" + denyCar.getMassage() + ". Qaytadan mashina qo'shing. ")
                 .from(4546)

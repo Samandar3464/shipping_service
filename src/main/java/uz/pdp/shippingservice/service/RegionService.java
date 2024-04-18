@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import uz.pdp.shippingservice.entity.Country;
-import uz.pdp.shippingservice.entity.Region;
+import uz.pdp.shippingservice.entity.locations.Country;
+import uz.pdp.shippingservice.entity.locations.Region;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordAlreadyExistException;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
@@ -29,7 +29,7 @@ public class RegionService {
         }
         Country country = countryRepository.findById(regionRegisterRequestDto.getCountryId())
                 .orElseThrow(() -> new RecordNotFoundException(REGION_NOT_FOUND));
-        regionRepository.save(Region.from(regionRegisterRequestDto, country));
+        regionRepository.save(Region.toEntity(regionRegisterRequestDto, country));
         return new ApiResponse(SUCCESSFULLY, true);
     }
 

@@ -155,8 +155,8 @@ public class FileService {
         long bytes = Files.size(filePath);
         UploadedDTO uploadedDTO = new UploadedDTO();
         uploadedDTO.setServer(server);
-        uploadedDTO.setExtension(FilenameUtils.getExtension(remoteFile));
-        uploadedDTO.setName(FilenameUtils.getName(remoteFile));
+//        uploadedDTO.setExtension(FilenameUtils.getExtension(remoteFile));
+//        uploadedDTO.setName(FilenameUtils.getName(remoteFile));
         uploadedDTO.setSize(bytes);
         uploadedDTO.setUploadPath(remoteFile);
         uploadedDTO.setUploadFile(remoteFile.replace(server.getUploadPath(), ""));

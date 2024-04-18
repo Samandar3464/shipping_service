@@ -86,7 +86,7 @@ public class AttachmentService {
     }
 
     //    Rasmni fileda joylashgan joyini linkini beradi
-    public String getUrl(UUID imageId) {
+    public String getUrl(Long imageId) {
         Attachment attachment = attachmentRepository.findById(imageId).orElseThrow(() -> new RecordNotFoundException(FILE_NOT_FOUND));
         return attachUploadFolder + attachment.getPath() + "/" + attachment.getNewName() + "." + attachment.getType();
     }

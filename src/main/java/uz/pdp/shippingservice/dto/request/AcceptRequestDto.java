@@ -11,6 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AcceptRequestDto {
-    private UUID senderId;
+    private Integer senderId;
     private UUID announcementClientId;
 }

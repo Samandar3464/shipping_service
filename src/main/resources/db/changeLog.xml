@@ -4,5 +4,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-<!--    <include file="db/migration/changelog-gcp-madiyor.xml"/>-->
+    <include file="db/migration/changelog_1-create_roles_table.xml"/>
+    <include file="db/migration/changelog_2-create_users_table.xml"/>
+    <include file="db/migration/changelog_3-create_country_table.xml"/>
+    <include file="db/migration/changelog_4-create_region_table.xml"/>
+    <include file="db/migration/changelog_5-create_city_table.xml"/>
 </databaseChangeLog>

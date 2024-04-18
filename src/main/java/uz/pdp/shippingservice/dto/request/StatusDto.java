@@ -17,6 +17,6 @@ public class StatusDto {
 
     private Long stars;
 
-    private Long userId;
+    private Integer userId;
 
 }

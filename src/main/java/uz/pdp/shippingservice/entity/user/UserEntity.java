@@ -1,6 +1,7 @@
-package uz.pdp.shippingservice.entity;
+package uz.pdp.shippingservice.entity.user;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -8,11 +9,10 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import uz.pdp.shippingservice.enums.Gender;
+import uz.pdp.shippingservice.entity.UserRole;
 import uz.pdp.shippingservice.dto.request.UserRegisterDto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,34 +25,22 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "users")
-public class User implements UserDetails, Serializable {
+public class UserEntity implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @NotBlank
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "surname")
-    private String surname;
-
-    @Column(name = "father_name")
-    private String fatherName;
-
-    @NotBlank
-    @Size(min = 9,max = 9)
-    @Column(name = "phone" ,unique = true)
-    private String phone;
+    @Size(min = 12,max = 12)
+    @Column(name = "user_name" ,unique = true)
+    private String userName;
 
     @Size(min = 6)
     @Column(name = "password")
+    @JsonIgnore
     private String password;
-
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -66,28 +54,20 @@ public class User implements UserDetails, Serializable {
     @Column(name = "firebase_token")
     private String firebaseToken;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
-    private Gender gender;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @Column(name = "avatar_id")
-    private Attachment avatarId;
-
     @ManyToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
     @Column(name = "roles")
-    private List<Role> roles;
+    private List<UserRole> authroles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-        roles.forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
+        authroles.forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
         return authorityList;
     }
 
     @Override
     public String getUsername() {
-        return phone;
+        return userName;
     }
 
     @Override
@@ -110,11 +90,9 @@ public class User implements UserDetails, Serializable {
         return isBlocked;
     }
 
-    public static User from(UserRegisterDto userRegisterDto){
-        return User.builder()
-                .name(userRegisterDto.getFullName())
-                .phone(userRegisterDto.getPhone())
-                .gender(userRegisterDto.getGender())
+    public static UserEntity from(UserRegisterDto userRegisterDto){
+        return UserEntity.builder()
+                .userName(userRegisterDto.getPhone())
                 .createdAt(LocalDateTime.now())
                 .isBlocked(true)
                 .build();

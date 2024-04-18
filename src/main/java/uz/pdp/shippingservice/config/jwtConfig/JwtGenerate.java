@@ -4,7 +4,7 @@ import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import uz.pdp.shippingservice.entity.User;
+import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.exception.RefreshTokeNotFound;
 import uz.pdp.shippingservice.exception.TimeExceededException;
 import uz.pdp.shippingservice.exception.UserNotFoundException;
@@ -23,20 +23,20 @@ public class JwtGenerate {
     private  final long accessTokenLiveTime = 1000 * 60 * 60 * 3;//*100000;
     private  final long reFreshTokenLiveTime = 1000 * 60 * 60 * 5;//* 60 * 60 * 24;
 
-    public  synchronized String generateAccessToken(User user) {
+    public  synchronized String generateAccessToken(UserEntity userEntity) {
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, JWT_ACCESS_KEY)
-                .setSubject(user.getPhone())
+                .setSubject(userEntity.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + accessTokenLiveTime))
-                .claim(AUTHORITIES, user.getAuthorities())
+                .claim(AUTHORITIES, userEntity.getAuthorities())
                 .compact();
     }
 
-    public  synchronized String generateRefreshToken(User user) {
+    public  synchronized String generateRefreshToken(UserEntity userEntity) {
         return REFRESH_TOKEN + Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, JWT_REFRESH_KEY)
-                .setSubject(user.getPhone())
+                .setSubject(userEntity.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + reFreshTokenLiveTime))
                 .compact();
@@ -70,8 +70,8 @@ public class JwtGenerate {
         if (claims == null) {
             throw new Exception();
         }
-        User user = userRepository.findByPhone(claims.getSubject()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
-        return generateAccessToken(user);
+        UserEntity userEntity = userRepository.findByPhone(claims.getSubject()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        return generateAccessToken(userEntity);
     }
 
     public    String getUserNameFromAccessToken(String token) {

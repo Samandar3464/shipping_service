@@ -3,6 +3,7 @@ package uz.pdp.shippingservice.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.enums.NotificationType;
 import uz.pdp.shippingservice.dto.request.NotificationRequestDto;
 
@@ -21,9 +22,9 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private UUID senderId;
+    private Integer senderId;
 
-    private UUID receiverId;
+    private Integer receiverId;
 
     private UUID announcementDriverId;
 
@@ -46,7 +47,7 @@ public class Notification {
 
     @ManyToOne
     @JsonIgnore
-    private User user;
+    private UserEntity userEntity;
 
     public static Notification from(NotificationRequestDto notificationRequestDto){
         return Notification.builder()

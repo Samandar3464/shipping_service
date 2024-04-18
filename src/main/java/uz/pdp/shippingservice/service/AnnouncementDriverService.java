@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.AnnouncementDriver;
 import uz.pdp.shippingservice.entity.Attachment;
 import uz.pdp.shippingservice.entity.Car;
-import uz.pdp.shippingservice.entity.User;
+import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.exception.AnnouncementAlreadyExistException;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
@@ -41,15 +41,15 @@ public class AnnouncementDriverService {
 
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse add(AnnouncementDriverDto announcementDriverDto) {
-        User user = userService.checkUserExistByContext();
-        Car car = carService.getCarByUserId(user.getId());
+        UserEntity userEntity = userService.checkUserExistByContext();
+        Car car = carService.getCarByUserId(userEntity.getId());
 //        if (announcementPassengerService.existByUserIdAndActiveTrueAndDeletedFalse(user.getId())){
 //            throw new AnnouncementAlreadyExistException(ANNOUNCEMENT_PASSENGER_ALREADY_EXIST);
 //        }
-        if (existByUserIdAndActiveTrueAndDeletedFalse(user.getId())) {
-            throw new AnnouncementAlreadyExistException(ANNOUNCEMENT_DRIVER_ALREADY_EXIST);
-        }
-        AnnouncementDriver announcementDriver = fromAnnouncementDriver(announcementDriverDto, user, car);
+//        if (existByUserIdAndActiveTrueAndDeletedFalse(userEntity.getId())) {
+//            throw new AnnouncementAlreadyExistException(ANNOUNCEMENT_DRIVER_ALREADY_EXIST);
+//        }
+        AnnouncementDriver announcementDriver = fromAnnouncementDriver(announcementDriverDto, userEntity, car);
         announcementDriverRepository.save(announcementDriver);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -77,11 +77,12 @@ public class AnnouncementDriverService {
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse getDriverOwnAnnouncements() {
-        User user = userService.checkUserExistByContext();
-        List<AnnouncementDriver> announcementDrivers = announcementDriverRepository.findAllByUserIdAndDeletedFalseOrderByCreatedTime(user.getId());
+        UserEntity userEntity = userService.checkUserExistByContext();
+//        List<AnnouncementDriver> announcementDrivers = announcementDriverRepository.findAllByUserIdAndDeletedFalseOrderByCreatedTime(userEntity.getId());
         List<AnnouncementDriverResponseList> announcementDriverResponses = new ArrayList<>();
-        announcementDrivers.forEach(obj -> announcementDriverResponses.add(AnnouncementDriverResponseList.from(obj)));
-        return new ApiResponse(announcementDriverResponses, true);
+//        announcementDrivers.forEach(obj -> announcementDriverResponses.add(AnnouncementDriverResponseList.from(obj)));
+//        return new ApiResponse(announcementDriverResponses, true);
+        return null;
     }
 
 //    @ResponseStatus(HttpStatus.OK)
@@ -116,10 +117,10 @@ public class AnnouncementDriverService {
                 .orElseThrow(() -> new AnnouncementNotFoundException(DRIVER_ANNOUNCEMENT_NOT_FOUND));
     }
 
-    private AnnouncementDriver fromAnnouncementDriver(AnnouncementDriverDto announcement, User user, Car car) {
+    private AnnouncementDriver fromAnnouncementDriver(AnnouncementDriverDto announcement, UserEntity userEntity, Car car) {
         AnnouncementDriver announcementDriver = AnnouncementDriver.from(announcement);
         announcementDriver.setCar(car);
-        announcementDriver.setUser(user);
+        announcementDriver.setUserEntity(userEntity);
         announcementDriver.setCountry(countryRepository.getById(announcement.getCountryId()));
         announcementDriver.setRegion(announcement.getRegionId() == null ? null : regionRepository.getById(announcement.getRegionId()));
         announcementDriver.setCity(announcement.getCityId() == null ? null : cityRepository.getById(announcement.getCityId()));
@@ -132,20 +133,23 @@ public class AnnouncementDriverService {
         attachmentList.forEach(attach -> photos.add(attachmentService.attachUploadFolder + attach.getPath() + "/" + attach.getNewName() + "." + attach.getType()));
         AnnouncementDriverResponse announcement = AnnouncementDriverResponse.from(announcementDriver);
         announcement.setCarPhotoPath(photos);
-        announcement.setUserResponseDto(userService.fromUserToResponse(announcementDriver.getUser()));
+        announcement.setUserResponseDto(userService.fromUserToResponse(announcementDriver.getUserEntity()));
         return announcement;
     }
 
-    public boolean existByUserIdAndActiveTrueAndDeletedFalse(UUID userId) {
-        return announcementDriverRepository.existsByUserIdAndActiveTrueAndDeletedFalse(userId);
+    public boolean existByUserIdAndActiveTrueAndDeletedFalse(Integer userId) {
+//        return announcementDriverRepository.existsByUserIdAndActiveTrueAndDeletedFalse(userId);
+        return false;
     }
 
-    public List<AnnouncementDriver> getByUserIdAndActiveAndDeletedFalseList(UUID userId, boolean active) {
-        return announcementDriverRepository.findAllByUserIdAndActiveAndDeletedFalseOrderByCreatedTimeDesc(userId, active);
+    public List<AnnouncementDriver> getByUserIdAndActiveAndDeletedFalseList(Integer userId, boolean active) {
+//        return announcementDriverRepository.findAllByUserIdAndActiveAndDeletedFalseOrderByCreatedTimeDesc(userId, active);
+        return null;
     }
 
-    public AnnouncementDriver getByUserIdAndActiveAndDeletedFalse(UUID userId, boolean active) {
-        return announcementDriverRepository.findByUserIdAndActiveAndDeletedFalseOrderByCreatedTimeDesc(userId, active)
-                .orElseThrow(() -> new AnnouncementNotFoundException(DRIVER_ANNOUNCEMENT_NOT_FOUND));
+    public AnnouncementDriver getByUserIdAndActiveAndDeletedFalse(Integer userId, boolean active) {
+//        return announcementDriverRepository.findByUserIdAndActiveAndDeletedFalseOrderByCreatedTimeDesc(userId, active)
+//                .orElseThrow(() -> new AnnouncementNotFoundException(DRIVER_ANNOUNCEMENT_NOT_FOUND));
+        return null;
     }
 }

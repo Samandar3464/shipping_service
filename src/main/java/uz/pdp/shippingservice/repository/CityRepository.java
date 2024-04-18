@@ -2,7 +2,7 @@ package uz.pdp.shippingservice.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.pdp.shippingservice.entity.City;
+import uz.pdp.shippingservice.entity.locations.City;
 
 import java.util.List;
 

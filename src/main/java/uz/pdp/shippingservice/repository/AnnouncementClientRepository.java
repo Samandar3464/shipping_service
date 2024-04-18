@@ -15,6 +15,6 @@ public interface AnnouncementClientRepository extends JpaRepository<Announcement
 
     Optional<AnnouncementClient> findByIdAndDeletedFalse(UUID id);
 
-    List<AnnouncementClient> findAllByUserIdAndDeletedFalseOrderByCreatedTime(Long id);
-    List<AnnouncementClient> findAllByUserIdAndActiveAndDeletedFalseOrderByCreatedTimeDesc(Long id, boolean active);
+//    List<AnnouncementClient> findAllByUserIdAndDeletedFalseOrderByCreatedTime(Long id);
+//    List<AnnouncementClient> findAllByUserIdAndActiveAndDeletedFalseOrderByCreatedTimeDesc(Long id, boolean active);
 }

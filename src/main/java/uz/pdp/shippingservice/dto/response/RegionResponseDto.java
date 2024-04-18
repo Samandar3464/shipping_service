@@ -1,7 +1,7 @@
 package uz.pdp.shippingservice.dto.response;
 
 import lombok.*;
-import uz.pdp.shippingservice.entity.Region;
+import uz.pdp.shippingservice.entity.locations.Region;
 
 @Getter
 @Setter

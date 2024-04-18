@@ -5,14 +5,38 @@
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="create_roles_table" author="samandar">
-        <createTable tableName="role">
+        <createTable tableName="roles">
             <column name="id" autoIncrement="true" type="INT">
                 <constraints nullable="false" primaryKey="true" />
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" unique="true"/>
             </column>
+            <column name="description" type="varchar(255)" />
+            <column name="deleted" type="BOOLEAN" />
         </createTable>
+
+        <insert tableName="roles">
+            <column name="name" value="admin"/>
+            <column name="description" value=" system admin" />
+            <column name="deleted" value="false" />
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="users"/>
+            <column name="description" value=" user role" />
+            <column name="deleted" value="false" />
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="driver"/>
+            <column name="description" value=" driver role " />
+            <column name="deleted" value="false" />
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="client"/>
+            <column name="description" value=" client role" />
+            <column name="deleted" value="false" />
+        </insert>
+
     </changeSet>
 
 

@@ -6,15 +6,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import uz.pdp.shippingservice.entity.*;
-import uz.pdp.shippingservice.enums.Gender;
+import uz.pdp.shippingservice.entity.locations.City;
+import uz.pdp.shippingservice.entity.locations.Country;
+import uz.pdp.shippingservice.entity.locations.Region;
+import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.dto.CountryDto;
 import uz.pdp.shippingservice.repository.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static uz.pdp.shippingservice.constants.Constants.*;
 
 @Component
 @RequiredArgsConstructor
@@ -34,29 +34,21 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) {
 
         if (initMode.equals("always")) {
-            Role admim = new Role(1, ADMIN);
-            Role save15 = roleRepository.save(admim);
-            Role yolovchi = new Role(2, CLIENT);
-            Role save16 = roleRepository.save(yolovchi);
-            Role haydovchi = new Role(3, DRIVER);
-            Role save17 = roleRepository.save(haydovchi);
-
-            User admin = User.builder()
-                    .name("ADMIN")
-                    .phone("111111111")
-                    .birthDate(LocalDate.parse("1998-05-13"))
-                    .gender(Gender.MAN)
+            //admin
+            UserEntity adminUser = UserEntity.builder()
+                    .userName("998906163464")
                     .createdAt(LocalDateTime.now())
-                    .password(passwordEncoder.encode("111111"))
-                    .isBlocked(true)
+                    .password(passwordEncoder.encode("123456"))
+                    .isBlocked(false)
+                    .isDeleted(false)
                     .build();
-            User save = userRepository.save(admin);
-            Status status = statusRepository.save(Status.builder().stars(5).build());
-            save.setRoles(List.of(save15, save16, save17));
-
+            UserEntity save = userRepository.save(adminUser);
+            UserRole adminRole = roleRepository.findByName("admin");
+            save.setAuthroles(List.of(adminRole));
             userRepository.save(save);
 
-            Country country = Country.from(new CountryDto("O'zbekistan"));
+
+            Country country = Country.toEntity(new CountryDto("O'zbekistan"));
             Country savedCountry = countryRepository.save(country);
             List<Region> regions = List.of(
                     new Region(1, "Toshkent shahri",savedCountry)

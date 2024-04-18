@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import uz.pdp.shippingservice.entity.Country;
+import uz.pdp.shippingservice.entity.locations.Country;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordAlreadyExistException;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
@@ -24,7 +24,7 @@ public class CountryService {
         if (countryRepository.existsByName(countryDto.getName())) {
             throw new RecordAlreadyExistException(COUNTRY_ALREADY_EXIST);
         }
-        countryRepository.save(Country.from(countryDto));
+        countryRepository.save(Country.toEntity(countryDto));
         return new ApiResponse(SUCCESSFULLY, true);
     }
     @ResponseStatus(HttpStatus.CREATED)

@@ -5,6 +5,10 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import uz.pdp.shippingservice.dto.request.AnnouncementClientDto;
+import uz.pdp.shippingservice.entity.locations.City;
+import uz.pdp.shippingservice.entity.locations.Country;
+import uz.pdp.shippingservice.entity.locations.Region;
+import uz.pdp.shippingservice.entity.user.UserEntity;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -44,7 +48,7 @@ public class AnnouncementClient {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
+    private UserEntity userId;
 
     private double fromLatitude;
 
