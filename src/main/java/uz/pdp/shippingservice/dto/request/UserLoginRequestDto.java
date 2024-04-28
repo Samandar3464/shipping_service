@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 public class UserLoginRequestDto {
 
     @NotBlank
-    @Size(min = 9, max = 10)
+    @Size(min = 13, max = 13)
     private String phone;
 
     @NotBlank
-    @Size(min = 6 )
+    @Size(min = 6)
     private String password;
 }

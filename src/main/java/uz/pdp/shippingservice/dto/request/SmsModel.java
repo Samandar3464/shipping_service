@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 public class SmsModel {
 
     @NotBlank
-    @Size(min = 9,max = 9)
-    private String mobile_phone;
+    @Size(min = 13,max = 13)
+    private String phone;
 
     private String message;
 

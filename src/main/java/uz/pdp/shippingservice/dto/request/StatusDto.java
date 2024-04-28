@@ -15,8 +15,8 @@ import java.util.UUID;
 
 public class StatusDto {
 
-    private Long stars;
+    private Integer countStars;
 
-    private Integer userId;
+    private String phone;
 
 }

@@ -2,10 +2,10 @@ package uz.pdp.shippingservice.constants;
 public class Constants {
 
     public static final String USER_NOT_FOUND="USER NOT FOUND";
+    public static final String SOMETHING_WRONG="SOMETHING WRONG";
     public static final String USER_ALREADY_EXIST="USER ALREADY EXIST";
     public static final String TOKEN_TIME_OUT="TOKEN TIME OUT";
-    public static final String BLOCKED="Sizni DexTaxi accountinggiz blocklandi .";
-    public static final String OPEN="Sizni DexTaxi accountinggiz blockdan ochildi.";
+    public static final String BLOCKED="BLOCKED";
 
     public static final String SUCCESSFULLY="SUCCESSFULLY";
     public static final String DRIVER_ANNOUNCEMENT_NOT_FOUND="DRIVER ANNOUNCEMENT NOT FOUND";
@@ -14,6 +14,7 @@ public class Constants {
     public static final String CLIENT_ANNOUNCEMENT_NOT_FOUND="CLIENT ANNOUNCEMENT NOT FOUND";
 
     public static final String DELETED="DELETED";
+    public static final String OPEN="OPEN";
     public static final String FILE_NAME_NULL="FILE NAME NULL";
     public static final String FILE_COULD_NOT_UPLOADED="FILE COULD NOT UPLOADED";
     public static final String FILE_NOT_FOUND="FILE NOT FOUND";
@@ -43,6 +44,8 @@ public class Constants {
     public static final String CLIENT ="CLIENT";
     public static final String CAR_ALREADY_EXIST ="CAR ALREADY EXIST";
     public static final String CAN_NOT_SEND_SMS="CAN NOT SEND SMS";
+    public static final String SMS_NOT_SEND_THIS_NUMBER="SMS NOT SEND THIS NUMBER";
+    public static final String SMS_CODE_EXPIRE_TIME="SMS CODE EXPIRE TIME";
     public static final String CAN_NOT_TAKE_SMS_SENDING_SERVICE_TOKEN="CAN NOT TAKE SMS SENDING SERVICE TOKEN";
     public static final String FILE_SIZE_MUST_BU_10MB_OR_LOWER="FILE SIZE MUST BU 10MB OR LOWER";
     public static final String INPUT_EXCEPTION="INPUT EXCEPTION";

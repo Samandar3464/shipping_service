@@ -1,20 +1,15 @@
 package uz.pdp.shippingservice.dto.request;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.pdp.shippingservice.entity.Status;
-import uz.pdp.shippingservice.enums.Gender;
 
-
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRegisterDto {
+@Data
+public class ChangePasswordDto {
 
     @NotBlank
     @Size(min = 13, max = 13)
@@ -22,9 +17,9 @@ public class UserRegisterDto {
 
     @NotBlank
     @Size(min = 6)
-    private String password;
+    private String newPassword;
 
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
-
+    @NotBlank
+    @Size(min = 6)
+    private String oldPassword;
 }

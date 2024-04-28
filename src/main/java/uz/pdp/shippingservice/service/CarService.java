@@ -26,7 +26,6 @@ import uz.pdp.shippingservice.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static uz.pdp.shippingservice.constants.Constants.*;
 
@@ -50,9 +49,9 @@ public class CarService {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse addCar(CarRegisterRequestDto carRegisterRequestDto) {
         UserEntity userEntity = userService.checkUserExistByContext();
-        List<UserRole> authroles = userEntity.getAuthroles();
+        List<UserRole> authroles = userEntity.getRoles();
         UserRole byName = roleRepository.findByName(DRIVER);
-        if (!userEntity.getAuthroles().contains(byName)) {
+        if (!userEntity.getRoles().contains(byName)) {
             authroles.add((byName));
         }
         userRepository.save(userEntity);
@@ -155,7 +154,7 @@ public class CarService {
         carRepository.deleteById(car.getId());
 
         service.sendSms(SmsModel.builder()
-                .mobile_phone(userEntityByCar.getUsername())
+                .phone(userEntityByCar.getUsername())
                 .message("DexTaxi. Sizni mashina qo'shish bo'yicha arizangiz bekor qilindi" +
                         " . Sababi :" + denyCar.getMassage() + ". Qaytadan mashina qo'shing. ")
                 .from(4546)

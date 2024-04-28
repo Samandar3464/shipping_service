@@ -33,7 +33,7 @@ public class UserEntity implements UserDetails, Serializable {
     private Integer id;
 
     @NotBlank
-    @Size(min = 12,max = 12)
+    @Size(min = 13,max = 13)
     @Column(name = "user_name" ,unique = true)
     private String userName;
 
@@ -56,12 +56,12 @@ public class UserEntity implements UserDetails, Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
     @Column(name = "roles")
-    private List<UserRole> authroles;
+    private List<UserRole> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-        authroles.forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
+        roles.forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
         return authorityList;
     }
 
@@ -90,10 +90,11 @@ public class UserEntity implements UserDetails, Serializable {
         return isBlocked;
     }
 
-    public static UserEntity from(UserRegisterDto userRegisterDto){
+    public static UserEntity toEntity(UserRegisterDto dto){
         return UserEntity.builder()
-                .userName(userRegisterDto.getPhone())
+                .userName(dto.getPhone())
                 .createdAt(LocalDateTime.now())
+                .isDeleted(false)
                 .isBlocked(true)
                 .build();
     }

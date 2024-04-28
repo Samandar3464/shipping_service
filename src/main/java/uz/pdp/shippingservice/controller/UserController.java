@@ -18,13 +18,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ApiResponse registerUser(@RequestBody UserRegisterDto userRegisterDto) {
-        return userService.registerUser(userRegisterDto);
-    }
-
-    @PostMapping("/login")
-    public ApiResponse login(@RequestBody @Validated UserLoginRequestDto userLoginRequestDto) {
-        return userService.login(userLoginRequestDto);
+    public ApiResponse register(@RequestBody UserRegisterDto userRegisterDto) {
+        return userService.register(userRegisterDto);
     }
 
     @PostMapping("/verify")
@@ -32,71 +27,73 @@ public class UserController {
         return userService.verify(userVerifyRequestDto);
     }
 
-    @PostMapping("/forgetPassword")
+    @GetMapping("/resend-sms")
+    public ApiResponse reSendSms(@RequestParam(name = "phone") String phone) {
+        return userService.reSendSms(phone);
+    }
+
+    @PostMapping("/login")
+    public ApiResponse login(@RequestBody @Validated UserLoginRequestDto userLoginRequestDto) {
+        return userService.login(userLoginRequestDto);
+    }
+
+    @GetMapping("/me")
+    public ApiResponse checkUserResponseExistById() {
+        return userService.getMe();
+    }
+
+    @PostMapping("/forget-password")
     public ApiResponse forgetPassword(@RequestBody String number) {
         return userService.forgetPassword(number);
     }
-    @PostMapping("get/token/refreshToken")
+
+
+    @PostMapping("/change-password")
+    public ApiResponse changePassword(@RequestBody ForgerPasswordDto dto) {
+        return userService.changePassword(dto);
+    }
+
+    @PutMapping("/change-password")
+    public ApiResponse changePassword(@RequestBody ChangePasswordDto dto) {
+        return userService.changePasswordToNew(dto);
+    }
+
+    @PostMapping("get/token/refresh-token")
     public ApiResponse refreshToken(HttpServletRequest httpServletRequest) throws Exception {
         return userService.getToken(httpServletRequest);
     }
 
     @GetMapping("/getById/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
     public ApiResponse getUserById(@PathVariable Integer id) {
         return userService.getByUserId(id);
     }
-    @PostMapping("/setStatus")
-    @PreAuthorize("hasAnyRole('HAYDOVCHI','YOLOVCHI','ADMIN')")
-    public ApiResponse setStatus(@RequestBody StatusDto statusDto) {
-        return userService.setStatus(statusDto);
-    }
+
 
     @PutMapping("/block/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
     public ApiResponse blockUserById(@PathVariable Integer id) {
         return userService.addBlockUserByID(id);
     }
 
     @PutMapping("/openBlock/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('ADMIN')")
     public ApiResponse openBlockUserById(@PathVariable Integer id) {
         return userService.openToBlockUserByID(id);
     }
 
-    @PostMapping("/setFireBaseToken")
+    @PostMapping("/set-firebase-token")
     public ApiResponse setFireBaseToken(@RequestBody FireBaseTokenRegisterDto fireBaseTokenRegisterDto) {
         return userService.saveFireBaseToken(fireBaseTokenRegisterDto);
     }
 
-    @PostMapping("/changePassword")
-    public ApiResponse changePassword(
-            @RequestParam String number,
-            @RequestParam String password
-    ) {
-        return userService.changePassword(number, password);
-    }
-    @PutMapping("/update")
-    @PreAuthorize("hasAnyRole('DRIVER','CLIENT','ADMIN')")
-    public ApiResponse update(@ModelAttribute UserUpdateDto userUpdateDto) {
-        return userService.updateUser(userUpdateDto);
-    }
-    @GetMapping("/getUserList")
-    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/get-user-list")
+//    @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse getUserList(@RequestParam(name = "page", defaultValue = "0") int page,
                                    @RequestParam(name = "size", defaultValue = "5") int size) {
         return userService.getUserList(page, size);
     }
 
-    @GetMapping("/getByToken")
-    public ApiResponse checkUserResponseExistById() {
-        return userService.checkUserResponseExistById();
-    }
-
-    @GetMapping("/reSendSms/{phone}")
-    public ApiResponse reSendSms(@PathVariable String phone) {
-        return userService.reSendSms(phone);
-    }
     @GetMapping("/logout")
     public ApiResponse deleteUserFromContext() {
         return userService.removeUserFromContext();

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.dto.request.CountMassageRequest;
-import uz.pdp.shippingservice.repository.CountMassageRepository;
 
 
 @Service

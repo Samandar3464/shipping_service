@@ -11,9 +11,7 @@ import uz.pdp.shippingservice.exception.AnnouncementAlreadyExistException;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
 import uz.pdp.shippingservice.dto.request.AnnouncementClientDto;
 import uz.pdp.shippingservice.dto.request.GetByFilter;
-import uz.pdp.shippingservice.dto.response.AnnouncementClientResponse;
 import uz.pdp.shippingservice.dto.response.AnnouncementClientResponseList;
-import uz.pdp.shippingservice.dto.response.UserResponseDto;
 import uz.pdp.shippingservice.repository.*;
 
 import java.util.ArrayList;

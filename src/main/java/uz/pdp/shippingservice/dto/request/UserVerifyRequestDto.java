@@ -11,5 +11,5 @@ public class UserVerifyRequestDto {
 
     private String phone;
 
-    private int verificationCode;
+    private String verificationCode;
 }

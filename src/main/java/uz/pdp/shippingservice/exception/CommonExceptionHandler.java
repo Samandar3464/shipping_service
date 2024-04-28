@@ -1,9 +1,6 @@
 package uz.pdp.shippingservice.exception;
 
 import com.google.firebase.messaging.FirebaseMessagingException;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,8 +8,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 
-import java.io.IOException;
-import java.security.SignatureException;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -66,9 +61,9 @@ public class CommonExceptionHandler {
                 , null);
     }
 
-    @ExceptionHandler(UserAlreadyExistException.class)
+    @ExceptionHandler(UserException.class)
     @ResponseStatus(HttpStatus.ALREADY_REPORTED)
-    public ApiResponse handleUserNotFoundException(UserAlreadyExistException e) {
+    public ApiResponse handleUserNotFoundException(UserException e) {
         return new ApiResponse(
                 USER_ALREADY_EXIST
                 , false
@@ -165,9 +160,9 @@ public class CommonExceptionHandler {
                 , null);
     }
 
-    @ExceptionHandler(SmsServiceBroken.class)
+    @ExceptionHandler(SmsException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ApiResponse notEnoughNotException(SmsServiceBroken e) {
+    public ApiResponse notEnoughNotException(SmsException e) {
         return new ApiResponse(
                 CAN_NOT_TAKE_SMS_SENDING_SERVICE_TOKEN
                 , false
