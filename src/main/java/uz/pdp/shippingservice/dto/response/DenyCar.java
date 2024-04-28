@@ -11,6 +11,6 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DenyCar {
 
-    private UUID carId;
+    private Integer carId;
     private String massage;
 }

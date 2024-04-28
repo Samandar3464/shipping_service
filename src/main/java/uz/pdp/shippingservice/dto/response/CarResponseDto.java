@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 public class CarResponseDto {
 
-     private UUID id;
+     private Integer id;
 
      private String carNumber;
 

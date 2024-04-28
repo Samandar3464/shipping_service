@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
-    Optional<UserEntity> findByPhone(@NotBlank @Size(min = 12, max = 12) String phone);
+    Optional<UserEntity> findByUserName(@NotBlank @Size(min = 12, max = 12) String phone);
 
-    boolean existsByPhone(@NotBlank @Size(min = 12, max = 12) String phone);
+    boolean existsByUserName(@NotBlank @Size(min = 12, max = 12) String phone);
 
 }

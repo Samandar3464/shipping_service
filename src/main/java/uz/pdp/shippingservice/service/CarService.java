@@ -69,13 +69,13 @@ public class CarService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse getCarById(UUID carId) {
+    public ApiResponse getCarById(Integer carId) {
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFound(CAR_NOT_FOUND));
         return new ApiResponse(fromCarToResponse(car), true);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse deleteCarByID(UUID id) {
+    public ApiResponse deleteCarByID(Integer id) {
         Car byId = carRepository.findById(id).orElseThrow(() -> new CarNotFound(CAR_NOT_FOUND));
         byId.setActive(false);
         carRepository.save(byId);
@@ -83,7 +83,8 @@ public class CarService {
     }
 
     private Car from(CarRegisterRequestDto carRegisterRequestDto, UserEntity userEntity) {
-        Optional<Car> byUserIdAndActiveTrue = carRepository.findByUserIdAndActiveTrue(userEntity.getId());
+//        Optional<Car> byUserIdAndActiveTrue = carRepository.findByUserIdAndActiveTrue(userEntity.getId());
+        Optional<Car> byUserIdAndActiveTrue = Optional.ofNullable(new Car());
         if (byUserIdAndActiveTrue.isPresent()) {
             throw new CarAlreadyExistException(CAR_ALREADY_EXIST);
         }
@@ -91,7 +92,7 @@ public class CarService {
         car.setPhotoDriverLicense(attachmentService.saveToSystem(carRegisterRequestDto.getPhotoDriverLicense()));
         car.setTexPassportPhoto(attachmentService.saveToSystem(carRegisterRequestDto.getTexPassportPhoto()));
         car.setCarPhotos(attachmentService.saveToSystemListFile(carRegisterRequestDto.getCarPhotoList()));
-        car.setUserEntity(userEntity);
+        car.setUser(userEntity);
         return car;
     }
 
@@ -113,8 +114,9 @@ public class CarService {
     }
 
     public Car getCarByUserId(Integer user_id) {
-        return carRepository.findByUserIdAndActiveTrue(user_id).orElseThrow(() ->
-                new CarNotFound(CAR_NOT_FOUND));
+//        return carRepository.findByUserIdAndActiveTrue(user_id).orElseThrow(() ->
+//                new CarNotFound(CAR_NOT_FOUND));
+        return new Car();
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -127,7 +129,7 @@ public class CarService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse activateCar(UUID carId) {
+    public ApiResponse activateCar(Integer carId) {
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFound(CAR_NOT_FOUND));
         car.setActive(true);
         carRepository.save(car);
@@ -135,7 +137,7 @@ public class CarService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse deactivateCar(UUID carId) {
+    public ApiResponse deactivateCar(Integer carId) {
         Car car = carRepository.findById(carId).orElseThrow(() -> new CarNotFound(CAR_NOT_FOUND));
         car.setActive(false);
         carRepository.save(car);
@@ -145,7 +147,7 @@ public class CarService {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse denyCar(DenyCar denyCar) {
         Car car = carRepository.findById(denyCar.getCarId()).orElseThrow(() -> new CarNotFound(CAR_NOT_FOUND));
-        UserEntity userEntityByCar = userService.checkUserExistById(car.getUserEntity().getId());
+        UserEntity userEntityByCar = userService.checkUserExistById(car.getUser().getId());
 
         car.getCarPhotos().forEach(obj -> attachmentService.deleteNewNameId(obj.getNewName() + "." + obj.getType()));
         attachmentService.deleteNewNameId(car.getPhotoDriverLicense().getNewName() + "." + car.getPhotoDriverLicense().getType());

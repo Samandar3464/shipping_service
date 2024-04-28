@@ -29,19 +29,19 @@ public class CarController {
     }
     @GetMapping("/getCarById/{id}")
     @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-    public ApiResponse getCatById(@PathVariable UUID id) {
+    public ApiResponse getCatById(@PathVariable Integer id) {
         return carService.getCarById(id);
     }
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-    public ApiResponse deleteCarByID(@PathVariable UUID id) {
+    public ApiResponse deleteCarByID(@PathVariable Integer id) {
         return carService.deleteCarByID(id);
     }
 
 //    @PutMapping("/updateCar/{id}")
 //    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-//    public ApiResponse updateCar(@PathVariable UUID id, @RequestBody CarRegisterRequestDto carRegisterRequestDto) {
+//    public ApiResponse updateCar(@PathVariable Integer id, @RequestBody CarRegisterRequestDto carRegisterRequestDto) {
 //        return carService.updateCar(id,carRegisterRequestDto);
 //    }
 
@@ -56,13 +56,13 @@ public class CarController {
 
     @GetMapping("/activateCar/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ApiResponse activateCar(@PathVariable("id") UUID id) {
+    public ApiResponse activateCar(@PathVariable("id") Integer id) {
         return carService.activateCar(id);
     }
 
     @GetMapping("/deactivateCar/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ApiResponse deactivateCar(@PathVariable("id") UUID id) {
+    public ApiResponse deactivateCar(@PathVariable("id") Integer id) {
         return carService.deactivateCar(id);
     }
 

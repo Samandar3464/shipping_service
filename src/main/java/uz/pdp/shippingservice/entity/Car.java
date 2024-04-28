@@ -9,7 +9,6 @@ import uz.pdp.shippingservice.dto.request.CarRegisterRequestDto;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -20,8 +19,8 @@ import java.util.UUID;
 public class Car {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String carNumber;
 
@@ -49,9 +48,9 @@ public class Car {
     @JsonIgnore
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private UserEntity userEntity;
+    private UserEntity user;
 
-    private boolean active;
+    private boolean isActive;
 
     public static Car from(CarRegisterRequestDto carRegisterRequestDto) {
         return Car.builder()
@@ -62,7 +61,7 @@ public class Car {
                 .maximumLoadWidth(carRegisterRequestDto.getMaximumLoadWidth())
                 .texPassportNumber(carRegisterRequestDto.getTexPassportNumber())
                 .carNumber(carRegisterRequestDto.getCarNumber())
-                .active(true)
+                .isActive(true)
                 .build();
     }
 

@@ -58,7 +58,7 @@ public class UserService {
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional(rollbackFor = {Exception.class})
     public ApiResponse registerUser(UserRegisterDto userRegisterDto) {
-        boolean byPhone = userRepository.existsByPhone(userRegisterDto.getPhone());
+        boolean byPhone = userRepository.existsByUserName(userRegisterDto.getPhone());
         if (byPhone) {
             throw new UserAlreadyExistException(USER_ALREADY_EXIST);
         }
@@ -77,7 +77,7 @@ public class UserService {
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse verify(UserVerifyRequestDto userVerifyRequestDto) {
-        UserEntity userEntity = userRepository.findByPhone(userVerifyRequestDto.getPhone())
+        UserEntity userEntity = userRepository.findByUserName(userVerifyRequestDto.getPhone())
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         userEntity.setBlocked(true);
         userRepository.save(userEntity);
@@ -98,7 +98,7 @@ public class UserService {
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse forgetPassword(String number) {
-        UserEntity userEntity = userRepository.findByPhone(number).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        UserEntity userEntity = userRepository.findByUserName(number).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         Integer verificationCode = verificationCodeGenerator();
         System.out.println("Verification code: " + verificationCode);
 //        service.sendSms(SmsModel.builder()
@@ -166,7 +166,7 @@ public class UserService {
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse changePassword(String number, String password) {
-        UserEntity userEntity = userRepository.findByPhone(number).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        UserEntity userEntity = userRepository.findByUserName(number).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         userEntity.setPassword(passwordEncoder.encode(password));
         userRepository.save(userEntity);
         return new ApiResponse(userEntity, true);
@@ -188,7 +188,7 @@ public class UserService {
             throw new UserNotFoundException(USER_NOT_FOUND);
         }
         UserEntity userEntity = (UserEntity) authentication.getPrincipal();
-        UserEntity userEntity1 = userRepository.findByPhone(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        UserEntity userEntity1 = userRepository.findByUserName(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         return new ApiResponse(fromUserToResponse(userEntity1), true);
     }
     @ResponseStatus(HttpStatus.OK)
@@ -220,7 +220,7 @@ public class UserService {
             throw new UserNotFoundException(USER_NOT_FOUND);
         }
         UserEntity userEntity = (UserEntity) authentication.getPrincipal();
-        return userRepository.findByPhone(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        return userRepository.findByUserName(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
     }
 
     public UserEntity checkUserExistById(Integer id) {

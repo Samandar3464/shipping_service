@@ -10,10 +10,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface CarRepository extends JpaRepository<Car, UUID> {
-     List<Car> findAllByActiveFalse();
-     Optional<Car> findByUserIdAndActiveTrue(Integer user_id);
-     Optional<Car> findFirstByUserIdAndActiveTrue(Integer user_id);
+public interface CarRepository extends JpaRepository<Car, Integer> {
+
+//     Optional<Car> findByUserIdAndActiveTrue(Integer user_id);
 
     Page<Car> findAllByActiveFalse(Pageable pageable);
 }
