@@ -51,7 +51,7 @@ public class UserEntity implements UserDetails, Serializable {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    @Column(name = "firebase_token")
+    @Column(name = "firebase_token" ,columnDefinition="TEXT")
     private String firebaseToken;
 
     @ManyToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)

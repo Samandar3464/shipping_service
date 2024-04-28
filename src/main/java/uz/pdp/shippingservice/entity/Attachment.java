@@ -2,6 +2,10 @@ package uz.pdp.shippingservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -32,5 +36,20 @@ public class Attachment  {
 
     @Column(name = "path")
     private String path;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @UpdateTimestamp
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted = false;
 
 }

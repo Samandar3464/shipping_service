@@ -1,7 +1,7 @@
 package uz.pdp.shippingservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.pdp.shippingservice.entity.user.SmsEntity;
+import uz.pdp.shippingservice.entity.SmsEntity;
 
 import java.util.Optional;
 
