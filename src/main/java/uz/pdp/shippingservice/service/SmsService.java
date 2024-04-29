@@ -1,11 +1,9 @@
 package uz.pdp.shippingservice.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import okhttp3.*;
+import okhttp3.MediaType;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import uz.pdp.shippingservice.dto.request.UserVerifyRequestDto;
@@ -14,11 +12,12 @@ import uz.pdp.shippingservice.entity.SmsServiceTokenEntity;
 import uz.pdp.shippingservice.exception.SmsSendingFailException;
 import uz.pdp.shippingservice.exception.SmsException;
 import uz.pdp.shippingservice.dto.request.SmsModel;
-import uz.pdp.shippingservice.dto.request.SmsToken;
+import uz.pdp.shippingservice.dto.request.SmsTokenDto;
 import uz.pdp.shippingservice.dto.response.SmsResponse;
 import uz.pdp.shippingservice.properties.SmsServiceProperties;
 import uz.pdp.shippingservice.repository.SmsRepository;
 import uz.pdp.shippingservice.repository.SmsServiceTokenRepository;
+import uz.pdp.shippingservice.utils.AppUtils;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -37,28 +36,39 @@ public class SmsService {
 
     private final RestTemplate restTemplate;
 
-    private final ObjectMapper objectMapper;
     private final SmsRepository smsRepository;
 
-    private static final String GET_TOKEN = "https://notify.eskiz.uz/api/auth/login";
-    private static final String RELOAD_TOKEN = "https://notify.eskiz.uz/api/auth/refresh";
-    private static final String SMS_SEND = "https://notify.eskiz.uz/api/message/sms/send";
 
     public String getToken() {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("email", properties.getUsername())
+                .addFormDataPart("password", properties.getPassword())
+                .build();
+        Request request = new Request.Builder()
+                .url(properties.getUrl() + "/api/auth/login")
+                .post(requestBody)
+                .build();
         try {
-            Map<String, String> requestBody = new HashMap<>();
-            requestBody.put("email", properties.getUsername());
-            requestBody.put("password", properties.getPassword());
-            HttpEntity<Map<String, String>> request = new HttpEntity<>(requestBody);
-            String url = properties.getUrl() + "/api/auth/login";
-            ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
-            String body = response.getBody();
-            SmsToken smsToken = objectMapper.readValue(body, SmsToken.class);
-            SmsServiceTokenEntity entity = smsToken.getData();
-            SmsServiceTokenEntity save = smsServiceTokenRepository.save(entity);
-            return save.getToken();
+            Response response = client.newCall(request).execute();
+            String responseBody = response.body().string();
+            if (response.code() != HttpStatus.OK.value()) {
+                throw new SmsException(CAN_NOT_TAKE_SMS_SENDING_SERVICE_TOKEN);
+            }
+            SmsTokenDto smsTokenDto = AppUtils.jsonTreeToObjectByGson(responseBody, SmsTokenDto.class);
+            SmsServiceTokenEntity entity = smsTokenDto.getData();
+            List<SmsServiceTokenEntity> all = smsServiceTokenRepository.findAll();
+            if (!all.isEmpty()){
+                SmsServiceTokenEntity entity1 = all.get(0);
+                entity1.setToken(entity.getToken());
+                entity = smsServiceTokenRepository.save(entity1);
+            }else {
+                entity = smsServiceTokenRepository.save(entity);
+            }
+            return entity.getToken();
         } catch (Exception e) {
-            throw new SmsException(CAN_NOT_TAKE_SMS_SENDING_SERVICE_TOKEN);
+            throw new SmsException(e.getMessage());
         }
     }
 
@@ -76,50 +86,67 @@ public class SmsService {
     }
 
     public SmsResponse sendSms(SmsModel smsModel) {
-        HttpEntity<Map<String, String>> request = null;
-        HttpHeaders headers = new HttpHeaders();
-        String token = null;
+        OkHttpClient client = new OkHttpClient();
+        List<SmsServiceTokenEntity> all = smsServiceTokenRepository.findAll();
+        String token = all.get(0).getToken();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("mobile_phone", smsModel.getPhone())
+                .addFormDataPart("message", smsModel.getMessage())
+                .addFormDataPart("from", "4546")
+                .addFormDataPart("callback_url", "http://0000.uz/test.php")
+                .build();
+
+        Request request = new Request.Builder()
+                .url(properties.getUrl() + "/api/message/sms/send")
+                .addHeader("Authorization", "Bearer " + token)
+                .post(requestBody)
+                .build();
+
         try {
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            List<SmsServiceTokenEntity> all = smsServiceTokenRepository.findAll();
-            if (!all.isEmpty()) {
-                token = all.get(0).getToken();
-            } else {
-                token = getToken();
+            Response response = client.newCall(request).execute();
+            String responseBody = response.body().string();
+            if (response.code() == HttpStatus.UNAUTHORIZED.value()) {
+                getToken();
+                sendSms(smsModel);
+            } else if (response.code() == HttpStatus.OK.value()) {
+                throw new SmsException(CAN_NOT_SEND_SMS);
             }
-            headers.set("Authorization", "Bearer " + token);
-            Map<String, String> requestBody = new HashMap<>();
-            requestBody.put("mobile_phone", "998" + smsModel.getPhone());
-            requestBody.put("message", smsModel.getMessage());
-            requestBody.put("from", String.valueOf(smsModel.getFrom()));
-            requestBody.put("callback_url", smsModel.getCallback_url());
-            request = new HttpEntity<>(requestBody, headers);
-            String url = properties.getUrl() + "/api/message/sms/send";
-            ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);
-            String body = response.getBody();
-            return objectMapper.readValue(body, SmsResponse.class);
+          return   AppUtils.jsonTreeToObjectByJackson(responseBody, SmsResponse.class);
         } catch (Exception e) {
-            try {
-                token = reFreshToken(token);
-                HttpHeaders headers1 = request.getHeaders();
-                headers1.setBearerAuth(token);
-                String url = properties.getUrl() + "/api/message/sms/send";
-                restTemplate.postForEntity(url, request, String.class);
-            } catch (Exception e1) {
-                throw new SmsSendingFailException(CAN_NOT_SEND_SMS);
-            }
+            throw new SmsException(CAN_NOT_SEND_SMS);
         }
-        return null;
     }
 
     private String reFreshToken(String oldToken) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Bearer " + oldToken);
-        HttpEntity<?> httpEntity = new HttpEntity<>(headers);
         String url = properties.getUrl() + "/api/auth/refresh";
-        restTemplate.patchForObject(url, httpEntity, Void.class);
-        return getToken();
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization", "Bearer "+ oldToken)
+                .patch(RequestBody.create(null, new byte[0])) // Empty body for PATCH request
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            String responseBody = response.body().string();
+            if (response.code() != HttpStatus.OK.value()) {
+                throw new SmsException(CAN_NOT_TAKE_SMS_SENDING_SERVICE_TOKEN);
+            }
+            SmsTokenDto smsTokenDto = AppUtils.jsonTreeToObjectByGson(responseBody, SmsTokenDto.class);
+            SmsServiceTokenEntity entity = smsTokenDto.getData();
+            List<SmsServiceTokenEntity> all = smsServiceTokenRepository.findAll();
+            if (!all.isEmpty()){
+                SmsServiceTokenEntity entity1 = all.get(0);
+                entity1.setToken(entity.getToken());
+                entity = smsServiceTokenRepository.save(entity1);
+            }else {
+                entity = smsServiceTokenRepository.save(entity);
+            }
+            return entity.getToken();
+        } catch (Exception e) {
+            throw new SmsException(CAN_NOT_TAKE_SMS_SENDING_SERVICE_TOKEN);
+        }
     }
 
     public boolean findByPhoneAndCheck(UserVerifyRequestDto dto) {

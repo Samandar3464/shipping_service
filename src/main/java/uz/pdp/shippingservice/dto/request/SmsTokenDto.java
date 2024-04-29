@@ -9,7 +9,7 @@ import uz.pdp.shippingservice.entity.SmsServiceTokenEntity;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SmsToken {
+public class SmsTokenDto {
 
     private String message;
 
