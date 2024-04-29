@@ -15,6 +15,8 @@ public class CountryDto {
 
     private String name;
 
+    private Boolean active = true;
+
     public CountryDto(String name) {
         this.name = name;
     }

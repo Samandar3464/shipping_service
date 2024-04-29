@@ -11,5 +11,6 @@ public class RegionRegisterRequestDto {
     private Integer id;
     private Integer countryId;
     private String name;
+    private Boolean active;
 
 }

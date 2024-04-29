@@ -6,7 +6,7 @@ import uz.pdp.shippingservice.entity.locations.Region;
 import java.util.Collection;
 
 public interface RegionRepository extends JpaRepository<Region, Integer> {
-    boolean existsByName(String name);
+    boolean existsByNameAndCountryId(String name , Integer id);
     boolean existsByIdAndName(Integer id, String name);
     boolean existsByNameIn(Collection<String> name);
 }

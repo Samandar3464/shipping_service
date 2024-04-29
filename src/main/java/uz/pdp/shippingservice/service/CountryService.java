@@ -29,10 +29,10 @@ public class CountryService {
     }
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse editCountry(CountryDto countryDto) {
-        if (countryRepository.existsByIdAndName(countryDto.getId(),countryDto.getName())) {
-            throw new RecordAlreadyExistException(COUNTRY_ALREADY_EXIST);
-        }
-        countryRepository.save(new Country(countryDto.getId(), countryDto.getName()));
+        Country country = countryRepository.findByIdAndName(countryDto.getId(), countryDto.getName()).orElseThrow(() -> new RecordAlreadyExistException(COUNTRY_ALREADY_EXIST));
+        country.setName(countryDto.getName());
+        country.setIsActive(countryDto.getActive());
+        countryRepository.save(country);
         return new ApiResponse(SUCCESSFULLY, true);
     }
 
@@ -42,12 +42,19 @@ public class CountryService {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    public ApiResponse getActiveCountryList() {
+        return new ApiResponse(countryRepository.findAllByIsActiveTrue(), true);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     public ApiResponse getCountryById(Integer id) {
         return new ApiResponse(countryRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(COUNTRY_NOT_FOUND)), true);
     }
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse deleteRegionById(Integer id) {
-        countryRepository.deleteById(id);
+        Country country = countryRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(COUNTRY_NOT_FOUND));
+        country.setIsActive(false);
+        countryRepository.save(country);
         return new ApiResponse(DELETED, true);
     }
 }

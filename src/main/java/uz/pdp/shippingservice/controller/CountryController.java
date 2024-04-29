@@ -31,6 +31,11 @@ public class CountryController {
         return countryService.getCountryList();
     }
 
+    @GetMapping("/getActiveCountryList")
+    public ApiResponse getActiveCountryList() {
+        return countryService.getActiveCountryList();
+    }
+
     @GetMapping("/countryById/{id}")
     public ApiResponse getRegionById(@PathVariable Integer id) {
         return countryService.getCountryById(id);

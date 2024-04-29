@@ -3,7 +3,13 @@ package uz.pdp.shippingservice.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import uz.pdp.shippingservice.entity.locations.Country;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface CountryRepository extends JpaRepository<Country ,Integer> {
     boolean existsByName(String name);
-    boolean existsByIdAndName(Integer id, String name);
+    Optional<Country> findByIdAndName(Integer id, String name);
+    Optional<Country> findByIdAndIsActiveTrue(Integer id);
+
+    List<Country> findAllByIsActiveTrue();
 }
