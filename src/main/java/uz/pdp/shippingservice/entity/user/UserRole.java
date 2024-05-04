@@ -1,5 +1,6 @@
 package uz.pdp.shippingservice.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.shippingservice.dto.request.UserRoleDto;
@@ -27,7 +28,7 @@ public class UserRole {
 
     @Column(name = "deleted")
     private boolean deleted;
-
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public static UserRole toEntity(UserRoleDto dto){

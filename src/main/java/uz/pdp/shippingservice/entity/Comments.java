@@ -1,5 +1,6 @@
 package uz.pdp.shippingservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,6 @@ public class Comments {
     private String text;
 
     private boolean read;
-
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private LocalDateTime createdTime;
 }

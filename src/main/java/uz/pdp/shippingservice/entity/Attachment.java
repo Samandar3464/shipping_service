@@ -1,5 +1,6 @@
 package uz.pdp.shippingservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -45,6 +46,7 @@ public class Attachment  {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     @UpdateTimestamp
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;

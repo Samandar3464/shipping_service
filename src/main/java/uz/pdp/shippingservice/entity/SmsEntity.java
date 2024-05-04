@@ -1,6 +1,7 @@
 package uz.pdp.shippingservice.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -33,9 +34,11 @@ public class SmsEntity {
     @Column(name = "code")
     private String code;
 
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     @Column(name = "expire_at")
     private LocalDateTime expireAt;
 

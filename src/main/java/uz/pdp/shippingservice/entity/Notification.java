@@ -1,5 +1,6 @@
 package uz.pdp.shippingservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,7 +38,7 @@ public class Notification {
     private boolean read;
 
     private boolean deleted;
-
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private LocalDateTime createdTime;
 
     private String receiverToken;

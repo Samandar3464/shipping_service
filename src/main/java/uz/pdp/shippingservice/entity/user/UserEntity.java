@@ -1,6 +1,7 @@
 package uz.pdp.shippingservice.entity.user;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -42,6 +43,7 @@ public class UserEntity implements UserDetails, Serializable {
     private String password;
 
     @Column(name = "created_at")
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private LocalDateTime createdAt;
 
     @Column(name = "is_blocked")

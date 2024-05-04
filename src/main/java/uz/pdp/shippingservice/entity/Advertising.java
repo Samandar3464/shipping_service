@@ -1,9 +1,11 @@
 package uz.pdp.shippingservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.shippingservice.dto.request.AdvertisingRequestDto;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -21,9 +23,15 @@ public class Advertising {
 
     private String name;
 
-    private String ownerName;
+    private String ownerData;
 
     private String url;
+
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
+    private LocalDateTime startDate;
+
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
+    private LocalDateTime endDate;
 
     private boolean active;
 
@@ -35,7 +43,7 @@ public class Advertising {
                 .builder()
                 .price(advertisingRequestDto.getPrice())
                 .name(advertisingRequestDto.getName())
-                .ownerName(advertisingRequestDto.getOwnerName())
+                .ownerData(advertisingRequestDto.getOwnerData())
                 .url(advertisingRequestDto.getUrl())
                 .active(true)
                 .build();

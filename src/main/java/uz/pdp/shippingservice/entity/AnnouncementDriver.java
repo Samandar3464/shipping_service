@@ -1,5 +1,6 @@
 package uz.pdp.shippingservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -36,7 +37,7 @@ public class AnnouncementDriver {
      private boolean deleted;
 
      private boolean goAnotherRegion;
-
+     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
      private LocalDateTime createdTime;
 
      @ManyToOne

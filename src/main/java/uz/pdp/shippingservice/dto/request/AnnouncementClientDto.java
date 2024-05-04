@@ -1,5 +1,6 @@
 package uz.pdp.shippingservice.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -30,5 +31,6 @@ public class AnnouncementClientDto {
 
      @JsonSerialize(using = LocalDateTimeSerializer.class)
      @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
      private LocalDateTime timeToSend;
 }
