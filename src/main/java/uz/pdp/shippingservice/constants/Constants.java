@@ -31,6 +31,8 @@ public class Constants {
     public static final String REGION_NOT_FOUND="REGION NOT FOUND";
     public static final String COUNTRY_NOT_FOUND="COUNTRY NOT FOUND";
     public static final String CITY_NOT_FOUND="CITY NOT FOUND";
+    public static final String ROLE_NOT_FOUND="ROLE NOT FOUND";
+    public static final String ROLE_ALREADY_EXIST="ROLE ALREADY EXIST";
     public static final String YOU_COME_TO_MESSAGE_FROM_DRIVER="SIZGA HAYDOVCHIDAN HABAR KELDI";
     public static final String PASSENGER_AGREE="Klent yukni olib borib berishinggizga  rozi bo'ldi.";
     public static final String FIREBASE_EXCEPTION="FIREBASE EXCEPTION";

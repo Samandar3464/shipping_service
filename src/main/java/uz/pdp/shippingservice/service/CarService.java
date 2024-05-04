@@ -19,6 +19,7 @@ import uz.pdp.shippingservice.dto.request.SmsModel;
 import uz.pdp.shippingservice.dto.response.CarResponseDto;
 import uz.pdp.shippingservice.dto.response.CarResponseListForAdmin;
 import uz.pdp.shippingservice.dto.response.DenyCar;
+import uz.pdp.shippingservice.exception.RecordNotFoundException;
 import uz.pdp.shippingservice.repository.CarRepository;
 import uz.pdp.shippingservice.repository.RoleRepository;
 import uz.pdp.shippingservice.repository.UserRepository;
@@ -40,7 +41,7 @@ public class CarService {
 
     private final UserService userService;
 
-    private final RoleRepository roleRepository;
+    private final UserRoleService roleService;
 
     private final UserRepository userRepository;
 
@@ -50,7 +51,7 @@ public class CarService {
     public ApiResponse addCar(CarRegisterRequestDto carRegisterRequestDto) {
         UserEntity userEntity = userService.checkUserExistByContext();
         List<UserRole> authroles = userEntity.getRoles();
-        UserRole byName = roleRepository.findByName(DRIVER);
+        UserRole byName = roleService.findByName(DRIVER);
         if (!userEntity.getRoles().contains(byName)) {
             authroles.add((byName));
         }

@@ -1,13 +1,16 @@
 package uz.pdp.shippingservice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import uz.pdp.shippingservice.dto.request.UserRoleDto;
+
+import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "roles")
 public class UserRole {
@@ -24,4 +27,15 @@ public class UserRole {
 
     @Column(name = "deleted")
     private boolean deleted;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    public static UserRole toEntity(UserRoleDto dto){
+        return UserRole.builder()
+                .name(dto.getName())
+                .description(dto.getDescription())
+                .deleted(false)
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
 }

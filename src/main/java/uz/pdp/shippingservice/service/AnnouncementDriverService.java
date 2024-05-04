@@ -133,7 +133,7 @@ public class AnnouncementDriverService {
         attachmentList.forEach(attach -> photos.add(attachmentService.attachUploadFolder + attach.getPath() + "/" + attach.getNewName() + "." + attach.getType()));
         AnnouncementDriverResponse announcement = AnnouncementDriverResponse.from(announcementDriver);
         announcement.setCarPhotoPath(photos);
-        announcement.setUserResponseDto(userService.fromUserToResponse(announcementDriver.getUserEntity()));
+//        announcement.setUserResponseDto(userService.fromUserToResponse(announcementDriver.getUserEntity()));
         return announcement;
     }
 

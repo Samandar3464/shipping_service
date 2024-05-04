@@ -129,9 +129,9 @@ public class NotificationService {
 
         passengerAccepted.forEach(obj -> {
             AnnouncementClient announcement = announcementClientRepository.findById(obj.getAnnouncementPassengerId()).orElse(null);
-            UserResponseDto userResponseDto = UserResponseDto.from(userService.checkUserExistById(obj.getReceiverId()));
+//            UserResponseDto userResponseDto = UserResponseDto.from(userService.checkUserExistById(obj.getReceiverId()));
             if (announcement != null) {
-                allowedAnnouncementResponseForDrivers.add(AnnouncementClientResponse.from(announcement, userResponseDto));
+                allowedAnnouncementResponseForDrivers.add(AnnouncementClientResponse.from(announcement/*, userResponseDto*/));
             }
         });
         return new ApiResponse(allowedAnnouncementResponseForDrivers, true);

@@ -25,7 +25,7 @@ public class AnnouncementDriverResponse {
 
     private double currentLongitude;
 
-    private UserResponseDto userResponseDto;
+//    private UserResponseDto userResponseDto;
 
     private String info;
 

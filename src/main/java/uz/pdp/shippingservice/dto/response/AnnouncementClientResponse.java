@@ -27,9 +27,9 @@ public class AnnouncementClientResponse {
     private String info;
     private double price;
     private String timeToSend;
-    private UserResponseDto userResponseDto;
+//    private UserResponseDto userResponseDto;
 
-    public static AnnouncementClientResponse from(AnnouncementClient announcementClient, UserResponseDto userResponseDto) {
+    public static AnnouncementClientResponse from(AnnouncementClient announcementClient/*, UserResponseDto userResponseDto*/) {
         return AnnouncementClientResponse.builder()
                 .id(announcementClient.getId())
                 .fromRegion(announcementClient.getFromRegion().getName())
@@ -43,7 +43,7 @@ public class AnnouncementClientResponse {
                 .toLongitude(announcementClient.getToLongitude())
                 .info(announcementClient.getInfo())
                 .timeToSend(announcementClient.getTimeToSend().toString())
-                .userResponseDto(userResponseDto)
+//                .userResponseDto(userResponseDto)
                 .build();
     }
 }
