@@ -32,5 +32,5 @@ public class AnnouncementClientDto {
      @JsonSerialize(using = LocalDateTimeSerializer.class)
      @JsonDeserialize(using = LocalDateTimeDeserializer.class)
      @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-     private LocalDateTime timeToSend;
+     private String timeToSend;
 }

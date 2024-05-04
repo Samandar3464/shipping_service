@@ -23,14 +23,10 @@ public class GetByFilter {
 
     private Integer cityId;
 
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    private LocalDateTime time1;
+    private String time1;
 
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    private LocalDateTime time2;
+    private String time2;
 
 }

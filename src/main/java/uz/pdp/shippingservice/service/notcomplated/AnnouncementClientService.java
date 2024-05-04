@@ -13,6 +13,7 @@ import uz.pdp.shippingservice.dto.request.AnnouncementClientDto;
 import uz.pdp.shippingservice.dto.request.GetByFilter;
 import uz.pdp.shippingservice.dto.response.AnnouncementClientResponseList;
 import uz.pdp.shippingservice.repository.*;
+import uz.pdp.shippingservice.service.LocalDateTimeConverter;
 import uz.pdp.shippingservice.service.UserService;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class AnnouncementClientService {
     private final UserService userService;
     private final AnnouncementClientRepository announcementClientRepository;
     private final CountryRepository countryRepository;
-
+    private final LocalDateTimeConverter converter;
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse add(AnnouncementClientDto announcementClientDto) {
         UserEntity userEntity = userService.checkUserExistByContext();
@@ -56,8 +57,8 @@ public class AnnouncementClientService {
                 .findAllByFromRegionIdAndFromCityIdAndTimeToSendBetweenOrderByCreatedTimeDesc(
                         getByFilter.getRegionId(),
                         getByFilter.getCityId(),
-                        getByFilter.getTime1(),
-                        getByFilter.getTime2());
+                        converter.convert(getByFilter.getTime1()),
+                        converter.convert(getByFilter.getTime2()));
         List<AnnouncementClientResponseList> passengerResponses = new ArrayList<>();
         byFilter.forEach(obj -> passengerResponses.add(AnnouncementClientResponseList.from(obj)));
         return new ApiResponse(passengerResponses, true);
@@ -130,6 +131,7 @@ public class AnnouncementClientService {
 
     private AnnouncementClient fromRequest(AnnouncementClientDto announcementClientDto, UserEntity userEntity) {
         AnnouncementClient announcementClient = AnnouncementClient.from(announcementClientDto);
+        announcementClient.setTimeToSend(converter.convert(announcementClientDto.getTimeToSend()));
 //        announcementClient.setUserEntity(userEntity);
         announcementClient.setFromCountry(countryRepository.getById(announcementClientDto.getFromRegionId()));
         announcementClient.setToCountry(countryRepository.getById(announcementClientDto.getFromRegionId()));
