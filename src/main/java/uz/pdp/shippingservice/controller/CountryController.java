@@ -9,7 +9,7 @@ import uz.pdp.shippingservice.service.CountryService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/country")
+@RequestMapping("/v1/country")
 public class CountryController {
 
     private final CountryService countryService;

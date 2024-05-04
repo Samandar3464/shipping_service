@@ -11,7 +11,7 @@ import uz.pdp.shippingservice.service.UserService;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/user")
+@RequestMapping("/v1/user")
 public class UserController {
 
     private UserService userService;

@@ -8,7 +8,7 @@ import uz.pdp.shippingservice.service.notcomplated.CommentService;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/comment")
+@RequestMapping("/v1/comment")
 public class CommentController {
 
     private final CommentService commentService;

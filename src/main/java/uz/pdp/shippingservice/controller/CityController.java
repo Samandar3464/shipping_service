@@ -10,7 +10,7 @@ import uz.pdp.shippingservice.service.CityService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/city")
+@RequestMapping("/v1/city")
 public class CityController {
      private final CityService cityService;
 

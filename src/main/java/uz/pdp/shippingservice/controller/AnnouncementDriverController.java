@@ -1,39 +1,61 @@
 package uz.pdp.shippingservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.shippingservice.dto.request.UserRoleDto;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
-import uz.pdp.shippingservice.service.UserRoleService;
+import uz.pdp.shippingservice.dto.request.AnnouncementDriverDto;
+import uz.pdp.shippingservice.dto.request.GetByFilter;
+import uz.pdp.shippingservice.service.notcomplated.AnnouncementDriverService;
+
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/userRole")
+@RequestMapping("/api/v1/driver")
 public class AnnouncementDriverController {
 
-    private final UserRoleService userRoleService;
+    private final AnnouncementDriverService announcementDriverService;
 
-    @PostMapping("/create")
-//    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-    public ApiResponse create(@RequestBody UserRoleDto dto){
-        return userRoleService.create(dto);
+    @PostMapping("/add")
+    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
+    public ApiResponse addDriverAnnouncement(@RequestBody AnnouncementDriverDto announcementDriverDto){
+        return announcementDriverService.add(announcementDriverDto);
     }
 
-    @GetMapping("/getAll")
-    public ApiResponse getAll(){
-        return userRoleService.getAll();
+    @PostMapping("/getAnnouncementDriverByFilter")
+    public ApiResponse getByFilter(@RequestBody GetByFilter getByFilter){
+        return announcementDriverService.getAnnouncementDriverByFilter(getByFilter);
     }
 
-
-    @GetMapping("/getById/{id}")
-//    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-    public ApiResponse getById(@PathVariable Integer id){
-        return userRoleService.getById(id);
+    @PreAuthorize("hasAnyRole('DRIVER','CLIENT','ADMIN')")
+    @GetMapping("/getActiveAnnouncementById/{id}")
+    public ApiResponse getDriverAnnouncementByIdAndActiveTrue(@PathVariable("id")UUID id){
+        return announcementDriverService.getDriverAnnouncementByIdAndActiveTrue(id);
     }
 
-    @DeleteMapping("/delete/{id}")
-//    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-    public ApiResponse delete(@PathVariable Integer id){
-        return userRoleService.delete(id);
+    @GetMapping("/getbyId/{id}")
+    @PreAuthorize("hasAnyRole('DRIVER','CLIENT','ADMIN')")
+    public ApiResponse getDriverAnnouncementByIdDeletedFalse(@PathVariable("id")UUID id){
+        return announcementDriverService.getDriverAnnouncementByIdDeletedFalse(id);
+    }
+
+    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
+    @GetMapping("/getDriverOwnAnnouncements")
+    public ApiResponse getOwnDriverAnnouncements(){
+        return announcementDriverService.getDriverOwnAnnouncements();
+    }
+
+//    @GetMapping("/getDriverOwnAnnouncementsHistory")
+//    public ApiResponse getOwnDriverAnnouncementsHistory(){
+//        return announcementDriverService.getDriverOwnAnnouncementsHistory();
+//    }
+
+
+    @DeleteMapping("/deleteDriverAnnouncements/{id}")
+    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
+    public ApiResponse deleteDriverAnnouncement(@PathVariable UUID id){
+        return announcementDriverService.deleteDriverAnnouncement(id);
     }
 }

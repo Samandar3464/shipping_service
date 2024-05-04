@@ -1,6 +1,7 @@
 package uz.pdp.shippingservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.shippingservice.dto.request.AdvertisingRequestDto;
@@ -35,17 +36,20 @@ public class Advertising {
 
     private boolean active;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Attachment content;
 
-    public static Advertising from(AdvertisingRequestDto advertisingRequestDto){
+    public static Advertising toEntity(AdvertisingRequestDto dto){
         return Advertising
                 .builder()
-                .price(advertisingRequestDto.getPrice())
-                .name(advertisingRequestDto.getName())
-                .ownerData(advertisingRequestDto.getOwnerData())
-                .url(advertisingRequestDto.getUrl())
+                .price(dto.getPrice())
+                .name(dto.getName())
+                .ownerData(dto.getOwnerData())
+                .url(dto.getUrl())
                 .active(true)
+                .startDate(dto.getStartDate())
+                .endDate(dto.getEndDate())
                 .build();
     }
 }

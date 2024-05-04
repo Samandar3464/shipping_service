@@ -10,7 +10,7 @@ import uz.pdp.shippingservice.dto.response.DenyCar;
 import uz.pdp.shippingservice.service.notcomplated.CarService;
 
 @RestController
-@RequestMapping("/api/v1/car")
+@RequestMapping("/v1/car")
 @RequiredArgsConstructor
 public class CarController {
     private final CarService carService;

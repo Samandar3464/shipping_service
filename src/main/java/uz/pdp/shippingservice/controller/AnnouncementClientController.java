@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/client")
+@RequestMapping("/v1/client")
 public class AnnouncementClientController {
 
     private final AnnouncementClientService announcementClientService;
