@@ -9,7 +9,6 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import uz.pdp.shippingservice.entity.UserRole;
 import uz.pdp.shippingservice.dto.request.UserRegisterDto;
 
 import java.io.Serializable;

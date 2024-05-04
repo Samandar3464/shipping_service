@@ -1,7 +1,7 @@
 package uz.pdp.shippingservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.pdp.shippingservice.entity.UserRole;
+import uz.pdp.shippingservice.entity.user.UserRole;
 
 import java.util.List;
 import java.util.Optional;

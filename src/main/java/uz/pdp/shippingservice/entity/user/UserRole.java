@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.entity;
+package uz.pdp.shippingservice.entity.user;
 
 import jakarta.persistence.*;
 import lombok.*;

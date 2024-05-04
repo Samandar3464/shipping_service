@@ -10,7 +10,7 @@
 //import org.springframework.security.core.userdetails.UserDetails;
 //import uz.pdp.shippingservice.dto.request.UserRegisterDto;
 //import uz.pdp.shippingservice.entity.Attachment;
-//import uz.pdp.shippingservice.entity.UserRole;
+//import uz.pdp.shippingservice.entity.user.UserRole;
 //import uz.pdp.shippingservice.enums.Gender;
 //
 //import java.io.Serializable;

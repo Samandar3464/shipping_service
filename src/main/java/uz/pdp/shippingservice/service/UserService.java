@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.config.jwtConfig.JwtGenerate;
 import uz.pdp.shippingservice.entity.user.UserEntity;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.UserException;
 import uz.pdp.shippingservice.exception.UserNotFoundException;
 import uz.pdp.shippingservice.dto.request.*;

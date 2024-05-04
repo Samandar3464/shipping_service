@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.service;
+package uz.pdp.shippingservice.service.notcomplated;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -6,13 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.AnnouncementClient;
 import uz.pdp.shippingservice.entity.user.UserEntity;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.AnnouncementAlreadyExistException;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
 import uz.pdp.shippingservice.dto.request.AnnouncementClientDto;
 import uz.pdp.shippingservice.dto.request.GetByFilter;
 import uz.pdp.shippingservice.dto.response.AnnouncementClientResponseList;
 import uz.pdp.shippingservice.repository.*;
+import uz.pdp.shippingservice.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,7 @@ package uz.pdp.shippingservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.dto.CountryDto;
 import uz.pdp.shippingservice.service.CountryService;
 

@@ -3,12 +3,8 @@ package uz.pdp.shippingservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.dto.request.UserRoleDto;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
-import uz.pdp.shippingservice.dto.request.AnnouncementDriverDto;
-import uz.pdp.shippingservice.dto.request.GetByFilter;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.service.UserRoleService;
-
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor

@@ -2,10 +2,9 @@ package uz.pdp.shippingservice.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.dto.request.*;
 import uz.pdp.shippingservice.service.UserService;
 

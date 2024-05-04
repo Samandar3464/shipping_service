@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.entity.api;
+package uz.pdp.shippingservice.dto.base;
 
 import lombok.*;
 

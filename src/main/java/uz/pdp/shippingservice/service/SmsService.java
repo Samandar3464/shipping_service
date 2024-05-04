@@ -2,14 +2,11 @@ package uz.pdp.shippingservice.service;
 
 import lombok.RequiredArgsConstructor;
 import okhttp3.*;
-import okhttp3.MediaType;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import uz.pdp.shippingservice.dto.request.UserVerifyRequestDto;
 import uz.pdp.shippingservice.entity.SmsEntity;
 import uz.pdp.shippingservice.entity.SmsServiceTokenEntity;
-import uz.pdp.shippingservice.exception.SmsSendingFailException;
 import uz.pdp.shippingservice.exception.SmsException;
 import uz.pdp.shippingservice.dto.request.SmsModel;
 import uz.pdp.shippingservice.dto.request.SmsTokenDto;
@@ -20,9 +17,7 @@ import uz.pdp.shippingservice.repository.SmsServiceTokenRepository;
 import uz.pdp.shippingservice.utils.AppUtils;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static uz.pdp.shippingservice.constants.Constants.*;
 
@@ -33,8 +28,6 @@ public class SmsService {
     private final SmsServiceProperties properties;
 
     private final SmsServiceTokenRepository smsServiceTokenRepository;
-
-    private final RestTemplate restTemplate;
 
     private final SmsRepository smsRepository;
 
@@ -152,7 +145,7 @@ public class SmsService {
     public boolean findByPhoneAndCheck(UserVerifyRequestDto dto) {
         SmsEntity smsEntity = smsRepository.findByPhoneAndCode(dto.getPhone(), dto.getVerificationCode()).orElseThrow(() -> new SmsException(SMS_NOT_SEND_THIS_NUMBER));
         if (LocalDateTime.now().isAfter(smsEntity.getExpireAt())) {
-            throw new SmsException(SMS_CODE_EXPIRE_TIME);
+            throw new SmsException(SMS_CODE_TIME_EXPIRE);
         }
         return true;
     }

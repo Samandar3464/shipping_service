@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.dto.PageRequestFilter;
 import uz.pdp.shippingservice.entity.locations.City;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordAlreadyExistException;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
 import uz.pdp.shippingservice.dto.request.CityRequestDto;

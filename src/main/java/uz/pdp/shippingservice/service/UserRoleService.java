@@ -1,20 +1,14 @@
 package uz.pdp.shippingservice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import uz.pdp.shippingservice.dto.PageRequestFilter;
-import uz.pdp.shippingservice.dto.request.CityRequestDto;
 import uz.pdp.shippingservice.dto.request.UserRoleDto;
-import uz.pdp.shippingservice.entity.UserRole;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
-import uz.pdp.shippingservice.entity.locations.City;
+import uz.pdp.shippingservice.entity.user.UserRole;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordAlreadyExistException;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
-import uz.pdp.shippingservice.repository.CityRepository;
-import uz.pdp.shippingservice.repository.RegionRepository;
 import uz.pdp.shippingservice.repository.RoleRepository;
 
 import static uz.pdp.shippingservice.constants.Constants.*;

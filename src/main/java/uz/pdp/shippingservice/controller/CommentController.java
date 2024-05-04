@@ -3,8 +3,8 @@ package uz.pdp.shippingservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.entity.Comments;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
-import uz.pdp.shippingservice.service.CommentService;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
+import uz.pdp.shippingservice.service.notcomplated.CommentService;
 
 @RequiredArgsConstructor
 @RestController

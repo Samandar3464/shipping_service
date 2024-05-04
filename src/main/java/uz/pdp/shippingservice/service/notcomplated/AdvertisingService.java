@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.service;
+package uz.pdp.shippingservice.service.notcomplated;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -6,10 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.Advertising;
 import uz.pdp.shippingservice.entity.Attachment;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
 import uz.pdp.shippingservice.dto.request.AdvertisingRequestDto;
 import uz.pdp.shippingservice.repository.AdvertisingRepository;
+import uz.pdp.shippingservice.service.AttachmentService;
 
 import java.util.UUID;
 

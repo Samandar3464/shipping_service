@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.service;
+package uz.pdp.shippingservice.service.notcomplated;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -8,10 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.Attachment;
-import uz.pdp.shippingservice.entity.UserRole;
+import uz.pdp.shippingservice.entity.user.UserRole;
 import uz.pdp.shippingservice.entity.Car;
 import uz.pdp.shippingservice.entity.user.UserEntity;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.CarAlreadyExistException;
 import uz.pdp.shippingservice.exception.CarNotFound;
 import uz.pdp.shippingservice.dto.request.CarRegisterRequestDto;
@@ -19,10 +19,12 @@ import uz.pdp.shippingservice.dto.request.SmsModel;
 import uz.pdp.shippingservice.dto.response.CarResponseDto;
 import uz.pdp.shippingservice.dto.response.CarResponseListForAdmin;
 import uz.pdp.shippingservice.dto.response.DenyCar;
-import uz.pdp.shippingservice.exception.RecordNotFoundException;
 import uz.pdp.shippingservice.repository.CarRepository;
-import uz.pdp.shippingservice.repository.RoleRepository;
 import uz.pdp.shippingservice.repository.UserRepository;
+import uz.pdp.shippingservice.service.AttachmentService;
+import uz.pdp.shippingservice.service.SmsService;
+import uz.pdp.shippingservice.service.UserRoleService;
+import uz.pdp.shippingservice.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;

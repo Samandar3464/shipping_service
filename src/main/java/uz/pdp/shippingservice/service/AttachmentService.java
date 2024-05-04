@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import uz.pdp.shippingservice.entity.Attachment;
-import uz.pdp.shippingservice.entity.api.ApiResponse;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.FileUploadException;
 import uz.pdp.shippingservice.exception.OriginalFileNameNullException;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;

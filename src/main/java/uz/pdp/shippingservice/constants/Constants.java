@@ -47,7 +47,7 @@ public class Constants {
     public static final String CAR_ALREADY_EXIST ="CAR ALREADY EXIST";
     public static final String CAN_NOT_SEND_SMS="CAN NOT SEND SMS";
     public static final String SMS_NOT_SEND_THIS_NUMBER="SMS NOT SEND THIS NUMBER";
-    public static final String SMS_CODE_EXPIRE_TIME="SMS CODE EXPIRE TIME";
+    public static final String SMS_CODE_TIME_EXPIRE="SMS CODE TIME EXPIRE";
     public static final String CAN_NOT_TAKE_SMS_SENDING_SERVICE_TOKEN="CAN NOT TAKE SMS SENDING SERVICE TOKEN";
     public static final String FILE_SIZE_MUST_BU_10MB_OR_LOWER="FILE SIZE MUST BU 10MB OR LOWER";
     public static final String INPUT_EXCEPTION="INPUT EXCEPTION";
