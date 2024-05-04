@@ -34,19 +34,19 @@ public class AdvertisingController {
 
     @PostMapping("/activate/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse activate(@RequestParam(name = "id ") UUID id, @RequestBody AdvertisingRequestDto dto) {
+    public ApiResponse activate(@RequestParam(name = "id ") Long id, @RequestBody AdvertisingRequestDto dto) {
         return advertisingService.activate(id , dto);
     }
 
     @GetMapping("/deactivate/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse deactivate(@PathVariable UUID id) {
+    public ApiResponse deactivate(@PathVariable Long id) {
         return advertisingService.deActivate(id);
     }
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse deleteCityById(@PathVariable UUID id) {
+    public ApiResponse deleteCityById(@PathVariable Long id) {
         return advertisingService.deleted(id);
     }
 }

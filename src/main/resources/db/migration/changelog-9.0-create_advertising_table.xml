@@ -1,0 +1,34 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create_attachment_table" author="Samandar">
+        <createTable tableName="advertising">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="price" type="DOUBLE"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="owner_data" type="VARCHAR(255)"/>
+            <column name="url" type="VARCHAR(255)"/>
+            <column name="start_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOLEAN"/>
+            <column name="content_id" type="UUID"/>
+
+            <!-- Add foreign key constraint -->
+            <addForeignKeyConstraint baseTableName="advertising"
+                                     baseColumnNames="content_id"
+                                     constraintName="fk_advertising_content"
+                                     referencedTableName="attachment"
+                                     referencedColumnNames="id"/>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

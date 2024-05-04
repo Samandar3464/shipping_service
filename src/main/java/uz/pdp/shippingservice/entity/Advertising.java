@@ -17,8 +17,8 @@ import java.util.UUID;
 @Entity
 public class Advertising {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private double price;
 

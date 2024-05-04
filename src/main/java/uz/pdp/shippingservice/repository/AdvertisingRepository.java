@@ -6,7 +6,7 @@ import uz.pdp.shippingservice.entity.Advertising;
 import java.util.List;
 import java.util.UUID;
 
-public interface AdvertisingRepository extends JpaRepository<Advertising,UUID> {
+public interface AdvertisingRepository extends JpaRepository<Advertising,Long> {
 
     List<Advertising> findAllByActiveTrue();
 }

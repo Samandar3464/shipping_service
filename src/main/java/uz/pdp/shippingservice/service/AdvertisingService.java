@@ -62,7 +62,7 @@ public class AdvertisingService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse activate(UUID id, AdvertisingRequestDto dto) {
+    public ApiResponse activate(Long id, AdvertisingRequestDto dto) {
         Advertising advertising = advertisingRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(ADVERTISING_NOT_FOUND));
         Advertising newAdvertising = new Advertising();
         newAdvertising.setPrice(dto.getPrice());
@@ -78,7 +78,7 @@ public class AdvertisingService {
 
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse deActivate(UUID id) {
+    public ApiResponse deActivate(Long id) {
         Advertising advertising = advertisingRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(ADVERTISING_NOT_FOUND));
         advertising.setActive(false);
         advertisingRepository.save(advertising);
@@ -86,7 +86,7 @@ public class AdvertisingService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse deleted(UUID id) {
+    public ApiResponse deleted(Long id) {
         Advertising advertising = advertisingRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(ADVERTISING_NOT_FOUND));
         attachmentService.deleteNewNameId(advertising.getContent().getNewName());
         advertisingRepository.deleteById(id);
