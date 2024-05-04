@@ -9,4 +9,6 @@
     <include file="db/migration/changelog_3-create_country_table.xml"/>
     <include file="db/migration/changelog_4-create_region_table.xml"/>
     <include file="db/migration/changelog_5-create_city_table.xml"/>
+    <include file="db/migration/changelog-6.0-create_language_base_words_table.xml"/>
+    <include file="db/migration/changelog-7.0-create_language_source_table.xml"/>
 </databaseChangeLog>

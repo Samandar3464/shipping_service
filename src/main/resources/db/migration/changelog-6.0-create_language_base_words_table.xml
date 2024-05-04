@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="create_language_table.xml" author="samandar">
+        <createTable tableName="language_base_words">
+            <column name="id" autoIncrement="true" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="language_id"/>
+            </column>
+            <column name="category" type="varchar(250)"></column>
+            <column name="text" type="varchar(250)"></column>
+            <column name="lang" type="varchar(250)"></column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
