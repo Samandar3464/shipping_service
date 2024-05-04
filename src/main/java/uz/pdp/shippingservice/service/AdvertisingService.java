@@ -10,11 +10,8 @@ import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
 import uz.pdp.shippingservice.dto.request.AdvertisingRequestDto;
 import uz.pdp.shippingservice.repository.AdvertisingRepository;
-import uz.pdp.shippingservice.service.AttachmentService;
-
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import static uz.pdp.shippingservice.constants.Constants.*;
 
@@ -26,12 +23,18 @@ public class AdvertisingService {
 
     private final AttachmentService attachmentService;
 
+    private final LocalDateTimeConverter converter;
+
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse create(AdvertisingRequestDto dto) {
-        Attachment attachment = attachmentService.saveToSystem(dto.getContent());
         Advertising advertising = Advertising.toEntity(dto);
-        advertising.setUrl(attachmentService.getUrl(attachment));
-        advertising.setContent(attachment);
+        advertising.setStartDate(converter.convertDate(dto.getStartDate()));
+        advertising.setEndDate(converter.convertDate(dto.getEndDate()));
+        if (dto.getContent()!= null){
+            Attachment attachment = attachmentService.saveToSystem(dto.getContent());
+            advertising.setUrl(attachmentService.getUrl(attachment));
+            advertising.setContent(attachment);
+        }
         advertisingRepository.save(advertising);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -68,8 +71,8 @@ public class AdvertisingService {
         newAdvertising.setPrice(dto.getPrice());
         newAdvertising.setName(dto.getName());
         newAdvertising.setOwnerData(dto.getOwnerData());
-        newAdvertising.setStartDate(dto.getStartDate());
-        newAdvertising.setEndDate(dto.getEndDate());
+        newAdvertising.setStartDate(converter.convertDate(dto.getStartDate()));
+        newAdvertising.setEndDate(converter.convertDate(dto.getEndDate()));
         newAdvertising.setActive(true);
         newAdvertising.setUrl(advertising.getUrl());
         advertisingRepository.save(newAdvertising);

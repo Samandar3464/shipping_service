@@ -42,7 +42,6 @@ public class SecurityConfiguration {
     }
 
     private final String[] WHITE_LIST = new String[]{
-//            "/**",
             "/v3/api-docs/**",
             "/configuration/ui",
             "/swagger-resources/**",
@@ -51,7 +50,8 @@ public class SecurityConfiguration {
             "/webjars/**",
             "/images/**",
             "webapp/**",
-            "/api/v1/user/**"
+            "/v1/user/**",
+            "/v1/advertising/**",
     };
 
     @Bean
@@ -72,6 +72,7 @@ public class SecurityConfiguration {
                         auth -> auth
                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 .requestMatchers(WHITE_LIST).permitAll()
+                                .requestMatchers(HttpMethod.POST ,WHITE_LIST).permitAll()
                                 .requestMatchers("/gs-guide-websocket/**").permitAll()
                                 .anyRequest().authenticated()
                 )

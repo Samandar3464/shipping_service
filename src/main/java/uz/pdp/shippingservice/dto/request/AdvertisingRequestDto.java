@@ -25,15 +25,11 @@ public class AdvertisingRequestDto {
 
     private String url;
 
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    private LocalDateTime startDate;
+    @JsonFormat(pattern = "YYYY-MM-DD")
+    private String startDate;
 
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    private LocalDateTime endDate;
+    @JsonFormat(pattern = "YYYY-MM-DD")
+    private String endDate;
 
     private MultipartFile content;
 }

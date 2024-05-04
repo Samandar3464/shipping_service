@@ -48,8 +48,6 @@ public class Advertising {
                 .ownerData(dto.getOwnerData())
                 .url(dto.getUrl())
                 .active(true)
-                .startDate(dto.getStartDate())
-                .endDate(dto.getEndDate())
                 .build();
     }
 }
