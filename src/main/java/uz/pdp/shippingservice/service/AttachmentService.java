@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -33,10 +34,10 @@ public class AttachmentService {
     @Value("${attach.upload.folder}")
     public String attachUploadFolder;
 
-    public String getYearMonthDay() {
+    public String createPackageName() {
         int year = LocalDate.now().getYear();
         int month = LocalDate.now().getMonthValue();
-        return year + "/" + month; // 2022/03
+        return year + "/" + month; // 2024/05
     }
 
 
@@ -51,7 +52,7 @@ public class AttachmentService {
     //    Bitta fileni sestamaga saqlab beradi
     public Attachment saveToSystem(MultipartFile file) {
         try {
-            String pathFolder = getYearMonthDay();
+            String pathFolder = createPackageName();
             File folder = new File(attachUploadFolder + pathFolder);
             if (!folder.exists()) folder.mkdirs();
             String fileName = UUID.randomUUID().toString();
@@ -61,13 +62,17 @@ public class AttachmentService {
             Path path = Paths.get(attachUploadFolder + pathFolder + "/" + fileName + "." + extension);
             Files.write(path, bytes).toFile();
 
-            Attachment entity = new Attachment();
-            entity.setNewName(fileName);
-            entity.setOriginName(file.getOriginalFilename());
-            entity.setType(extension);
-            entity.setPath(pathFolder);
-            entity.setSize(file.getSize());
-            entity.setContentType(file.getContentType());
+            Attachment entity = Attachment.builder()
+                    .newName(fileName)
+                    .originName(file.getOriginalFilename())
+                    .type(extension)
+                    .path(pathFolder)
+                    .size(file.getSize())
+                    .contentType(file.getContentType())
+                    .createdAt(LocalDateTime.now())
+                    .updatedAt(LocalDateTime.now())
+                    .isDeleted(false)
+                    .build();
 
             return attachmentRepository.save(entity);
         } catch (IOException e) {
@@ -80,7 +85,7 @@ public class AttachmentService {
     public List<Attachment> saveToSystemListFile(List<MultipartFile> fileList) {
         List<Attachment> attachments = new ArrayList<>();
         fileList.forEach((file) -> {
-                attachments.add(saveToSystem(file));
+            attachments.add(saveToSystem(file));
         });
         return attachments;
     }
@@ -92,10 +97,10 @@ public class AttachmentService {
     }
 
     public String getUrl(Attachment attachment) {
-        if (attachment!=null){
+        if (attachment != null) {
             return attachUploadFolder + attachment.getPath() + "/" + attachment.getNewName() + "." + attachment.getType();
-        }else {
-            return attachUploadFolder+"avatar.png";
+        } else {
+            return attachUploadFolder + "avatar.png";
         }
     }
 
@@ -115,7 +120,7 @@ public class AttachmentService {
         return attachmentRepository.findByNewName(newName).orElseThrow(() -> new RecordNotFoundException(FILE_NOT_FOUND));
     }
 
-//    File systendan ochirib tashlaydi
+    //    File systendan ochirib tashlaydi
     public ApiResponse deleteNewNameId(String fileName) {
         try {
             Attachment entity = getAttachment(fileName);
