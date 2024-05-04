@@ -5,7 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import uz.pdp.shippingservice.dto.Filter;
+import uz.pdp.shippingservice.dto.PageRequestFilter;
 import uz.pdp.shippingservice.entity.locations.Country;
 import uz.pdp.shippingservice.entity.locations.Region;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
@@ -36,8 +36,8 @@ public class RegionService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse getRegionList(Filter filter) {
-        PageRequest pageRequest = PageRequest.of(filter.getPage(), filter.getSize());
+    public ApiResponse getRegionList(PageRequestFilter filter) {
+        PageRequest pageRequest = PageRequest.of(filter.getPageNumber(), filter.getPageSize());
         return new ApiResponse(regionRepository.findAll(pageRequest), true);
     }
 

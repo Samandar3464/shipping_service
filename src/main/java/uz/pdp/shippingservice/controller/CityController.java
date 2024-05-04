@@ -3,6 +3,7 @@ package uz.pdp.shippingservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import uz.pdp.shippingservice.dto.PageRequestFilter;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.dto.request.CityRequestDto;
 import uz.pdp.shippingservice.service.CityService;
@@ -20,8 +21,13 @@ public class CityController {
      }
 
      @GetMapping("/getList/{id}")
-     public ApiResponse getCityList(@PathVariable Integer id){
-          return cityService.getCityList(id);
+     public ApiResponse getCityList(@RequestParam(name = "regionId") Integer regionId){
+          return cityService.getCityList(regionId);
+     }
+
+     @GetMapping("/getListForAdmin")
+     public ApiResponse getCityListForAdmin(@RequestParam(name = "regionId") Integer regionId, PageRequestFilter pageRequestFilter){
+          return cityService.getCityListForAdmin(regionId, pageRequestFilter);
      }
 
      @GetMapping("/getCityById/{id}")

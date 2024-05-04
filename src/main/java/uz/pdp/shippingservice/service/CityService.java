@@ -1,9 +1,11 @@
 package uz.pdp.shippingservice.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import uz.pdp.shippingservice.dto.PageRequestFilter;
 import uz.pdp.shippingservice.entity.locations.City;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordAlreadyExistException;
@@ -33,7 +35,16 @@ public class CityService {
      }
      @ResponseStatus(HttpStatus.OK)
      public ApiResponse getCityList(Integer id) {
-          return new ApiResponse(cityRepository.findAllByRegionId(id),true);
+          return new ApiResponse(cityRepository.findAllByRegionIdAndIsActiveTrue(id),true);
+     }
+
+     @ResponseStatus(HttpStatus.OK)
+     public ApiResponse getCityListForAdmin(Integer id , PageRequestFilter reuest) {
+          PageRequest pageRequest = PageRequest.of(reuest.getPageNumber(), reuest.getPageSize());
+          if (id == null){
+               return new ApiResponse(cityRepository.findAll(pageRequest),true);
+          }
+          return new ApiResponse(cityRepository.findAllByRegionId(id , pageRequest),true);
      }
 
      @ResponseStatus(HttpStatus.OK)
@@ -43,7 +54,9 @@ public class CityService {
 
      @ResponseStatus(HttpStatus.OK)
      public ApiResponse deleteCityById(Integer id) {
-          cityRepository.deleteById(id);
+          City city = cityRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(CITY_NOT_FOUND));
+          city.setIsActive(false);
+          cityRepository.save(city);
           return new ApiResponse(DELETED,true);
      }
 }

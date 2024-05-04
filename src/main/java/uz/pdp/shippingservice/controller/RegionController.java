@@ -3,7 +3,7 @@ package uz.pdp.shippingservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.shippingservice.dto.Filter;
+import uz.pdp.shippingservice.dto.PageRequestFilter;
 import uz.pdp.shippingservice.entity.api.ApiResponse;
 import uz.pdp.shippingservice.dto.request.RegionRegisterRequestDto;
 import uz.pdp.shippingservice.service.RegionService;
@@ -27,8 +27,8 @@ public class RegionController {
      }
 
      @GetMapping("/getRegionList")
-     public ApiResponse getRegionList(Filter filter) {
-          return regionService.getRegionList(filter);
+     public ApiResponse getRegionList(PageRequestFilter pageRequestFilter) {
+          return regionService.getRegionList(pageRequestFilter);
      }
 
      @GetMapping("/getRegionListByCountyId")
