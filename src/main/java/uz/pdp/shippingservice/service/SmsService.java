@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import okhttp3.*;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import uz.pdp.shippingservice.dto.request.UserVerifyRequestDto;
+import uz.pdp.shippingservice.dto.user.UserVerifyRequestDto;
 import uz.pdp.shippingservice.entity.SmsEntity;
 import uz.pdp.shippingservice.entity.SmsServiceTokenEntity;
 import uz.pdp.shippingservice.exception.SmsException;

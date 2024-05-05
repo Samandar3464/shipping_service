@@ -17,6 +17,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.config.jwtConfig.JwtGenerate;
+import uz.pdp.shippingservice.dto.user.UserLoginRequestDto;
+import uz.pdp.shippingservice.dto.user.UserRegisterDto;
+import uz.pdp.shippingservice.dto.user.UserUpdateDto;
+import uz.pdp.shippingservice.dto.user.UserVerifyRequestDto;
+import uz.pdp.shippingservice.entity.Attachment;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.UserException;
@@ -39,12 +44,14 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final RoleRepository roleRepository;
+    private final LocalDateTimeConverter converter;
+    private final AttachmentService attachmentService;
     private final FireBaseMessagingService fireBaseMessagingService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @Transactional(rollbackFor = {Exception.class})
     public ApiResponse register(UserRegisterDto dto) {
-        boolean byPhone = userRepository.existsByUserName(dto.getPhone());
+        boolean byPhone = userRepository.existsByPhone(dto.getPhone());
         if (byPhone) {
             throw new UserException(USER_ALREADY_EXIST);
         }
@@ -61,7 +68,7 @@ public class UserService {
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse verify(UserVerifyRequestDto dto) {
-        UserEntity userEntity = userRepository.findByUserName(dto.getPhone())
+        UserEntity userEntity = userRepository.findByPhone(dto.getPhone())
                 .orElseThrow(() -> new UserException(USER_NOT_FOUND));
         if (smsService.findByPhoneAndCheck(dto)) {
             userEntity.setBlocked(false);
@@ -98,14 +105,25 @@ public class UserService {
             throw new UserNotFoundException(USER_NOT_FOUND);
         }
         UserEntity userEntity = (UserEntity) authentication.getPrincipal();
-        UserEntity user = userRepository.findByUserName(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        UserEntity user = userRepository.findByPhone(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         return new ApiResponse(user, true);
     }
-
+    @ResponseStatus(HttpStatus.OK)
+    public ApiResponse update(UserUpdateDto dto) {
+        UserEntity userEntity = userRepository.findById(dto.getId()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        UserEntity.update(dto , userEntity);
+        userEntity.setBirthDate(converter.convertOnlyDate(dto.getBirthDate()));
+        if (dto.getAvatar() != null){
+            Attachment attachment = attachmentService.saveToSystem(dto.getAvatar());
+            userEntity.setAvatar(attachment);
+        }
+        userRepository.save(userEntity);
+        return new ApiResponse(SUCCESSFULLY, true);
+    }
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse forgetPassword(String number) {
-        userRepository.findByUserName(number).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        userRepository.findByPhone(number).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         String code = verificationCodeGenerator().toString();
         String message = "Tasdiqlash kodi: " + code;
         smsService.send(number, message, code);
@@ -115,7 +133,7 @@ public class UserService {
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse changePassword(ForgerPasswordDto dto) {
-        UserEntity userEntity = userRepository.findByUserName(dto.getPhone()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        UserEntity userEntity = userRepository.findByPhone(dto.getPhone()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         userEntity.setPassword(passwordEncoder.encode(dto.getPassword()));
         userRepository.save(userEntity);
         return new ApiResponse(userEntity, true);
@@ -143,7 +161,7 @@ public class UserService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse addBlockUserByID(Integer id) {
+    public ApiResponse addBlockUserByID(Long id) {
         UserEntity userEntity = checkUserExistById(id);
         userEntity.setBlocked(true);
         userRepository.save(userEntity);
@@ -153,7 +171,7 @@ public class UserService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse openToBlockUserByID(Integer id) {
+    public ApiResponse openToBlockUserByID(Long id) {
         UserEntity userEntity = checkUserExistById(id);
         userEntity.setBlocked(true);
         userRepository.save(userEntity);
@@ -171,7 +189,7 @@ public class UserService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse getByUserId(Integer id) {
+    public ApiResponse getByUserId(Long id) {
         UserEntity userEntity = checkUserExistById(id);
         return new ApiResponse(userEntity, true);
     }
@@ -199,14 +217,14 @@ public class UserService {
             throw new UserNotFoundException(USER_NOT_FOUND);
         }
         UserEntity userEntity = (UserEntity) authentication.getPrincipal();
-        return userRepository.findByUserName(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        return userRepository.findByPhone(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
     }
 
-    public UserEntity checkUserExistById(Integer id) {
+    public UserEntity checkUserExistById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
     }
     public UserEntity checkUserExistByPhone(String phone) {
-        return userRepository.findByUserName(phone).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        return userRepository.findByPhone(phone).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
     }
 
     private Integer verificationCodeGenerator() {

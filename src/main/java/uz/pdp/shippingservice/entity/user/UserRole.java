@@ -3,7 +3,7 @@ package uz.pdp.shippingservice.entity.user;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.shippingservice.dto.request.UserRoleDto;
+import uz.pdp.shippingservice.dto.user.UserRoleDto;
 
 import java.time.LocalDateTime;
 

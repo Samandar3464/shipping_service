@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import uz.pdp.shippingservice.dto.request.UserRoleDto;
+import uz.pdp.shippingservice.dto.user.UserRoleDto;
 import uz.pdp.shippingservice.entity.user.UserRole;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordAlreadyExistException;

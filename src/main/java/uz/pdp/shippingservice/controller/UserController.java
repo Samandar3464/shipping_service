@@ -6,6 +6,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.dto.request.*;
+import uz.pdp.shippingservice.dto.user.UserLoginRequestDto;
+import uz.pdp.shippingservice.dto.user.UserRegisterDto;
+import uz.pdp.shippingservice.dto.user.UserUpdateDto;
+import uz.pdp.shippingservice.dto.user.UserVerifyRequestDto;
 import uz.pdp.shippingservice.service.UserService;
 
 
@@ -19,6 +23,11 @@ public class UserController {
     @PostMapping("/register")
     public ApiResponse register(@RequestBody UserRegisterDto userRegisterDto) {
         return userService.register(userRegisterDto);
+    }
+
+    @PutMapping("/update")
+    public ApiResponse update(@ModelAttribute UserUpdateDto dto) {
+        return userService.update(dto);
     }
 
     @PostMapping("/verify")
@@ -64,20 +73,20 @@ public class UserController {
 
     @GetMapping("/getById/{id}")
 //    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse getUserById(@PathVariable Integer id) {
+    public ApiResponse getUserById(@PathVariable Long id) {
         return userService.getByUserId(id);
     }
 
 
     @PutMapping("/block/{id}")
 //    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse blockUserById(@PathVariable Integer id) {
+    public ApiResponse blockUserById(@PathVariable Long id) {
         return userService.addBlockUserByID(id);
     }
 
     @PutMapping("/openBlock/{id}")
 //    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ApiResponse openBlockUserById(@PathVariable Integer id) {
+    public ApiResponse openBlockUserById(@PathVariable Long id) {
         return userService.openToBlockUserByID(id);
     }
 

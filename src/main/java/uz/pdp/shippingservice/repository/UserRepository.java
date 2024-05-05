@@ -7,10 +7,10 @@ import uz.pdp.shippingservice.entity.user.UserEntity;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    Optional<UserEntity> findByUserName(@NotBlank @Size(min = 13, max = 13) String phone);
+    Optional<UserEntity> findByPhone(@NotBlank @Size(min = 13, max = 13) String phone);
 
-    boolean existsByUserName(@NotBlank @Size(min = 13, max = 13) String phone);
+    boolean existsByPhone(@NotBlank @Size(min = 13, max = 13) String phone);
 
 }
