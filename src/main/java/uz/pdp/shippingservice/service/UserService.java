@@ -17,10 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.config.jwtConfig.JwtGenerate;
-import uz.pdp.shippingservice.dto.user.UserLoginRequestDto;
-import uz.pdp.shippingservice.dto.user.UserRegisterDto;
-import uz.pdp.shippingservice.dto.user.UserUpdateDto;
-import uz.pdp.shippingservice.dto.user.UserVerifyRequestDto;
+import uz.pdp.shippingservice.dto.user.*;
 import uz.pdp.shippingservice.entity.Attachment;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
@@ -106,7 +103,11 @@ public class UserService {
         }
         UserEntity userEntity = (UserEntity) authentication.getPrincipal();
         UserEntity user = userRepository.findByPhone(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
-        return new ApiResponse(user, true);
+        GetMe dto = GetMe.toDto(user);
+        if (user.getAvatar() != null){
+            dto.setAvatarUrl(attachmentService.getUrl(user.getAvatar()));
+        }
+        return new ApiResponse(dto, true);
     }
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse update(UserUpdateDto dto) {
