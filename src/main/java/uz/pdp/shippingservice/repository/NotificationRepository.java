@@ -10,15 +10,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface NotificationRepository extends JpaRepository<Notification, UUID> {
-    List<Notification> findAllBySenderIdAndDeletedFalseAndNotificationTypeOrderByCreatedTimeDesc(Integer senderId, NotificationType notificationType);
+    List<Notification> findAllBySenderIdAndDeletedFalseAndNotificationTypeOrderByCreatedTimeDesc(Long senderId, NotificationType notificationType);
 
-    List<Notification> findAllByReceiverIdAndActiveAndReceivedAndDeletedFalseAndNotificationTypeOrderByCreatedTime(Integer id, boolean b, boolean b1, NotificationType notificationType);
+    List<Notification> findAllByReceiverIdAndActiveAndReceivedAndDeletedFalseAndNotificationTypeOrderByCreatedTime(Long id, boolean b, boolean b1, NotificationType notificationType);
 
-    List<Notification> findAllBySenderIdAndReceivedTrueAndNotificationTypeOrderByCreatedTime(Integer id, NotificationType notificationType);
+    List<Notification> findAllBySenderIdAndReceivedTrueAndNotificationTypeOrderByCreatedTime(Long id, NotificationType notificationType);
 
-    List<Notification> findAllByReceiverIdAndReceivedTrueAndNotificationTypeOrderByCreatedTime(Integer id, NotificationType notificationType);
+    List<Notification> findAllByReceiverIdAndReceivedTrueAndNotificationTypeOrderByCreatedTime(Long id, NotificationType notificationType);
 
-    Optional<Notification> findFirstBySenderIdAndReceiverIdAndAnnouncementPassengerIdAndActiveTrueAndReceivedFalseOrderByCreatedTimeDesc(Integer id, Integer id1, UUID announcementId);
+    Optional<Notification> findFirstBySenderIdAndReceiverIdAndAnnouncementPassengerIdAndActiveTrueAndReceivedFalseOrderByCreatedTimeDesc(Long id, Long id1, UUID announcementId);
 
 //    List<Notification> findAllByReceiverIdAndReceivedTrueAndNotificationTypeOrderByCreatedTime(UUID id, NotificationType notificationType);
 

@@ -115,7 +115,7 @@ public class CarService {
         return carResponseDto;
     }
 
-    public Car getCarByUserId(Integer user_id) {
+    public Car getCarByUserId(Long user_id) {
 //        return carRepository.findByUserIdAndActiveTrue(user_id).orElseThrow(() ->
 //                new CarNotFound(CAR_NOT_FOUND));
         return new Car();

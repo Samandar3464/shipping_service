@@ -148,7 +148,7 @@ public class AnnouncementDriverService {
         return null;
     }
 
-    public AnnouncementDriver getByUserIdAndActiveAndDeletedFalse(Integer userId, boolean active) {
+    public AnnouncementDriver getByUserIdAndActiveAndDeletedFalse(Long userId, boolean active) {
 //        return announcementDriverRepository.findByUserIdAndActiveAndDeletedFalseOrderByCreatedTimeDesc(userId, active)
 //                .orElseThrow(() -> new AnnouncementNotFoundException(DRIVER_ANNOUNCEMENT_NOT_FOUND));
         return null;

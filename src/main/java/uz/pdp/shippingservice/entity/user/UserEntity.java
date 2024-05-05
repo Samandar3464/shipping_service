@@ -77,7 +77,7 @@ public class UserEntity implements UserDetails, Serializable {
     private Gender gender;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @Column(name = "avatar_id")
+    @PrimaryKeyJoinColumn(name = "avatar_id")
     private Attachment avatar;
 
 

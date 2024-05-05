@@ -4,8 +4,8 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="create_country_table"  author="samandar">
-        <createTable tableName="city" >
+    <changeSet id="4"  author="samandar">
+        <createTable tableName="country" >
             <column name="id" autoIncrement="true" type="INT">
                 <constraints primaryKey="true" nullable="false"  />
             </column>
@@ -14,9 +14,6 @@
             </column>
             <column name="is_active" type="BOOLEAN" />
             <column name="created_at" type="TIMESTAMP" />
-            <column name="region_id" type="INT">
-                <constraints nullable="false" foreignKeyName="fk_region_id" referencedTableName="region"  referencedColumnNames="id"/>
-            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

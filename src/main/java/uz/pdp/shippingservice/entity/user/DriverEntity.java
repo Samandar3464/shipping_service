@@ -1,92 +1,79 @@
-//package uz.pdp.shippingservice.entity.user;
-//
-//
-//import jakarta.persistence.*;
-//import jakarta.validation.constraints.NotBlank;
-//import jakarta.validation.constraints.Size;
-//import lombok.*;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.authority.SimpleGrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
-//import uz.pdp.shippingservice.dto.user.UserRegisterDto;
-//import uz.pdp.shippingservice.entity.Attachment;
-//import uz.pdp.shippingservice.entity.user.UserRole;
-//import uz.pdp.shippingservice.enums.Gender;
-//
-//import java.io.Serializable;
-//import java.time.LocalDate;
-//import java.time.LocalDateTime;
-//import java.util.ArrayList;
-//import java.util.Collection;
-//import java.util.List;
-//
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Builder
-//@Entity
-//@Table(name = "driver")
-//public class DriverEntity implements   Serializable {
-//
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "id")
-//    private Long id;
-//
-//    @NotBlank
-//    @Column(name = "name")
-//    private String name;
-//
-//    @Column(name = "surname")
-//    private String surname;
-//
-//    @Column(name = "father_name")
-//    private String fatherName;
-//
-//    @NotBlank
-//    @Size(min = 9,max = 9)
-//    @Column(name = "phone" ,unique = true)
-//    private String phone;
-//
-//    @Size(min = 6)
-//    @Column(name = "password")
-//    private String password;
-//
-//    @Column(name = "birth_date")
-//    private LocalDate birthDate;
-//
-//    @Column(name = "created_at")
-//    private LocalDateTime createdAt;
-//
-//    @Column(name = "is_blocked")
-//    private boolean isBlocked;
-//
-//    @Column(name = "is_deleted")
-//    private boolean isDeleted;
-//
-//    @Column(name = "firebase_token")
-//    private String firebaseToken;
-//
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "gender")
-//    private Gender gender;
-//
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @Column(name = "avatar_id")
-//    private Attachment avatarId;
-//
-//    @ManyToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
-//    @Column(name = "roles")
-//    private List<UserRole> authroles;
-//
-//    public static DriverEntity from(UserRegisterDto userRegisterDto){
-//        return DriverEntity.builder()
-//                .name(userRegisterDto.getFullName())
-//                .phone(userRegisterDto.getPhone())
-//                .gender(userRegisterDto.getGender())
-//                .createdAt(LocalDateTime.now())
-//                .isBlocked(true)
-//                .build();
-//    }
-//}
+package uz.pdp.shippingservice.entity.user;
+
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+import uz.pdp.shippingservice.dto.user.DriverUpdateDto;
+import uz.pdp.shippingservice.dto.user.UserRegisterDto;
+import uz.pdp.shippingservice.entity.Attachment;
+import uz.pdp.shippingservice.enums.Gender;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Entity
+@Table(name = "driver_info")
+public class DriverEntity implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "car_length")
+    private float carLength;
+
+    @Column(name = "car_width")
+    private float carWidth;
+
+    @Column(name = "max_load")
+    private float maxLoad;
+
+    @Column(name = "has_freezer")
+    private boolean hasFreezer;
+
+    @Column(name = "has_wrapped_fully")
+    private boolean hasWrappedFully;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn(name = "user_id")
+    private UserEntity user;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "driver_passport_photos")
+    private List<Attachment> driverPassportPhotos;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "driver_license_photos")
+    private List<Attachment> driverLicensePhotos;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "car_tex_passport")
+    private List<Attachment> carTexPassport;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @Column(name = "car_photos")
+    private List<Attachment> carPhotos;
+
+    @Column(name = "is_active")
+    private boolean isActive;
+
+    public static DriverEntity toEntity(DriverUpdateDto dto) {
+        return DriverEntity.builder()
+                .carLength(dto.getCarLength())
+                .carWidth(dto.getCarWidth())
+                .maxLoad(dto.getMaxLoad())
+                .hasFreezer(dto.isHasFreezer())
+                .hasWrappedFully(dto.isHasWrappedFully())
+                .isActive(false)
+                .build();
+    }
+}

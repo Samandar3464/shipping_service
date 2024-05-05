@@ -3,7 +3,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="create_attachment_table" author="Samandar">
+    <changeSet id="9" author="Samandar">
         <createTable tableName="advertising">
             <column name="id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
@@ -19,16 +19,18 @@
                 <constraints nullable="false"/>
             </column>
             <column name="active" type="BOOLEAN"/>
-            <column name="content_id" type="UUID"/>
-
-            <!-- Add foreign key constraint -->
-            <addForeignKeyConstraint baseTableName="advertising"
-                                     baseColumnNames="content_id"
-                                     constraintName="fk_advertising_content"
-                                     referencedTableName="attachment"
-                                     referencedColumnNames="id"/>
+            <column name="content_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
 
         </createTable>
+        <addForeignKeyConstraint baseTableName="advertising"
+                                 baseColumnNames="content_id"
+                                 referencedTableName="attachment"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_advertising_content"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
     </changeSet>
 
 </databaseChangeLog>

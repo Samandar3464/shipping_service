@@ -31,7 +31,7 @@ public class LanguageBaseWords implements Serializable {
                              @JsonProperty("category") String category,
                              @JsonProperty("text") String text,
                              @JsonProperty("lang") String lang,
-                             @JsonProperty("language_sourceps") List<LanguageSource> languageSource) {
+                             @JsonProperty("language_base_word_id") List<LanguageSource> languageSource) {
         this.id = id;
         this.category = category;
         this.text = text;

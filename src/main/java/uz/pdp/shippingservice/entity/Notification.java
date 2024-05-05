@@ -23,9 +23,9 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private Integer senderId;
+    private Long senderId;
 
-    private Integer receiverId;
+    private Long receiverId;
 
     private UUID announcementDriverId;
 

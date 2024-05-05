@@ -70,7 +70,7 @@ public class JwtGenerate {
         if (claims == null) {
             throw new Exception();
         }
-        UserEntity userEntity = userRepository.findByUserName(claims.getSubject()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+        UserEntity userEntity = userRepository.findByPhone(claims.getSubject()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         return generateAccessToken(userEntity);
     }
 

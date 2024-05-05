@@ -21,7 +21,7 @@ public class NotificationRequestDto {
 
     private String body;
 
-    private Integer receiverId;
+    private Long receiverId;
 
     private UUID announcementDriverId;
 

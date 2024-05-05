@@ -5,12 +5,13 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
     <include file="db/migration/changelog_1-create_roles_table.xml"/>
-    <include file="db/migration/changelog_2-create_users_table.xml"/>
-    <include file="db/migration/changelog_3-create_country_table.xml"/>
-    <include file="db/migration/changelog_4-create_region_table.xml"/>
-    <include file="db/migration/changelog_5-create_city_table.xml"/>
-    <include file="db/migration/changelog-6.0-create_language_base_words_table.xml"/>
-    <include file="db/migration/changelog-7.0-create_language_source_table.xml"/>
-    <include file="db/migration/changelog-8.0-create_attachment_table.xml"/>
-    <include file="db/migration/changelog-9.0-create_advertising_table.xml"/>
+    <include file="/db/migration/changelog-2.0-create_attachment_table.xml"/>
+    <include file="/db/migration/changelog_3-create_users_table.xml"/>
+        <include file="/db/migration/changelog_4-create_country_table.xml"/>
+        <include file="/db/migration/changelog_5-create_region_table.xml"/>
+        <include file="/db/migration/changelog_6-create_city_table.xml"/>
+    <include file="/db/migration/changelog-7.0-create_language_base_words_table.xml"/>
+    <include file="/db/migration/changelog-8.0-create_language_source_table.xml"/>
+        <include file="db/migration/changelog-9.0-create_advertising_table.xml"/>
+    <include file="db/migration/changelog-10.0-create_driver_info_table.xml"/>
 </databaseChangeLog>

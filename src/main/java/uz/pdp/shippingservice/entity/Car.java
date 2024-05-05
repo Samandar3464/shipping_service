@@ -40,6 +40,7 @@ public class Car {
     private List<Attachment> carPhotos;
 
     @OneToOne(cascade = CascadeType.ALL)
+//    @PrimaryKeyJoinColumn(name = "")
     private Attachment texPassportPhoto;
 
     @OneToOne(cascade = CascadeType.ALL)

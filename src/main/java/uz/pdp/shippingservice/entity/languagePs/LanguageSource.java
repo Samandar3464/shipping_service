@@ -24,6 +24,7 @@ public class LanguageSource implements Serializable {
 
     @ManyToOne
     @JsonIgnore
+    @JoinColumn(name = "language_base_word_id")
     private LanguageBaseWords languageBaseWords;
 
     private String language;

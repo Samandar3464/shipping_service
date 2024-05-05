@@ -56,8 +56,8 @@ public class CoreDBConfig {
     ) {
 
         Map<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", "create");
-        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.put("hibernate.hbm2ddl.auto", "none");
+//        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 
         return builder
                 .dataSource(dataSource)

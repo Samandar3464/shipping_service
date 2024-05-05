@@ -4,9 +4,9 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="create_users_table"  author="samandar">
+    <changeSet id="3"  author="samandar">
         <createTable tableName="users" >
-            <column name="id" autoIncrement="true" type="INT">
+            <column name="id" autoIncrement="true" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"  />
             </column>
 
@@ -26,13 +26,16 @@
             <column name="is_deleted" type="BOOLEAN" />
             <column name="firebase_token" type="VARCHAR(255)" />
             <column name="avatar_id" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_avatar_id" referencedTableName="attachment"  referencedColumnNames="id"/>
+                <constraints nullable="false"
+                             foreignKeyName="fk_avatar_id"
+                             referencedTableName="attachment"
+                             referencedColumnNames="id"/>
             </column>
         </createTable>
     </changeSet>
 
     <!-- Define changeset for Many-to-Many relationship with user_role table -->
-    <changeSet id="add_roles_to_users" author="samandar">
+    <changeSet id="3.1" author="samandar">
         <createTable tableName="user_roles">
             <column name="user_id" type="INT">
                 <constraints nullable="false" foreignKeyName="fk_user_id" referencedTableName="users"  referencedColumnNames="id"/>

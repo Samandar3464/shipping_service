@@ -38,6 +38,7 @@ public class Advertising {
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn(name = "content_id")
     private Attachment content;
 
     public static Advertising toEntity(AdvertisingRequestDto dto){
