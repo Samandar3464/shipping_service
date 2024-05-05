@@ -32,7 +32,11 @@
             <column name="description" value=" driver role " />
             <column name="deleted" value="false" />
         </insert>
-
+        <insert tableName="roles">
+            <column name="name" value="client"/>
+            <column name="description" value=" client role" />
+            <column name="deleted" value="false" />
+        </insert>
 
     </changeSet>
 

@@ -104,6 +104,17 @@ public class AttachmentService {
         }
     }
 
+    public List<String> getUrlList(List<Attachment> attachmentList) {
+        List<String> urlList = new ArrayList<String>();
+        attachmentList.forEach(attachment -> {
+            if (attachment != null) {
+                String url = attachUploadFolder + attachment.getPath() + "/" + attachment.getNewName() + "." + attachment.getType();
+                urlList.add(url);
+            }
+        });
+        return urlList;
+    }
+
     // Rasmni byte qilib beradi
     public byte[] open(String fileName) {
         try {

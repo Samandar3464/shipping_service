@@ -21,12 +21,14 @@ import uz.pdp.shippingservice.dto.user.*;
 import uz.pdp.shippingservice.entity.Attachment;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
+import uz.pdp.shippingservice.entity.user.UserRole;
 import uz.pdp.shippingservice.exception.UserException;
 import uz.pdp.shippingservice.exception.UserNotFoundException;
 import uz.pdp.shippingservice.dto.request.*;
 import uz.pdp.shippingservice.dto.response.TokenResponse;
 import uz.pdp.shippingservice.repository.*;
 
+import java.util.Optional;
 import java.util.random.RandomGenerator;
 
 import static uz.pdp.shippingservice.constants.Constants.*;
@@ -104,23 +106,25 @@ public class UserService {
         UserEntity userEntity = (UserEntity) authentication.getPrincipal();
         UserEntity user = userRepository.findByPhone(userEntity.getUsername()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         GetMe dto = GetMe.toDto(user);
-        if (user.getAvatar() != null){
+        if (user.getAvatar() != null) {
             dto.setAvatarUrl(attachmentService.getUrl(user.getAvatar()));
         }
         return new ApiResponse(dto, true);
     }
+
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse update(UserUpdateDto dto) {
         UserEntity userEntity = userRepository.findById(dto.getId()).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
-        UserEntity.update(dto , userEntity);
+        UserEntity.update(dto, userEntity);
         userEntity.setBirthDate(converter.convertOnlyDate(dto.getBirthDate()));
-        if (dto.getAvatar() != null){
+        if (dto.getAvatar() != null) {
             Attachment attachment = attachmentService.saveToSystem(dto.getAvatar());
             userEntity.setAvatar(attachment);
         }
-        userRepository.save(userEntity);
+        addUserRole(userEntity, "client");
         return new ApiResponse(SUCCESSFULLY, true);
     }
+
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse forgetPassword(String number) {
@@ -224,8 +228,16 @@ public class UserService {
     public UserEntity checkUserExistById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
     }
+
     public UserEntity checkUserExistByPhone(String phone) {
         return userRepository.findByPhone(phone).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+    }
+    public void addUserRole(UserEntity user, String roleName) {
+        Optional<UserRole> role = roleRepository.findByName(roleName);
+        if (role.isEmpty()) {
+            user.getRoles().add(role.get());
+        }
+        userRepository.save(user);
     }
 
     private Integer verificationCodeGenerator() {

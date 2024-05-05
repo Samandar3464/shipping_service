@@ -6,6 +6,8 @@ public class Constants {
     public static final String USER_ALREADY_EXIST="USER ALREADY EXIST";
     public static final String TOKEN_TIME_OUT="TOKEN TIME OUT";
     public static final String BLOCKED="BLOCKED";
+    public static final String CANNOT_SAVE_DRIVER_INFO="CANNOT SAVE DRIVER INFO";
+    public static final String CANNOT_FIND_DRIVER="CANNOT FIND DRIVER";
 
     public static final String SUCCESSFULLY="SUCCESSFULLY";
     public static final String DRIVER_ANNOUNCEMENT_NOT_FOUND="DRIVER ANNOUNCEMENT NOT FOUND";
