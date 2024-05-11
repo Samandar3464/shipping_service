@@ -14,4 +14,5 @@
     <include file="/db/migration/changelog-8.0-create_language_source_table.xml"/>
         <include file="db/migration/changelog-9.0-create_advertising_table.xml"/>
     <include file="db/migration/changelog-10.0-create_driver_info_table.xml"/>
+    <include file="db/migration/changelog-11.0-create_user_status_table.xml"/>
 </databaseChangeLog>

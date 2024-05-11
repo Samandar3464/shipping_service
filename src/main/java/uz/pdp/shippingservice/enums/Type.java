@@ -1,6 +1,6 @@
 package uz.pdp.shippingservice.enums;
 
-public enum NotificationType {
+public enum Type {
     DRIVER,
     CLIENT
 }

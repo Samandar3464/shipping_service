@@ -33,6 +33,7 @@ public class DriverEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
     @Column(name = "car_length")
     private float carLength;
 

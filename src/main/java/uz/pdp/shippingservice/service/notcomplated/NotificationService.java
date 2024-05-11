@@ -10,7 +10,7 @@ import uz.pdp.shippingservice.entity.AnnouncementDriver;
 import uz.pdp.shippingservice.entity.Notification;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
-import uz.pdp.shippingservice.enums.NotificationType;
+import uz.pdp.shippingservice.enums.Type;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
 import uz.pdp.shippingservice.exception.UserNotFoundException;
@@ -54,7 +54,7 @@ public class NotificationService {
         data.put("announcementId", announcementDriver.getId().toString());
         notificationRequestDto.setDate(data);
         notificationRequestDto.setTitle(YOU_COME_TO_MESSAGE_FROM_DRIVER);
-        notificationRequestDto.setNotificationType(NotificationType.CLIENT);
+        notificationRequestDto.setType(Type.CLIENT);
         Notification notification = from(notificationRequestDto, userEntity);
         NotificationMessageResponse notificationMessageResponse = NotificationMessageResponse.from(notification.getReceiverToken(), YOU_COME_TO_MESSAGE_FROM_DRIVER, data);
         fireBaseMessagingService.sendNotificationByToken(notificationMessageResponse);
@@ -65,7 +65,7 @@ public class NotificationService {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse getDriverPostedNotification() {
         UserEntity userEntity = userService.checkUserExistByContext();
-        List<Notification> notificationList = notificationRepository.findAllBySenderIdAndDeletedFalseAndNotificationTypeOrderByCreatedTimeDesc(userEntity.getId(), NotificationType.CLIENT);
+        List<Notification> notificationList = notificationRepository.findAllBySenderIdAndDeletedFalseAndTypeOrderByCreatedTimeDesc(userEntity.getId(), Type.CLIENT);
 
         List<AnnouncementClient> announcementClientList = new ArrayList<>();
         notificationList.forEach(obj -> {
@@ -94,7 +94,7 @@ public class NotificationService {
         UserEntity userEntity = userService.checkUserExistByContext();
 
         List<Notification> notifications = notificationRepository
-                .findAllByReceiverIdAndActiveAndReceivedAndDeletedFalseAndNotificationTypeOrderByCreatedTime(userEntity.getId(), true, false, NotificationType.CLIENT);
+                .findAllByReceiverIdAndActiveAndReceivedAndDeletedFalseAndTypeOrderByCreatedTime(userEntity.getId(), true, false, Type.CLIENT);
 
         List<AnnouncementDriverResponseList> announcementDriverResponseLists = new ArrayList<>();
         notifications.forEach(obj -> announcementDriverResponseLists.add(AnnouncementDriverResponseList
@@ -126,7 +126,7 @@ public class NotificationService {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse getAcceptedNotificationForDriver() {
         UserEntity receiver = userService.checkUserExistByContext();
-        List<Notification> passengerAccepted = notificationRepository.findAllBySenderIdAndReceivedTrueAndNotificationTypeOrderByCreatedTime(receiver.getId(), NotificationType.CLIENT);
+        List<Notification> passengerAccepted = notificationRepository.findAllBySenderIdAndReceivedTrueAndTypeOrderByCreatedTime(receiver.getId(), Type.CLIENT);
         List<AnnouncementClientResponse> allowedAnnouncementResponseForDrivers = new ArrayList<>();
 
         passengerAccepted.forEach(obj -> {
@@ -143,7 +143,7 @@ public class NotificationService {
     public ApiResponse getAcceptedNotificationForClient() {
         UserEntity receiver = userService.checkUserExistByContext();
         List<AnnouncementDriverResponseList> announcementDriverResponseLists = new ArrayList<>();
-        List<Notification> passengerAccepted = notificationRepository.findAllByReceiverIdAndReceivedTrueAndNotificationTypeOrderByCreatedTime(receiver.getId(), NotificationType.CLIENT);
+        List<Notification> passengerAccepted = notificationRepository.findAllByReceiverIdAndReceivedTrueAndTypeOrderByCreatedTime(receiver.getId(), Type.CLIENT);
 
         passengerAccepted.forEach(obj -> announcementDriverResponseLists.add(AnnouncementDriverResponseList
                 .fromForNotification(announcementDriverService.getById(obj.getAnnouncementDriverId()),

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.shippingservice.entity.user.UserEntity;
-import uz.pdp.shippingservice.enums.NotificationType;
+import uz.pdp.shippingservice.enums.Type;
 import uz.pdp.shippingservice.dto.request.NotificationRequestDto;
 
 import java.time.LocalDateTime;
@@ -44,7 +44,7 @@ public class Notification {
     private String receiverToken;
 
     @Enumerated(EnumType.STRING)
-    private NotificationType notificationType;
+    private Type type;
 
     @ManyToOne
     @JsonIgnore
@@ -56,7 +56,7 @@ public class Notification {
                 .announcementDriverId(notificationRequestDto.getAnnouncementDriverId())
                 .announcementPassengerId(notificationRequestDto.getAnnouncementPassengerId())
                 .createdTime(LocalDateTime.now())
-                .notificationType(notificationRequestDto.getNotificationType())
+                .type(notificationRequestDto.getType())
                 .received(false)
                 .read(false)
                 .active(true)

@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.pdp.shippingservice.entity.Status;
 import uz.pdp.shippingservice.enums.Gender;
 
 
