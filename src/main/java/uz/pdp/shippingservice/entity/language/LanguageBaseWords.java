@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.entity.languagePs;
+package uz.pdp.shippingservice.entity.language;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

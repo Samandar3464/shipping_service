@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.dto.language.CreateTranslateTextDto;
-import uz.pdp.shippingservice.entity.languagePs.LanguageBaseWords;
+import uz.pdp.shippingservice.entity.language.LanguageBaseWords;
 import uz.pdp.shippingservice.service.LanguageService;
 
 import java.util.HashMap;

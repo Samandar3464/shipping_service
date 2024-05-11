@@ -10,7 +10,8 @@ import java.util.UUID;
 
 public interface AnnouncementClientRepository extends JpaRepository<AnnouncementClient, UUID> {
 
-    List<AnnouncementClient> findAllByFromRegionIdAndFromCityIdAndTimeToSendBetweenOrderByCreatedTimeDesc(Integer fromRegion_id, Integer fromCity_id, LocalDateTime timeToSend, LocalDateTime timeToSend2);
+    List<AnnouncementClient> findAllByCreatedByIdAndActiveTrueAndDeletedFalse(Long createdBy_id);
+    List<AnnouncementClient> findAllByFromRegionIdAndFromCityIdAndTimeToSendBetweenOrderByCreatedAtDesc(Integer fromRegion_id, Integer fromCity_id, LocalDateTime timeToSend, LocalDateTime timeToSend2);
     Optional<AnnouncementClient> findByIdAndActiveAndDeletedFalse(UUID id, boolean active);
 
     Optional<AnnouncementClient> findByIdAndDeletedFalse(UUID id);

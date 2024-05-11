@@ -28,9 +28,6 @@ public class AnnouncementClientDto {
      private double toLatitude;
      private double price;
      private String info;
-
-     @JsonSerialize(using = LocalDateTimeSerializer.class)
-     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
      @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
      private String timeToSend;
 }

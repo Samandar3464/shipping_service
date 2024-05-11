@@ -2,7 +2,7 @@ package uz.pdp.shippingservice.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import uz.pdp.shippingservice.entity.languagePs.LanguageSource;
+import uz.pdp.shippingservice.entity.language.LanguageSource;
 
 
 import java.util.List;

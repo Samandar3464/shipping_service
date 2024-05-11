@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import uz.pdp.shippingservice.dto.language.CreateTranslateTextDto;
 import uz.pdp.shippingservice.dto.language.LanguageEnum;
-import uz.pdp.shippingservice.entity.languagePs.LanguageBaseWords;
-import uz.pdp.shippingservice.entity.languagePs.LanguageSource;
+import uz.pdp.shippingservice.entity.language.LanguageBaseWords;
+import uz.pdp.shippingservice.entity.language.LanguageSource;
 import uz.pdp.shippingservice.repository.LanguageRepository;
 import uz.pdp.shippingservice.repository.LanguageSourceRepository;
 
