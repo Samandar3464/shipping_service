@@ -8,7 +8,7 @@ import uz.pdp.shippingservice.entity.Advertising;
 import uz.pdp.shippingservice.entity.Attachment;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
-import uz.pdp.shippingservice.dto.request.AdvertisingRequestDto;
+import uz.pdp.shippingservice.dto.AdvertisingRequestDto;
 import uz.pdp.shippingservice.repository.AdvertisingRepository;
 import java.time.LocalDateTime;
 import java.util.List;

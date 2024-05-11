@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.dto.request;
+package uz.pdp.shippingservice.dto;
 
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

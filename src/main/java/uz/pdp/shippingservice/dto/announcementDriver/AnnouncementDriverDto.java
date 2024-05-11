@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.dto.request;
+package uz.pdp.shippingservice.dto.announcementDriver;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.dto.request;
+package uz.pdp.shippingservice.dto.sms;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +9,8 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FireBaseTokenRegisterDto {
-
-    private String phone;
-
-    private String fireBaseToken;
+public class SmsResponse {
+     private UUID id;
+     private String status;
+     private String message;
 }

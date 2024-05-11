@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.dto.request;
+package uz.pdp.shippingservice.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ChangePasswordDto {
+public class ForgerPasswordDto {
 
     @NotBlank
     @Size(min = 13, max = 13)
@@ -17,9 +17,5 @@ public class ChangePasswordDto {
 
     @NotBlank
     @Size(min = 6)
-    private String newPassword;
-
-    @NotBlank
-    @Size(min = 6)
-    private String oldPassword;
+    private String password;
 }

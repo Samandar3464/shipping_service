@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.dto;
+package uz.pdp.shippingservice.dto.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

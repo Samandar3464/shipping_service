@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.dto.request;
+package uz.pdp.shippingservice.dto.sms;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

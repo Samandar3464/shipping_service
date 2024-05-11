@@ -5,13 +5,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import uz.pdp.shippingservice.dto.PageRequestFilter;
+import uz.pdp.shippingservice.dto.base.PageRequestFilter;
 import uz.pdp.shippingservice.entity.locations.Country;
 import uz.pdp.shippingservice.entity.locations.Region;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordAlreadyExistException;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
-import uz.pdp.shippingservice.dto.request.RegionRegisterRequestDto;
+import uz.pdp.shippingservice.dto.location.RegionRegisterRequestDto;
 import uz.pdp.shippingservice.repository.CountryRepository;
 import uz.pdp.shippingservice.repository.RegionRepository;
 

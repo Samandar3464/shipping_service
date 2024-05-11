@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.enums.Type;
-import uz.pdp.shippingservice.dto.request.NotificationRequestDto;
+import uz.pdp.shippingservice.dto.NotificationRequestDto;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

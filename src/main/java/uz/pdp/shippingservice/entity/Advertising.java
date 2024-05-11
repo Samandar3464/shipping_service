@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.shippingservice.dto.request.AdvertisingRequestDto;
+import uz.pdp.shippingservice.dto.AdvertisingRequestDto;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Getter
 @Setter

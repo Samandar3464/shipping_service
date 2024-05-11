@@ -2,7 +2,7 @@ package uz.pdp.shippingservice.entity.locations;
 
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.shippingservice.dto.CountryDto;
+import uz.pdp.shippingservice.dto.location.CountryDto;
 
 import java.time.LocalDateTime;
 

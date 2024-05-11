@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import uz.pdp.shippingservice.dto.request.AnnouncementDriverDto;
+import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverDto;
 import uz.pdp.shippingservice.entity.locations.City;
 import uz.pdp.shippingservice.entity.locations.Country;
 import uz.pdp.shippingservice.entity.locations.Region;

@@ -10,7 +10,7 @@
 //import uz.pdp.shippingservice.entity.locations.Country;
 //import uz.pdp.shippingservice.entity.locations.Region;
 //import uz.pdp.shippingservice.entity.user.UserEntity;
-//import uz.pdp.shippingservice.dto.CountryDto;
+//import uz.pdp.shippingservice.dto.location.CountryDto;
 //import uz.pdp.shippingservice.repository.*;
 //
 //import java.time.LocalDateTime;

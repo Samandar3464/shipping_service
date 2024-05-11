@@ -1,9 +1,8 @@
 package uz.pdp.shippingservice.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.shippingservice.dto.PageRequestFilter;
+import uz.pdp.shippingservice.dto.base.PageRequestFilter;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.dto.user.DriverUpdateDto;
 import uz.pdp.shippingservice.service.DriverInfoService;

@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
-import uz.pdp.shippingservice.dto.request.AnnouncementDriverDto;
-import uz.pdp.shippingservice.dto.request.GetByFilter;
+import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverDto;
+import uz.pdp.shippingservice.dto.GetByFilter;
 import uz.pdp.shippingservice.service.notcomplated.AnnouncementDriverService;
 
 

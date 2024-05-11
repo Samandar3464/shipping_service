@@ -4,12 +4,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import uz.pdp.shippingservice.dto.FireBaseTokenRegisterDto;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
-import uz.pdp.shippingservice.dto.request.*;
-import uz.pdp.shippingservice.dto.user.UserLoginRequestDto;
-import uz.pdp.shippingservice.dto.user.UserRegisterDto;
-import uz.pdp.shippingservice.dto.user.UserUpdateDto;
-import uz.pdp.shippingservice.dto.user.UserVerifyRequestDto;
+import uz.pdp.shippingservice.dto.user.*;
 import uz.pdp.shippingservice.service.UserService;
 
 

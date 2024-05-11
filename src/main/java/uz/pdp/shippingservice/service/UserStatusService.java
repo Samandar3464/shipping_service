@@ -5,11 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
-import uz.pdp.shippingservice.dto.request.UserStatusDto;
+import uz.pdp.shippingservice.dto.user.UserStatusDto;
 import uz.pdp.shippingservice.entity.UserStatus;
 import uz.pdp.shippingservice.enums.Type;
 import uz.pdp.shippingservice.repository.UserStatusRepository;
-import uz.pdp.shippingservice.service.UserService;
 
 import java.util.List;
 

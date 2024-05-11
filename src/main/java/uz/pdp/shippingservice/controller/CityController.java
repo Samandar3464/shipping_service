@@ -3,9 +3,9 @@ package uz.pdp.shippingservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.shippingservice.dto.PageRequestFilter;
+import uz.pdp.shippingservice.dto.base.PageRequestFilter;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
-import uz.pdp.shippingservice.dto.request.CityRequestDto;
+import uz.pdp.shippingservice.dto.location.CityRequestDto;
 import uz.pdp.shippingservice.service.CityService;
 
 @RestController

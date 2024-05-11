@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.shippingservice.dto.request.UserStatusDto;
+import uz.pdp.shippingservice.dto.user.UserStatusDto;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.enums.Type;
 

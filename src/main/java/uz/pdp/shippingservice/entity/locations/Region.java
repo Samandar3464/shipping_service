@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import uz.pdp.shippingservice.dto.request.RegionRegisterRequestDto;
+import uz.pdp.shippingservice.dto.location.RegionRegisterRequestDto;
 
 import java.time.LocalDateTime;
 

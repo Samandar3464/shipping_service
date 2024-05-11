@@ -7,7 +7,7 @@ import com.google.firebase.messaging.Notification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.pdp.shippingservice.exception.FirebaseConnectionException;
-import uz.pdp.shippingservice.dto.response.NotificationMessageResponse;
+import uz.pdp.shippingservice.dto.NotificationMessageResponse;
 
 import static uz.pdp.shippingservice.constants.Constants.FIREBASE_EXCEPTION;
 import static uz.pdp.shippingservice.constants.Constants.SUCCESSFULLY;

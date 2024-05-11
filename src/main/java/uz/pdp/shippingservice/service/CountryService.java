@@ -8,7 +8,7 @@ import uz.pdp.shippingservice.entity.locations.Country;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.RecordAlreadyExistException;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
-import uz.pdp.shippingservice.dto.CountryDto;
+import uz.pdp.shippingservice.dto.location.CountryDto;
 import uz.pdp.shippingservice.repository.CountryRepository;
 
 import static uz.pdp.shippingservice.constants.Constants.*;
