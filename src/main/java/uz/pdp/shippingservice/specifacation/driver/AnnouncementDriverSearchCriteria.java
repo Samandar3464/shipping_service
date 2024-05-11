@@ -7,22 +7,22 @@ import lombok.Data;
 public class AnnouncementDriverSearchCriteria {
 
 
-    private Integer fromCountryId;
+    private Integer countryId;
 
-    private Integer toCountryId;
+    private Integer regionId;
 
-    private Integer fromRegionId;
+    private Integer cityId;
 
-    private Integer toRegionId;
+    private boolean canGoAnotherRegion;
 
-    private Integer fromCityId;
+    private boolean canGoAnotherCountry;
 
-    private Integer toCityId;
-
-    @JsonFormat(pattern = "YYYY-MM-DD")
-    private String timeToSendFrom;
+    private boolean onlyCity;
 
     @JsonFormat(pattern = "YYYY-MM-DD")
-    private String timeToSendTo;
+    private String timeToDriveFrom;
+
+    @JsonFormat(pattern = "YYYY-MM-DD")
+    private String timeToDriveTo;
 
 }

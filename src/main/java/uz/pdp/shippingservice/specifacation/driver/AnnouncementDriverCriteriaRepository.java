@@ -37,42 +37,46 @@ public class AnnouncementDriverCriteriaRepository {
         List<String> conditions = new ArrayList<>();
         ArrayList params = new ArrayList<>();
 
-        conditions.add(" ac.active = true and ac.deleted = false ");
-        if (Objects.nonNull(searchCriteria.getFromCountryId())) {
-            params.add(searchCriteria.getFromCountryId());
-            conditions.add(" from_country_name = ? ");
+        conditions.add(" ac.is_active = true and ac.is_deleted = false ");
+        if (Objects.nonNull(searchCriteria.getCountryId())) {
+            params.add(searchCriteria.getCountryId());
+            conditions.add(" country_id = ? ");
         }
-        if (Objects.nonNull(searchCriteria.getToCountryId())) {
-            params.add(searchCriteria.getToCountryId());
-            conditions.add(" to_country_name = ? ");
+        if (Objects.nonNull(searchCriteria.getRegionId())) {
+            params.add(searchCriteria.getRegionId());
+            conditions.add(" region_id = ? ");
         }
-        if (Objects.nonNull(searchCriteria.getFromRegionId())) {
-            params.add(searchCriteria.getFromRegionId());
-            conditions.add(" from_region_name = ? ");
+        if (Objects.nonNull(searchCriteria.getCityId())) {
+            params.add(searchCriteria.getCityId());
+            conditions.add(" city_id = ? ");
         }
-        if (Objects.nonNull(searchCriteria.getToRegionId())) {
-            params.add(searchCriteria.getToRegionId());
-            conditions.add(" to_region_name = ? ");
+        if (Objects.nonNull(searchCriteria.isCanGoAnotherCountry())) {
+            params.add(searchCriteria.isCanGoAnotherCountry());
+            conditions.add(" can_go_another_country = ? ");
         }
-        if (Objects.nonNull(searchCriteria.getFromCityId())) {
-            params.add(searchCriteria.getFromCityId());
-            conditions.add(" from_city_name = ? ");
+        if (Objects.nonNull(searchCriteria.isCanGoAnotherRegion())) {
+            params.add(searchCriteria.isCanGoAnotherRegion());
+            conditions.add(" can_go_another_region = ? ");
         }
-        if (Objects.nonNull(searchCriteria.getToCityId())) {
-            params.add(searchCriteria.getToCityId());
-            conditions.add(" to_city_name = ? ");
+        if (Objects.nonNull(searchCriteria.isOnlyCity())) {
+            params.add(searchCriteria.isOnlyCity());
+            conditions.add(" only_city = ? ");
         }
-        if (Objects.nonNull(searchCriteria.getTimeToSendFrom()) && Objects.nonNull(searchCriteria.getTimeToSendTo())) {
-            LocalDate lastDateStart = converter.convertOnlyDate(searchCriteria.getTimeToSendFrom());
-            LocalDate lastDateStop = converter.convertOnlyDate(searchCriteria.getTimeToSendTo());
+        if (Objects.nonNull(searchCriteria.getTimeToDriveFrom()) && Objects.nonNull(searchCriteria.getTimeToDriveTo())) {
+            LocalDate lastDateStart = converter.convertOnlyDate(searchCriteria.getTimeToDriveFrom());
+            LocalDate lastDateStop = converter.convertOnlyDate(searchCriteria.getTimeToDriveTo());
             params.add(lastDateStart);
             params.add(lastDateStop);
-            conditions.add(" time_to_sent >= ? ");
-            conditions.add(" time_to_sent <= ? ");
-        } else if (Objects.nonNull(searchCriteria.getTimeToSendTo()) || Objects.nonNull(searchCriteria.getTimeToSendFrom())) {
-            LocalDate lastDateStop = converter.convertOnlyDate(searchCriteria.getTimeToSendTo());
+            conditions.add(" time_to_drive >= ? ");
+            conditions.add(" time_to_drive <= ? ");
+        } else if (Objects.nonNull(searchCriteria.getTimeToDriveTo()) ) {
+            LocalDate lastDateStop = converter.convertOnlyDate(searchCriteria.getTimeToDriveTo());
             params.add(lastDateStop);
-            conditions.add(" time_to_sent = ? ");
+            conditions.add(" time_to_drive = ? ");
+        }else if (Objects.nonNull(searchCriteria.getTimeToDriveFrom())) {
+            LocalDate lastDateStop = converter.convertOnlyDate(searchCriteria.getTimeToDriveFrom());
+            params.add(lastDateStop);
+            conditions.add(" time_to_drive = ? ");
         }
 
         if (!conditions.isEmpty()) {

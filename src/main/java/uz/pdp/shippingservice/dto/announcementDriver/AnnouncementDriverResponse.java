@@ -14,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnnouncementDriverResponse {
+
     private UUID id;
 
     private String currentRegion;

@@ -9,10 +9,8 @@ import uz.pdp.shippingservice.entity.AnnouncementDriver;
 import uz.pdp.shippingservice.entity.user.DriverEntity;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
-import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
-import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverDto;
+import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverCreateDto;
 import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverResponse;
-import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverResponseList;
 import uz.pdp.shippingservice.repository.*;
 import uz.pdp.shippingservice.service.DriverInfoService;
 import uz.pdp.shippingservice.service.LocalDateTimeConverter;
@@ -20,10 +18,6 @@ import uz.pdp.shippingservice.service.UserService;
 import uz.pdp.shippingservice.specifacation.AnnouncementPageRequest;
 import uz.pdp.shippingservice.specifacation.driver.AnnouncementDriverCriteriaRepository;
 import uz.pdp.shippingservice.specifacation.driver.AnnouncementDriverSearchCriteria;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 import static uz.pdp.shippingservice.constants.Constants.*;
 
@@ -42,10 +36,10 @@ public class AnnouncementDriverService {
     private final LocalDateTimeConverter converter;
 
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse create(AnnouncementDriverDto announcementDriverDto) {
+    public ApiResponse create(AnnouncementDriverCreateDto announcementDriverCreateDto) {
         UserEntity userEntity = userService.checkUserExistByContext();
         DriverEntity driverEntity = driverInfoService.getByUserId(userEntity.getId());
-        AnnouncementDriver announcementDriver = toEntity(announcementDriverDto, userEntity , driverEntity);
+        AnnouncementDriver announcementDriver = toEntity(announcementDriverCreateDto, userEntity , driverEntity);
         announcementDriverRepository.save(announcementDriver);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -123,7 +117,7 @@ public class AnnouncementDriverService {
 //        return null;
 //    }
 
-    private AnnouncementDriver toEntity(AnnouncementDriverDto dto, UserEntity userEntity , DriverEntity driverEntity) {
+    private AnnouncementDriver toEntity(AnnouncementDriverCreateDto dto, UserEntity userEntity , DriverEntity driverEntity) {
         AnnouncementDriver announcementDriver = AnnouncementDriver.from(dto);
         announcementDriver.setUserEntity(userEntity);
         announcementDriver.setDriverEntity(driverEntity);

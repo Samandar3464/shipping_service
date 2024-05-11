@@ -4,13 +4,10 @@ import lombok.RequiredArgsConstructor;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
-import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverDto;
+import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverCreateDto;
 import uz.pdp.shippingservice.service.notcomplated.AnnouncementDriverService;
 import uz.pdp.shippingservice.specifacation.AnnouncementPageRequest;
 import uz.pdp.shippingservice.specifacation.driver.AnnouncementDriverSearchCriteria;
-
-
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,8 +18,8 @@ public class AnnouncementDriverController {
 
     @PostMapping("/create")
 //    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-    public ApiResponse createDriverAnnouncement(@RequestBody AnnouncementDriverDto announcementDriverDto){
-        return announcementDriverService.create(announcementDriverDto);
+    public ApiResponse createDriverAnnouncement(@RequestBody AnnouncementDriverCreateDto announcementDriverCreateDto){
+        return announcementDriverService.create(announcementDriverCreateDto);
     }
 
 //    @PreAuthorize("hasAnyRole('DRIVER','CLIENT','ADMIN')")
