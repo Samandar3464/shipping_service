@@ -8,6 +8,9 @@
             <column name="id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="model" type="VARCHAR(255)"/>
+            <column name="color" type="VARCHAR(255)"/>
+            <column name="car_number" type="VARCHAR(255)"/>
             <column name="car_length" type="FLOAT"/>
             <column name="car_width" type="FLOAT"/>
             <column name="max_load" type="FLOAT"/>
@@ -43,7 +46,7 @@
     </changeSet>
 
     <changeSet id="10.2" author="samandar">
-        <createTable tableName="car_documents">
+        <createTable tableName="driver_car_documents">
             <column name="driver_info_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_car_documents_id" referencedTableName="attachment"
                              referencedColumnNames="id"/>
@@ -69,7 +72,7 @@
     </changeSet>
 
     <changeSet id="10.4" author="samandar">
-        <createTable tableName="car_photos">
+        <createTable tableName="driver_car_photos">
             <column name="driver_info_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_car_photos_id" referencedTableName="attachment"
                              referencedColumnNames="id"/>

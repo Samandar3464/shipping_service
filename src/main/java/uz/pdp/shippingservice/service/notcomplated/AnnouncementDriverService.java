@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.AnnouncementDriver;
 import uz.pdp.shippingservice.entity.Attachment;
-import uz.pdp.shippingservice.entity.Car;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
@@ -33,7 +32,7 @@ import static uz.pdp.shippingservice.constants.Constants.*;
 public class AnnouncementDriverService {
 
     private final AnnouncementDriverRepository announcementDriverRepository;
-    private final CarService carService;
+//    private final CarService carService;
     private final RegionRepository regionRepository;
     private final UserService userService;
     private final AttachmentService attachmentService;
@@ -43,14 +42,14 @@ public class AnnouncementDriverService {
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse add(AnnouncementDriverDto announcementDriverDto) {
         UserEntity userEntity = userService.checkUserExistByContext();
-        Car car = carService.getCarByUserId(userEntity.getId());
+//        Car car = carService.getCarByUserId(userEntity.getId());
 //        if (announcementPassengerService.existByUserIdAndActiveTrueAndDeletedFalse(user.getId())){
 //            throw new AnnouncementAlreadyExistException(ANNOUNCEMENT_PASSENGER_ALREADY_EXIST);
 //        }
 //        if (existByUserIdAndActiveTrueAndDeletedFalse(userEntity.getId())) {
 //            throw new AnnouncementAlreadyExistException(ANNOUNCEMENT_DRIVER_ALREADY_EXIST);
 //        }
-        AnnouncementDriver announcementDriver = fromAnnouncementDriver(announcementDriverDto, userEntity, car);
+        AnnouncementDriver announcementDriver = fromAnnouncementDriver(announcementDriverDto, userEntity/*, car*/);
         announcementDriverRepository.save(announcementDriver);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -118,9 +117,9 @@ public class AnnouncementDriverService {
                 .orElseThrow(() -> new AnnouncementNotFoundException(DRIVER_ANNOUNCEMENT_NOT_FOUND));
     }
 
-    private AnnouncementDriver fromAnnouncementDriver(AnnouncementDriverDto announcement, UserEntity userEntity, Car car) {
+    private AnnouncementDriver fromAnnouncementDriver(AnnouncementDriverDto announcement, UserEntity userEntity/*, Car car*/) {
         AnnouncementDriver announcementDriver = AnnouncementDriver.from(announcement);
-        announcementDriver.setCar(car);
+//        announcementDriver.setCar(car);
         announcementDriver.setUserEntity(userEntity);
         announcementDriver.setCountry(countryRepository.getById(announcement.getCountryId()));
         announcementDriver.setRegion(announcement.getRegionId() == null ? null : regionRepository.getById(announcement.getRegionId()));
@@ -129,9 +128,9 @@ public class AnnouncementDriverService {
     }
 
     private AnnouncementDriverResponse fromAnnouncementDriverResponse(AnnouncementDriver announcementDriver) {
-        List<Attachment> attachmentList = announcementDriver.getCar().getCarPhotos();
+//        List<Attachment> attachmentList = announcementDriver.getCar().getCarPhotos();
         List<String> photos = new ArrayList<>();
-        attachmentList.forEach(attach -> photos.add(attachmentService.attachUploadFolder + attach.getPath() + "/" + attach.getNewName() + "." + attach.getType()));
+//        attachmentList.forEach(attach -> photos.add(attachmentService.attachUploadFolder + attach.getPath() + "/" + attach.getNewName() + "." + attach.getType()));
         AnnouncementDriverResponse announcement = AnnouncementDriverResponse.from(announcementDriver);
         announcement.setCarPhotoPath(photos);
 //        announcement.setUserResponseDto(userService.fromUserToResponse(announcementDriver.getUserEntity()));

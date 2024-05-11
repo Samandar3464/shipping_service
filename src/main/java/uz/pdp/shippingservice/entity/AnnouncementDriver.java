@@ -56,9 +56,9 @@ public class AnnouncementDriver {
      @OnDelete(action = OnDeleteAction.CASCADE)
      private UserEntity userEntity;
 
-     @ManyToOne
-     @OnDelete(action = OnDeleteAction.CASCADE)
-     private Car car;
+//     @ManyToOne
+//     @OnDelete(action = OnDeleteAction.CASCADE)
+//     private Car car;
 
      public static AnnouncementDriver from(AnnouncementDriverDto announcementRequestDto) {
           return AnnouncementDriver.builder()

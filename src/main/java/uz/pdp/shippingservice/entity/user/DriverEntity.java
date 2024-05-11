@@ -34,6 +34,15 @@ public class DriverEntity implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "car_number")
+    private String carNumber;
+
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "model")
+    private String model;
+
     @Column(name = "car_length")
     private float carLength;
 
@@ -80,6 +89,9 @@ public class DriverEntity implements Serializable {
 
     public static DriverEntity toEntity(DriverUpdateDto dto) {
         return DriverEntity.builder()
+                .carNumber(dto.getCarNumber())
+                .color(dto.getColor())
+                .model(dto.getModel())
                 .carLength(dto.getCarLength())
                 .carWidth(dto.getCarWidth())
                 .maxLoad(dto.getMaxLoad())

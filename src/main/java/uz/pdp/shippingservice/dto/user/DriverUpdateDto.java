@@ -1,5 +1,6 @@
 package uz.pdp.shippingservice.dto.user;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,6 +9,12 @@ import java.util.List;
 
 @Data
 public class DriverUpdateDto {
+
+    private String carNumber;
+
+    private String color;
+
+    private String model;
 
     private float carLength;
 
