@@ -26,6 +26,12 @@ public class DriverUpdateDto {
 
     private boolean hasWrappedFully;
 
+    private boolean driveToCountryToCountry;
+
+    private boolean driveToRegionToRegion;
+
+    private boolean driveOnlyCity;
+
     private Long userId;
 
     private List<MultipartFile> driverPassportPhotos;

@@ -17,6 +17,7 @@ import uz.pdp.shippingservice.entity.Attachment;
 import uz.pdp.shippingservice.entity.user.DriverEntity;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.exception.DriverException;
+import uz.pdp.shippingservice.exception.RecordNotFoundException;
 import uz.pdp.shippingservice.repository.DriverInfoRepository;
 
 import java.util.ArrayList;
@@ -112,5 +113,9 @@ public class DriverInfoService {
         driverEntity.setActive(false);
         driverInfoRepository.save(driverEntity);
         return new ApiResponse(SUCCESSFULLY, true);
+    }
+
+    public DriverEntity getByUserId(Long userId){
+       return driverInfoRepository.findFirstByUserIdAndActiveTrue(userId).orElseThrow(()-> new RecordNotFoundException(DRIVER_CAR_NOT_FOUND_NOT_ACTIVATED));
     }
 }

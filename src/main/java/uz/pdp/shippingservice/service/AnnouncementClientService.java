@@ -14,15 +14,11 @@ import uz.pdp.shippingservice.exception.AnnouncementAlreadyExistException;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
 import uz.pdp.shippingservice.dto.announcementClient.AnnouncementClientCreateDto;
 import uz.pdp.shippingservice.repository.*;
-import uz.pdp.shippingservice.service.AttachmentService;
-import uz.pdp.shippingservice.service.LocalDateTimeConverter;
-import uz.pdp.shippingservice.service.UserService;
 import uz.pdp.shippingservice.specifacation.client.AnnouncementClientCriteriaRepository;
 import uz.pdp.shippingservice.specifacation.client.AnnouncementClientSearchCriteria;
-import uz.pdp.shippingservice.specifacation.client.AnnouncementPageRequest;
+import uz.pdp.shippingservice.specifacation.AnnouncementPageRequest;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

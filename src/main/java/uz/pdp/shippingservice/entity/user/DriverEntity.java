@@ -58,7 +58,16 @@ public class DriverEntity implements Serializable {
     @Column(name = "has_wrapped_fully")
     private boolean hasWrappedFully;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @Column(name = "drive_to_country_to_country")
+    private boolean driveToCountryToCountry;
+
+    @Column(name = "drive_To_region_to_region")
+    private boolean driveToRegionToRegion;
+
+    @Column(name = "drive_only_city")
+    private boolean driveOnlyCity;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "user_id")
     private UserEntity user;
 
@@ -97,6 +106,9 @@ public class DriverEntity implements Serializable {
                 .maxLoad(dto.getMaxLoad())
                 .hasFreezer(dto.isHasFreezer())
                 .hasWrappedFully(dto.isHasWrappedFully())
+                .driveToCountryToCountry(dto.isDriveToCountryToCountry())
+                .driveToRegionToRegion(dto.isDriveToRegionToRegion())
+                .driveOnlyCity(dto.isDriveOnlyCity())
                 .isActive(false)
                 .createdAt(LocalDateTime.now())
                 .build();

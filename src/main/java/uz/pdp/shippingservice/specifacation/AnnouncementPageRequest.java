@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.specifacation.client;
+package uz.pdp.shippingservice.specifacation;
 
 import lombok.Data;
 import org.springframework.data.domain.Sort;

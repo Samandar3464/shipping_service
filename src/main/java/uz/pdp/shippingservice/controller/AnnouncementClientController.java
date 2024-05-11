@@ -7,7 +7,7 @@ import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.dto.announcementClient.AnnouncementClientCreateDto;
 import uz.pdp.shippingservice.service.AnnouncementClientService;
 import uz.pdp.shippingservice.specifacation.client.AnnouncementClientSearchCriteria;
-import uz.pdp.shippingservice.specifacation.client.AnnouncementPageRequest;
+import uz.pdp.shippingservice.specifacation.AnnouncementPageRequest;
 
 import java.util.UUID;
 

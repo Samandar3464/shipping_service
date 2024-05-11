@@ -16,6 +16,9 @@
             <column name="max_load" type="FLOAT"/>
             <column name="has_freezer" type="BOOLEAN"/>
             <column name="has_wrapped_fully" type="BOOLEAN"/>
+            <column name="drive_to_country_to_country" type="BOOLEAN"/>
+            <column name="drive_To_region_to_region" type="BOOLEAN"/>
+            <column name="drive_only_city" type="BOOLEAN"/>
             <column name="is_active" type="BOOLEAN"/>
             <column name="created_at" type="TIMESTAMP" />
             <column name="user_id" type="BIGINT">

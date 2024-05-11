@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.specifacation.client;
+package uz.pdp.shippingservice.specifacation.driver;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import uz.pdp.shippingservice.dto.announcementClient.AnnouncementClientResponse;
+import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverResponse;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.service.LocalDateTimeConverter;
 import uz.pdp.shippingservice.specifacation.AnnouncementPageRequest;
 import uz.pdp.shippingservice.utils.AppUtils;
-
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,14 +22,14 @@ import java.util.Objects;
 
 @Repository
 @RequiredArgsConstructor
-public class AnnouncementClientCriteriaRepository {
+public class AnnouncementDriverCriteriaRepository {
 
     private final JdbcTemplate jdbcTemplate;
     private final LocalDateTimeConverter converter;
     @Value("${attach.upload.folder}")
     public String attachUploadFolder;
 
-    public Page<AnnouncementClientResponse> findAllWithFilters(AnnouncementPageRequest page, AnnouncementClientSearchCriteria searchCriteria) {
+    public Page<AnnouncementDriverResponse> findAllWithFilters(AnnouncementPageRequest page, AnnouncementDriverSearchCriteria searchCriteria) {
         Sort sort = Sort.by(page.getSortDirection(), page.getSortBy());
         Pageable pageable = PageRequest.of(page.getPageNumber(), page.getPageSize(), sort);
 
@@ -88,25 +87,18 @@ public class AnnouncementClientCriteriaRepository {
         try {
             Long totalCount = jdbcTemplate.queryForObject(totalCountQuery, Long.class);
             List<Map<String, Object>> maps = jdbcTemplate.queryForList(query.toString(), params.toArray());
-            TypeReference<ArrayList<AnnouncementClientResponse>> typeReference = new TypeReference<ArrayList<AnnouncementClientResponse>>() {
+            TypeReference<ArrayList<AnnouncementDriverResponse>> typeReference = new TypeReference<ArrayList<AnnouncementDriverResponse>>() {
             };
-            ArrayList<AnnouncementClientResponse> creditRequestLogPsList = AppUtils.convertWithJackson(maps, typeReference);
-            creditRequestLogPsList.forEach(obj -> {
-                List<String> list = new ArrayList<>();
-                obj.getPhotos().forEach(url -> {
-                    url = attachUploadFolder + url;
-                    list.add(url);
-                });
-                obj.setPhotos(list);
-            });
-            return new PageImpl<AnnouncementClientResponse>(creditRequestLogPsList, pageable, totalCount);
+            ArrayList<AnnouncementDriverResponse> creditRequestLogPsList = AppUtils.convertWithJackson(maps, typeReference);
+
+            return new PageImpl<AnnouncementDriverResponse>(creditRequestLogPsList, pageable, totalCount);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public Page<AnnouncementClientResponse> getClientOwnAnnouncements(AnnouncementPageRequest page, Boolean active, UserEntity userEntity) {
+    public Page<AnnouncementDriverResponse> getDrierOwnAnnouncements(AnnouncementPageRequest page, Boolean active, UserEntity userEntity) {
         Sort sort = Sort.by(page.getSortDirection(), page.getSortBy());
         Pageable pageable = PageRequest.of(page.getPageNumber(), page.getPageSize(), sort);
 
@@ -132,18 +124,11 @@ public class AnnouncementClientCriteriaRepository {
         try {
             Long totalCount = jdbcTemplate.queryForObject(totalCountQuery, Long.class);
             List<Map<String, Object>> maps = jdbcTemplate.queryForList(query.toString(), params.toArray());
-            TypeReference<ArrayList<AnnouncementClientResponse>> typeReference = new TypeReference<ArrayList<AnnouncementClientResponse>>() {
+            TypeReference<ArrayList<AnnouncementDriverResponse>> typeReference = new TypeReference<ArrayList<AnnouncementDriverResponse>>() {
             };
-            ArrayList<AnnouncementClientResponse> creditRequestLogPsList = AppUtils.convertWithJackson(maps, typeReference);
-            creditRequestLogPsList.forEach(obj -> {
-                List<String> list = new ArrayList<>();
-                obj.getPhotos().forEach(url -> {
-                    url = attachUploadFolder + url;
-                    list.add(url);
-                });
-                obj.setPhotos(list);
-            });
-            return new PageImpl<AnnouncementClientResponse>(creditRequestLogPsList, pageable, totalCount);
+            ArrayList<AnnouncementDriverResponse> creditRequestLogPsList = AppUtils.convertWithJackson(maps, typeReference);
+
+            return new PageImpl<AnnouncementDriverResponse>(creditRequestLogPsList, pageable, totalCount);
         } catch (Exception e) {
             e.printStackTrace();
         }
