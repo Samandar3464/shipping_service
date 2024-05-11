@@ -1,6 +1,7 @@
 package uz.pdp.shippingservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -21,6 +22,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "announcement_driver")
 public class AnnouncementDriver {
 
      @Id
@@ -57,27 +59,28 @@ public class AnnouncementDriver {
 
      @ManyToOne
      @OnDelete(action = OnDeleteAction.CASCADE)
-     @Column(name = "country_id")
+     @JoinColumn(name = "country_id")
      private Country country;
 
      @ManyToOne
      @OnDelete(action = OnDeleteAction.CASCADE)
-     @Column(name = "region_id")
+     @JoinColumn(name = "region_id")
      private Region region;
 
      @ManyToOne
      @OnDelete(action = OnDeleteAction.CASCADE)
-     @Column(name = "city_id")
+     @JoinColumn(name = "city_id")
      private City city;
 
      @ManyToOne
      @OnDelete(action = OnDeleteAction.CASCADE)
-     @Column(name = "user_entity_id")
+     @JoinColumn(name = "user_entity_id")
      private UserEntity userEntity;
 
      @ManyToOne
+     @JsonIgnore
      @OnDelete(action = OnDeleteAction.CASCADE)
-     @Column(name = "driver_entity_id")
+     @JoinColumn(name = "driver_entity_id")
      private DriverEntity driverEntity;
 
      @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")

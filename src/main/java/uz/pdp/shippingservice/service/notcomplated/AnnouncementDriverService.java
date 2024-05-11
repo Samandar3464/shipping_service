@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.entity.AnnouncementDriver;
 import uz.pdp.shippingservice.entity.user.DriverEntity;
@@ -50,7 +51,7 @@ public class AnnouncementDriverService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse getDriverOwnAnnouncements(AnnouncementPageRequest page, Boolean active) {
+    public ApiResponse getDriverOwnAnnouncements(AnnouncementPageRequest page,@RequestParam(name = "active" , defaultValue = "true") Boolean active) {
         UserEntity userEntity = userService.checkUserExistByContext();
         Page<AnnouncementDriverResponse> clientOwnAnnouncements = announcementDriverCriteriaRepository.getDrierOwnAnnouncements(page, active, userEntity);
         return new ApiResponse(SUCCESSFULLY, true, clientOwnAnnouncements);

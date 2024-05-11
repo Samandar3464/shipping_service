@@ -88,7 +88,7 @@ public class DriverEntity implements Serializable {
     private List<Attachment> carPhotos;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private boolean active;
 
     @Column(name = "created_at")
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
@@ -109,7 +109,7 @@ public class DriverEntity implements Serializable {
                 .driveToCountryToCountry(dto.isDriveToCountryToCountry())
                 .driveToRegionToRegion(dto.isDriveToRegionToRegion())
                 .driveOnlyCity(dto.isDriveOnlyCity())
-                .isActive(false)
+                .active(false)
                 .createdAt(LocalDateTime.now())
                 .build();
     }

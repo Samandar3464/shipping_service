@@ -11,7 +11,7 @@ import uz.pdp.shippingservice.specifacation.driver.AnnouncementDriverSearchCrite
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/driver")
+@RequestMapping("/v1/driver_info")
 public class AnnouncementDriverController {
 
     private final AnnouncementDriverService announcementDriverService;

@@ -6,10 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.dto.announcementClient.AnnouncementClientResponse;
-import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverResponseList;
 import uz.pdp.shippingservice.dto.NotificationMessageResponse;
 import uz.pdp.shippingservice.entity.AnnouncementClient;
-import uz.pdp.shippingservice.entity.AnnouncementDriver;
 import uz.pdp.shippingservice.entity.Notification;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
@@ -50,11 +48,11 @@ public class NotificationService {
     public ApiResponse createNotificationForPassenger(NotificationRequestDto notificationRequestDto) {
         UserEntity userEntity = userService.checkUserExistByContext();
         announcementClientService.getByIdAndActiveAndDeletedFalse(notificationRequestDto.getAnnouncementPassengerId());
-        AnnouncementDriver announcementDriver = announcementDriverService.getByUserIdAndActiveAndDeletedFalse(userEntity.getId(), true);
+//        AnnouncementDriver announcementDriver = announcementDriverService.getByUserIdAndActiveAndDeletedFalse(userEntity.getId(), true);
 
-        notificationRequestDto.setAnnouncementDriverId(announcementDriver.getId());
+//        notificationRequestDto.setAnnouncementDriverId(announcementDriver.getId());
         HashMap<String, String> data = new HashMap<>();
-        data.put("announcementId", announcementDriver.getId().toString());
+//        data.put("announcementId", announcementDriver.getId().toString());
         notificationRequestDto.setDate(data);
         notificationRequestDto.setTitle(YOU_COME_TO_MESSAGE_FROM_DRIVER);
         notificationRequestDto.setType(Type.CLIENT);
@@ -99,11 +97,12 @@ public class NotificationService {
         List<Notification> notifications = notificationRepository
                 .findAllByReceiverIdAndActiveAndReceivedAndDeletedFalseAndTypeOrderByCreatedTime(userEntity.getId(), true, false, Type.CLIENT);
 
-        List<AnnouncementDriverResponseList> announcementDriverResponseLists = new ArrayList<>();
-        notifications.forEach(obj -> announcementDriverResponseLists.add(AnnouncementDriverResponseList
-                .fromForNotification(announcementDriverService.getByIdAndDeletedFalse(obj.getAnnouncementDriverId()), userService.checkUserExistById(obj.getSenderId()).getUsername())));
+//        List<AnnouncementDriverResponseList> announcementDriverResponseLists = new ArrayList<>();
+//        notifications.forEach(obj -> announcementDriverResponseLists.add(AnnouncementDriverResponseList
+//                .fromForNotification(announcementDriverService.getByIdAndDeletedFalse(obj.getAnnouncementDriverId()), userService.checkUserExistById(obj.getSenderId()).getUsername())));
 
-        return new ApiResponse(announcementDriverResponseLists, true);
+//        return new ApiResponse(announcementDriverResponseLists, true);
+        return null;
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -112,16 +111,16 @@ public class NotificationService {
         UserEntity passenger = userService.checkUserExistByContext();
         UserEntity driver = userService.checkUserExistById(acceptRequestDto.getSenderId());
         Notification fromDriverToUser = getNotification(passenger, driver, acceptRequestDto.getAnnouncementClientId());
-        AnnouncementDriver announcementDriver = announcementDriverService.getByUserIdAndActiveAndDeletedFalse(driver.getId(), true);
+//        AnnouncementDriver announcementDriver = announcementDriverService.getByUserIdAndActiveAndDeletedFalse(driver.getId(), true);
         AnnouncementClient announcementClient = announcementClientService.getByIdAndActiveAndDeletedFalse(acceptRequestDto.getAnnouncementClientId());
         fromDriverToUser.setActive(false);
         fromDriverToUser.setReceived(true);
         notificationRepository.save(fromDriverToUser);
         announcementClient.setActive(false);
-        announcementDriver.setActive(true);
+//        announcementDriver.setActive(true);
         NotificationMessageResponse notificationMessageResponse = NotificationMessageResponse.from(passenger.getFirebaseToken(), PASSENGER_AGREE, new HashMap<>());
         fireBaseMessagingService.sendNotificationByToken(notificationMessageResponse);
-        announcementDriverRepository.save(announcementDriver);
+//        announcementDriverRepository.save(announcementDriver);
         announcementClientRepository.save(announcementClient);
         return new ApiResponse(YOU_ACCEPTED_REQUEST, true);
     }
@@ -145,13 +144,14 @@ public class NotificationService {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse getAcceptedNotificationForClient() {
         UserEntity receiver = userService.checkUserExistByContext();
-        List<AnnouncementDriverResponseList> announcementDriverResponseLists = new ArrayList<>();
+//        List<AnnouncementDriverResponseList> announcementDriverResponseLists = new ArrayList<>();
         List<Notification> passengerAccepted = notificationRepository.findAllByReceiverIdAndReceivedTrueAndTypeOrderByCreatedTime(receiver.getId(), Type.CLIENT);
 
-        passengerAccepted.forEach(obj -> announcementDriverResponseLists.add(AnnouncementDriverResponseList
-                .fromForNotification(announcementDriverService.getById(obj.getAnnouncementDriverId()),
-                        userService.checkUserExistById(obj.getSenderId()).getUsername())));
-        return new ApiResponse(announcementDriverResponseLists, true);
+//        passengerAccepted.forEach(obj -> announcementDriverResponseLists.add(AnnouncementDriverResponseList
+//                .fromForNotification(announcementDriverService.getById(obj.getAnnouncementDriverId()),
+//                        userService.checkUserExistById(obj.getSenderId()).getUsername())));
+//        return new ApiResponse(announcementDriverResponseLists, true);
+        return null;
     }
 
     @ResponseStatus(HttpStatus.OK)

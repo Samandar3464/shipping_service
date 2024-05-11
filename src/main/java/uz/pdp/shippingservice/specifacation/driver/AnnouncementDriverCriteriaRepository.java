@@ -40,27 +40,27 @@ public class AnnouncementDriverCriteriaRepository {
         conditions.add(" ac.is_active = true and ac.is_deleted = false ");
         if (Objects.nonNull(searchCriteria.getCountryId())) {
             params.add(searchCriteria.getCountryId());
-            conditions.add(" country_id = ? ");
+            conditions.add(" ad.country_id = ? ");
         }
         if (Objects.nonNull(searchCriteria.getRegionId())) {
             params.add(searchCriteria.getRegionId());
-            conditions.add(" region_id = ? ");
+            conditions.add(" ad.region_id = ? ");
         }
         if (Objects.nonNull(searchCriteria.getCityId())) {
             params.add(searchCriteria.getCityId());
-            conditions.add(" city_id = ? ");
+            conditions.add(" ad.city_id = ? ");
         }
         if (Objects.nonNull(searchCriteria.isCanGoAnotherCountry())) {
             params.add(searchCriteria.isCanGoAnotherCountry());
-            conditions.add(" can_go_another_country = ? ");
+            conditions.add(" ad.can_go_another_country = ? ");
         }
         if (Objects.nonNull(searchCriteria.isCanGoAnotherRegion())) {
             params.add(searchCriteria.isCanGoAnotherRegion());
-            conditions.add(" can_go_another_region = ? ");
+            conditions.add(" ad.can_go_another_region = ? ");
         }
         if (Objects.nonNull(searchCriteria.isOnlyCity())) {
             params.add(searchCriteria.isOnlyCity());
-            conditions.add(" only_city = ? ");
+            conditions.add(" ad.only_city = ? ");
         }
         if (Objects.nonNull(searchCriteria.getTimeToDriveFrom()) && Objects.nonNull(searchCriteria.getTimeToDriveTo())) {
             LocalDate lastDateStart = converter.convertOnlyDate(searchCriteria.getTimeToDriveFrom());
@@ -72,11 +72,11 @@ public class AnnouncementDriverCriteriaRepository {
         } else if (Objects.nonNull(searchCriteria.getTimeToDriveTo()) ) {
             LocalDate lastDateStop = converter.convertOnlyDate(searchCriteria.getTimeToDriveTo());
             params.add(lastDateStop);
-            conditions.add(" time_to_drive = ? ");
+            conditions.add(" time_to_drive <= ? ");
         }else if (Objects.nonNull(searchCriteria.getTimeToDriveFrom())) {
-            LocalDate lastDateStop = converter.convertOnlyDate(searchCriteria.getTimeToDriveFrom());
-            params.add(lastDateStop);
-            conditions.add(" time_to_drive = ? ");
+            LocalDate lastDateStart = converter.convertOnlyDate(searchCriteria.getTimeToDriveFrom());
+            params.add(lastDateStart);
+            conditions.add(" time_to_drive >= ? ");
         }
 
         if (!conditions.isEmpty()) {
@@ -109,12 +109,12 @@ public class AnnouncementDriverCriteriaRepository {
         StringBuilder query = new StringBuilder(queryString);
         List<String> conditions = new ArrayList<>();
         ArrayList params = new ArrayList<>();
-        conditions.add(" ac.deleted = false ");
-        conditions.add(" ac.createdby_id = ?");
+        conditions.add(" ad.is_deleted = false ");
+        conditions.add(" ad.user_entity_id = ?");
         params.add(userEntity.getId());
         if (Objects.nonNull(active)) {
             params.add(active);
-            conditions.add(" ac.active = ? ");
+            conditions.add(" ad.is_active = ? ");
         }
         if (!conditions.isEmpty()) {
             query.append(String.join(" and ", conditions));
@@ -139,19 +139,16 @@ public class AnnouncementDriverCriteriaRepository {
         return null;
     }
 
-    private String queryString = "select ac.id,\n" +
-            "       (select name from country where id = fromcountry_id) as fromcountry_name,\n" +
-            "       (select name from country where id = tocountry_id)   as tocountry_name,\n" +
-            "       (select name from region where id = fromregion_id)   as fromregion_name,\n" +
-            "       (select name from region where id = toregion_id)     as toregion_name,\n" +
-            "       (select name from city where id = fromcity_id)       as fromcity_name,\n" +
-            "       (select name from city where id = tocity_id)         as tocity_name,\n" +
-            "       from_latitude, from_longitude, to_latitude, to_longitude, info, price, time_to_send,\n" +
-            "       ac.created_at, u.id as user_id, u.phone as phone, u.surname || ' ' || u.name as fullname,\n" +
-            "      (select array_agg(aa.path || '/' ||aa.new_name||'.'||aa.content_type) as photos from\n" +
-            "         announcement_client_attachment an ,attachment aa\n" +
-            "        where an.announcementclient_id =ac.id and an.photos_id = aa.id) as photos\n" +
-            "from announcement_client ac ,users u  where u.id = ac.createdby_id ";
+    private String queryString = "select ad.id,\n" +
+            " ad.current_latitude, ad.current_longitude,ad.info,ad.time_to_drive ,ad.created_at,\n" +
+            " ad.can_go_another_country, ad.can_go_another_region, ad.only_city,\n" +
+            " (select name from country where id = country_id) as country_name,\n" +
+            " (select name from region where id = region_id)   as region_name,\n" +
+            " (select name from city where id = city_id)       as city_name,\n" +
+            " u.id as user_id, u.phone as phone, u.surname || ' ' || u.name as fullname,\n" +
+            " di.id as driver_info_id, di.model , di.car_length ,di.car_width ,di.max_load,\n" +
+            " di.has_freezer, di.has_wrapped_fully \n" +
+            " from announcement_driver ad ,users u ,driver_info di where u.id = ad.user_entity_id and di.user_id = u.id and di.is_active = true ";
 
 
 }

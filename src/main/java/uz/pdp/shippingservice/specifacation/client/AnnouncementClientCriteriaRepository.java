@@ -70,10 +70,14 @@ public class AnnouncementClientCriteriaRepository {
             params.add(lastDateStop);
             conditions.add(" time_to_sent >= ? ");
             conditions.add(" time_to_sent <= ? ");
-        } else if (Objects.nonNull(searchCriteria.getTimeToSendTo()) || Objects.nonNull(searchCriteria.getTimeToSendFrom())) {
+        } else if (Objects.nonNull(searchCriteria.getTimeToSendTo())) {
             LocalDate lastDateStop = converter.convertOnlyDate(searchCriteria.getTimeToSendTo());
             params.add(lastDateStop);
-            conditions.add(" time_to_sent = ? ");
+            conditions.add(" time_to_sent <= ? ");
+        }else if (Objects.nonNull(searchCriteria.getTimeToSendFrom())) {
+            LocalDate lastDateStart = converter.convertOnlyDate(searchCriteria.getTimeToSendFrom());
+            params.add(lastDateStart);
+            conditions.add(" time_to_sent >= ? ");
         }
 
         if (!conditions.isEmpty()) {
@@ -114,7 +118,7 @@ public class AnnouncementClientCriteriaRepository {
         List<String> conditions = new ArrayList<>();
         ArrayList params = new ArrayList<>();
         conditions.add(" ac.deleted = false ");
-        conditions.add(" ac.createdby_id = ?");
+        conditions.add(" ac.created_by_id = ?");
         params.add(userEntity.getId());
         if (Objects.nonNull(active)) {
             params.add(active);
@@ -151,18 +155,18 @@ public class AnnouncementClientCriteriaRepository {
     }
 
     private String queryString = "select ac.id,\n" +
-            "       (select name from country where id = fromcountry_id) as fromcountry_name,\n" +
-            "       (select name from country where id = tocountry_id)   as tocountry_name,\n" +
-            "       (select name from region where id = fromregion_id)   as fromregion_name,\n" +
-            "       (select name from region where id = toregion_id)     as toregion_name,\n" +
-            "       (select name from city where id = fromcity_id)       as fromcity_name,\n" +
-            "       (select name from city where id = tocity_id)         as tocity_name,\n" +
+            "       (select name from country where id = from_country_id) as fromcountry_name,\n" +
+            "       (select name from country where id = to_country_id)   as tocountry_name,\n" +
+            "       (select name from region where id = from_region_id)   as fromregion_name,\n" +
+            "       (select name from region where id = to_region_id)     as toregion_name,\n" +
+            "       (select name from city where id = from_city_id)       as fromcity_name,\n" +
+            "       (select name from city where id = to_city_id)         as tocity_name,\n" +
             "       from_latitude, from_longitude, to_latitude, to_longitude, info, price, time_to_send,\n" +
             "       ac.created_at, u.id as user_id, u.phone as phone, u.surname || ' ' || u.name as fullname,\n" +
             "      (select array_agg(aa.path || '/' ||aa.new_name||'.'||aa.content_type) as photos from\n" +
-            "         announcement_client_attachment an ,attachment aa\n" +
-            "        where an.announcementclient_id =ac.id and an.photos_id = aa.id) as photos\n" +
-            "from announcement_client ac ,users u  where u.id = ac.createdby_id ";
+            "         announcement_client_photos an ,attachment aa\n" +
+            "        where an.announcement_client_id =ac.id and an.photos_id = aa.id) as photos\n" +
+            "from announcement_client ac ,users u  where u.id = ac.created_by_id ";
 
 
 }

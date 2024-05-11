@@ -9,7 +9,7 @@ import uz.pdp.shippingservice.service.DriverInfoService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/driver")
+@RequestMapping("/v1/announcement_driver")
 public class DriverInfoController {
 
     private final DriverInfoService driverInfoService;
