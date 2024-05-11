@@ -5,13 +5,14 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import uz.pdp.shippingservice.dto.announcementClient.AnnouncementClientDto;
+import uz.pdp.shippingservice.dto.announcementClient.AnnouncementClientCreateDto;
 import uz.pdp.shippingservice.entity.locations.City;
 import uz.pdp.shippingservice.entity.locations.Country;
 import uz.pdp.shippingservice.entity.locations.Region;
 import uz.pdp.shippingservice.entity.user.UserEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -20,6 +21,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "announcement_client")
 public class AnnouncementClient {
 
     @Id
@@ -93,7 +95,10 @@ public class AnnouncementClient {
     @Column(name = "price")
     private double price;
 
-    public static AnnouncementClient toEntity(AnnouncementClientDto announcementRequestDto) {
+    @OneToMany
+    private List<Attachment> photos;
+
+    public static AnnouncementClient toEntity(AnnouncementClientCreateDto announcementRequestDto) {
         return AnnouncementClient.builder()
                 .fromLatitude(announcementRequestDto.getFromLatitude())
                 .fromLongitude(announcementRequestDto.getFromLongitude())

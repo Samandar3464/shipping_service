@@ -1,20 +1,17 @@
 package uz.pdp.shippingservice.dto.announcementClient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AnnouncementClientDto {
+public class AnnouncementClientCreateDto {
 
      private Integer fromCountryId;
      private Integer toCountryId;
@@ -30,4 +27,6 @@ public class AnnouncementClientDto {
      private String info;
      @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
      private String timeToSend;
+
+     private List<MultipartFile> photos;
 }

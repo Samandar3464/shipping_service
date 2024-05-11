@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.dto.announcementClient.AnnouncementClientResponse;
-import uz.pdp.shippingservice.dto.announcementClient.AnnouncementClientResponseList;
 import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverResponseList;
 import uz.pdp.shippingservice.dto.NotificationMessageResponse;
 import uz.pdp.shippingservice.entity.AnnouncementClient;
@@ -23,6 +22,7 @@ import uz.pdp.shippingservice.dto.NotificationRequestDto;
 import uz.pdp.shippingservice.repository.AnnouncementClientRepository;
 import uz.pdp.shippingservice.repository.AnnouncementDriverRepository;
 import uz.pdp.shippingservice.repository.NotificationRepository;
+import uz.pdp.shippingservice.service.AnnouncementClientService;
 import uz.pdp.shippingservice.service.FireBaseMessagingService;
 import uz.pdp.shippingservice.service.UserService;
 
@@ -49,7 +49,7 @@ public class NotificationService {
     @Transactional(rollbackFor = {Exception.class})
     public ApiResponse createNotificationForPassenger(NotificationRequestDto notificationRequestDto) {
         UserEntity userEntity = userService.checkUserExistByContext();
-        announcementClientService.getByIdAndActiveAndDeletedFalse(notificationRequestDto.getAnnouncementPassengerId(), true);
+        announcementClientService.getByIdAndActiveAndDeletedFalse(notificationRequestDto.getAnnouncementPassengerId());
         AnnouncementDriver announcementDriver = announcementDriverService.getByUserIdAndActiveAndDeletedFalse(userEntity.getId(), true);
 
         notificationRequestDto.setAnnouncementDriverId(announcementDriver.getId());
@@ -76,11 +76,11 @@ public class NotificationService {
             announcementClientList.add(announcementClient);
         });
 
-        List<AnnouncementClientResponseList> anonymousList = new ArrayList<>();
-        announcementClientList.forEach(obj -> {
-            if (obj != null) anonymousList.add(AnnouncementClientResponseList.from(obj));
-        });
-        return new ApiResponse(anonymousList, true);
+//        List<AnnouncementClientResponseList> anonymousList = new ArrayList<>();
+//        announcementClientList.forEach(obj -> {
+//            if (obj != null) anonymousList.add(AnnouncementClientResponseList.from(obj));
+//        });
+        return new ApiResponse(null, true);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -113,7 +113,7 @@ public class NotificationService {
         UserEntity driver = userService.checkUserExistById(acceptRequestDto.getSenderId());
         Notification fromDriverToUser = getNotification(passenger, driver, acceptRequestDto.getAnnouncementClientId());
         AnnouncementDriver announcementDriver = announcementDriverService.getByUserIdAndActiveAndDeletedFalse(driver.getId(), true);
-        AnnouncementClient announcementClient = announcementClientService.getByIdAndActiveAndDeletedFalse(acceptRequestDto.getAnnouncementClientId(), true);
+        AnnouncementClient announcementClient = announcementClientService.getByIdAndActiveAndDeletedFalse(acceptRequestDto.getAnnouncementClientId());
         fromDriverToUser.setActive(false);
         fromDriverToUser.setReceived(true);
         notificationRepository.save(fromDriverToUser);
@@ -136,7 +136,7 @@ public class NotificationService {
             AnnouncementClient announcement = announcementClientRepository.findById(obj.getAnnouncementPassengerId()).orElse(null);
 //            UserResponseDto userResponseDto = UserResponseDto.from(userService.checkUserExistById(obj.getReceiverId()));
             if (announcement != null) {
-                allowedAnnouncementResponseForDrivers.add(AnnouncementClientResponse.from(announcement/*, userResponseDto*/));
+//                allowedAnnouncementResponseForDrivers.add(AnnouncementClientResponse.from(announcement/*, userResponseDto*/));
             }
         });
         return new ApiResponse(allowedAnnouncementResponseForDrivers, true);

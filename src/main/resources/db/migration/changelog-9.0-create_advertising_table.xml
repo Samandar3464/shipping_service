@@ -12,6 +12,7 @@
             <column name="name" type="VARCHAR(255)"/>
             <column name="owner_data" type="VARCHAR(255)"/>
             <column name="url" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP"/>
             <column name="start_date" type="TIMESTAMP">
                 <constraints nullable="false"/>
             </column>

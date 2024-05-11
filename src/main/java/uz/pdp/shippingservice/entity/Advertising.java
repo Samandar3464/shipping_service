@@ -33,6 +33,9 @@ public class Advertising {
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private LocalDateTime endDate;
 
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
+    private LocalDateTime createdAt;
+
     private boolean active;
 
     @JsonIgnore
@@ -47,6 +50,7 @@ public class Advertising {
                 .name(dto.getName())
                 .ownerData(dto.getOwnerData())
                 .url(dto.getUrl())
+                .createdAt(LocalDateTime.now())
                 .active(true)
                 .build();
     }

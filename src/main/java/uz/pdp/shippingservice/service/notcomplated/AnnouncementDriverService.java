@@ -9,7 +9,6 @@ import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.exception.AnnouncementNotFoundException;
 import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverDto;
-import uz.pdp.shippingservice.dto.GetByFilter;
 import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverResponse;
 import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverResponseList;
 import uz.pdp.shippingservice.repository.AnnouncementDriverRepository;
@@ -53,14 +52,14 @@ public class AnnouncementDriverService {
         return new ApiResponse(SUCCESSFULLY, true);
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    public ApiResponse getAnnouncementDriverByFilter(GetByFilter getByFilter) {
-        List<AnnouncementDriver> driverList = announcementDriverRepository
-                .findAllByCountryIdOrderByCreatedTimeDesc(getByFilter.getCountryId());
-        List<AnnouncementDriverResponseList> announcementDrivers = new ArrayList<>();
-        driverList.forEach(announcementDriver -> announcementDrivers.add(AnnouncementDriverResponseList.from(announcementDriver)));
-        return new ApiResponse(announcementDrivers, true);
-    }
+//    @ResponseStatus(HttpStatus.OK)
+//    public ApiResponse getAnnouncementDriverByFilter(GetByFilter getByFilter) {
+//        List<AnnouncementDriver> driverList = announcementDriverRepository
+//                .findAllByCountryIdOrderByCreatedTimeDesc(getByFilter.getCountryId());
+//        List<AnnouncementDriverResponseList> announcementDrivers = new ArrayList<>();
+//        driverList.forEach(announcementDriver -> announcementDrivers.add(AnnouncementDriverResponseList.from(announcementDriver)));
+//        return new ApiResponse(announcementDrivers, true);
+//    }
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse getDriverAnnouncementByIdAndActiveTrue(UUID id) {
