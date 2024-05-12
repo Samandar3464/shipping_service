@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.shippingservice.dto.user.UserStatusDto;
 import uz.pdp.shippingservice.entity.user.UserEntity;
-import uz.pdp.shippingservice.enums.Type;
+import uz.pdp.shippingservice.enums.TypeClients;
 
 import java.time.LocalDateTime;
 
@@ -23,9 +23,9 @@ public class UserStatus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "type")
+    @Column(name = "type_client")
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private TypeClients typeClient;
 
     @Column(name = "starts")
     private Integer stars;
@@ -49,7 +49,7 @@ public class UserStatus {
 
     public static UserStatus toEntity(UserStatusDto dto){
         return UserStatus.builder()
-                .type(dto.getType())
+                .typeClient(dto.getTypeClients())
                 .createdAt(LocalDateTime.now())
                 .stars(dto.getStars())
                 .text(dto.getText())

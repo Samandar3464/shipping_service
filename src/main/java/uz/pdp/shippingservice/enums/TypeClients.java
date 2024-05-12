@@ -1,6 +1,6 @@
 package uz.pdp.shippingservice.enums;
 
-public enum Type {
+public enum TypeClients {
     DRIVER,
     CLIENT
 }

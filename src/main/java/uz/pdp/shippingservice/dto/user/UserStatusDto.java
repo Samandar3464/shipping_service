@@ -1,7 +1,7 @@
 package uz.pdp.shippingservice.dto.user;
 
 import lombok.*;
-import uz.pdp.shippingservice.enums.Type;
+import uz.pdp.shippingservice.enums.TypeClients;
 
 @Getter
 @Setter
@@ -11,7 +11,7 @@ import uz.pdp.shippingservice.enums.Type;
 public class UserStatusDto {
 
 
-    private Type type;
+    private TypeClients typeClients;
     
     private int stars;
 

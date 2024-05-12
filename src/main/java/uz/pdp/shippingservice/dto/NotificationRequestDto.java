@@ -6,9 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.pdp.shippingservice.enums.Type;
+import uz.pdp.shippingservice.enums.TypeClients;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 @Data
@@ -17,19 +16,15 @@ import java.util.UUID;
 @Builder
 public class NotificationRequestDto {
 
-    private String title;
+    @Enumerated(EnumType.STRING)
+    private TypeClients type;
 
-    private String body;
+    private Long senderId;
 
     private Long receiverId;
 
-    private UUID announcementDriverId;
+    private UUID announcementId;
 
-    private UUID announcementPassengerId;
+    private String message;
 
-
-    private HashMap<String, String> date;
-
-    @Enumerated(EnumType.STRING)
-    private Type type;
 }

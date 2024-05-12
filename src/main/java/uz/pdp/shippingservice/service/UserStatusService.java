@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.dto.user.UserStatusDto;
 import uz.pdp.shippingservice.entity.UserStatus;
-import uz.pdp.shippingservice.enums.Type;
+import uz.pdp.shippingservice.enums.TypeClients;
 import uz.pdp.shippingservice.repository.UserStatusRepository;
 
 import java.util.List;
@@ -30,8 +30,8 @@ public class UserStatusService {
         return new ApiResponse(SUCCESSFULLY, true);
     }
 
-    public ApiResponse getAllByUserAndType(Long userId , Type type) {
-        List<UserStatus> list = userStatusRepository.findAllByGivenToIdAndType(userId, type);
+    public ApiResponse getAllByUserAndType(Long userId , TypeClients typeClients) {
+        List<UserStatus> list = userStatusRepository.findAllByGivenToIdAndTypeClient(userId, typeClients);
         return new ApiResponse(SUCCESSFULLY, true, list);
     }
 

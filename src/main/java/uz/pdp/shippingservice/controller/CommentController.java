@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.dto.user.UserStatusDto;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
-import uz.pdp.shippingservice.enums.Type;
+import uz.pdp.shippingservice.enums.TypeClients;
 import uz.pdp.shippingservice.service.UserStatusService;
 
 @RequiredArgsConstructor
@@ -20,8 +20,8 @@ public class CommentController {
 
     @GetMapping("/getAllByUser")
     public ApiResponse getAll(@RequestParam (name = "userId") Long userId ,
-                              @RequestParam(name = "type") Type type){
-        return userStatusService.getAllByUserAndType(userId , type);
+                              @RequestParam(name = "typeClients") TypeClients typeClients){
+        return userStatusService.getAllByUserAndType(userId , typeClients);
     }
 
 }
