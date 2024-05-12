@@ -2,13 +2,17 @@ package uz.pdp.shippingservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
 import lombok.*;
+import uz.pdp.shippingservice.dto.ChatMessageDto;
 import uz.pdp.shippingservice.dto.NotificationRequestDto;
 import uz.pdp.shippingservice.enums.TypeClients;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -17,6 +21,7 @@ import java.util.UUID;
 @Entity
 @Builder
 @Table(name = "chat")
+@Convert(attributeName = "jsonb", converter = JsonBinaryType.class)
 public class Chat {
 
     @Id
@@ -42,18 +47,21 @@ public class Chat {
     @Column(name = "deleted")
     private boolean deleted;
 
-//    @JdbcTypeCode(SqlTypes.JSON)
-////    @org.hibernate.annotations.Type(type = "jsonb")
-//    @Column(name="messages", columnDefinition = "jsonb")
-//    private List<ChatMessageDto> messages;
+//    @org.hibernate.annotations.Type(type = "jsonb")
+    @Column(name="messages", columnDefinition = "jsonb")
+    private Object messages;
 
     @Column(name = "chat_created_at")
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
     private LocalDateTime chatCreatedAt;
 
+    @Column(name = "updated_at")
+    @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
+    private LocalDateTime updatedAt;
+
 
     public static Chat toEntity(NotificationRequestDto dto) {
-//        ChatMessageDto chatMessageDto = new ChatMessageDto(dto.getSenderId(), dto.getMessage() ,LocalDateTime.now());
+        ChatMessageDto chatMessageDto = new ChatMessageDto(dto.getSenderId(), dto.getMessage() ,LocalDateTime.now());
         return Chat.builder()
                 .receiverId(dto.getReceiverId())
                 .senderId(dto.getSenderId())
@@ -62,7 +70,8 @@ public class Chat {
                 .typeClient(dto.getType())
                 .read(false)
                 .deleted(false)
-//                .messages(List.of(chatMessageDto))
+                .messages(List.of(chatMessageDto))
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 }

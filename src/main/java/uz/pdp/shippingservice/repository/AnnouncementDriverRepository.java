@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface AnnouncementDriverRepository extends JpaRepository<AnnouncementDriver, UUID> {
 
     List<AnnouncementDriver> findAllByActiveTrueAndDeletedFalseAndTimeToDriveIsBefore(LocalDateTime timeToDrive);
+
+    boolean existsByDeletedFalseAndId(UUID id);
 }

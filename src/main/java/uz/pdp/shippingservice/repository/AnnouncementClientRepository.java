@@ -18,4 +18,6 @@ public interface AnnouncementClientRepository extends JpaRepository<Announcement
 
     List<AnnouncementClient> findAllByDeletedFalseAndActiveTrueAndTimeToSendBefore(LocalDateTime timeToSend);
 
+    boolean existsByDeletedFalseAndId(UUID id);
+
 }

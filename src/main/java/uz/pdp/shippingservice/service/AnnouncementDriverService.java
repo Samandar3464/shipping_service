@@ -88,6 +88,10 @@ public class AnnouncementDriverService {
         return new ApiResponse(SUCCESSFULLY, true);
     }
 
+    public boolean existById(UUID announcementId) {
+        return announcementDriverRepository.existsByDeletedFalseAndId(announcementId);
+    }
+
     private AnnouncementDriver toEntity(AnnouncementDriverCreateDto dto, UserEntity userEntity, DriverEntity driverEntity) {
         AnnouncementDriver announcementDriver = AnnouncementDriver.toEntity(dto);
         announcementDriver.setUserEntity(userEntity);

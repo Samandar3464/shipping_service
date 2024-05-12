@@ -2,25 +2,36 @@ package uz.pdp.shippingservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import uz.pdp.shippingservice.dto.NotificationRequestDto;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
+import uz.pdp.shippingservice.enums.TypeClients;
+import uz.pdp.shippingservice.service.notcomplated.ChatService;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/notification")
+@RequestMapping("/v1/chat")
 public class ChatController {
 
-//    private final NotificationService notificationService;
-//
-//    @PostMapping("/addNotificationToClient")
+    private final ChatService chatService;
+
+    @PostMapping("/sendMessage")
 //    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-//    public ApiResponse createNotificationToPassenger(@RequestBody NotificationRequestDto notificationRequestDto) {
-//        return notificationService.createNotificationForPassenger(notificationRequestDto);
-//    }
-//
+    public ApiResponse sendMessage(@RequestBody NotificationRequestDto dto) {
+        return chatService.sendMessage(dto);
+    }
+
 //    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-//    @GetMapping("/getDriverNotification")
-//    public ApiResponse getDriverPostedNotification() {
-//        return notificationService.getDriverPostedNotification();
-//    }
+    @GetMapping("/getAllMessages")
+    public ApiResponse getAllMassage(TypeClients typeClients) {
+        return chatService.getAllMassage(typeClients);
+    }
+    //    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
+    @GetMapping("/getMessage")
+    public ApiResponse getMessage(@RequestParam(name = "announcement_id")UUID announcement_id, TypeClients typeClients) {
+        return chatService.getMessage(announcement_id,typeClients);
+    }
 //
 //    @PreAuthorize("hasAnyRole('DRIVER','CLIENT','ADMIN')")
 //    @DeleteMapping("/deleteNotification/{id}")

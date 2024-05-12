@@ -116,4 +116,8 @@ public class AnnouncementClientService {
         announcementClient.setToCity(announcementClientCreateDto.getToCityId() == null ? null : cityRepository.getById(announcementClientCreateDto.getToCityId()));
         return announcementClient;
     }
+
+    public boolean existById(UUID announcementId) {
+        return announcementClientRepository.existsByDeletedFalseAndId(announcementId);
+    }
 }
