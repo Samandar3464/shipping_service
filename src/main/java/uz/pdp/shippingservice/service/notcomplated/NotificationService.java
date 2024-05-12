@@ -21,6 +21,7 @@ import uz.pdp.shippingservice.repository.AnnouncementClientRepository;
 import uz.pdp.shippingservice.repository.AnnouncementDriverRepository;
 import uz.pdp.shippingservice.repository.NotificationRepository;
 import uz.pdp.shippingservice.service.AnnouncementClientService;
+import uz.pdp.shippingservice.service.AnnouncementDriverService;
 import uz.pdp.shippingservice.service.FireBaseMessagingService;
 import uz.pdp.shippingservice.service.UserService;
 

@@ -38,11 +38,11 @@ public class AnnouncementDriver {
      @Column(name = "info")
      private String info;
 
-     @Column(name = "is_active")
-     private boolean isActive;
+     @Column(name = "active")
+     private boolean active;
 
-     @Column(name = "is_deleted")
-     private boolean isDeleted;
+     @Column(name = "deleted")
+     private boolean deleted;
 
      @Column(name = "can_go_another_country")
      private boolean canGoAnotherCountry;
@@ -87,7 +87,7 @@ public class AnnouncementDriver {
      @Column(name = "created_at")
      private LocalDateTime createdAt;
 
-     public static AnnouncementDriver from(AnnouncementDriverCreateDto dto) {
+     public static AnnouncementDriver toEntity(AnnouncementDriverCreateDto dto) {
           return AnnouncementDriver.builder()
                   .currentLatitude(dto.getCurrentLatitude())
                   .currentLongitude(dto.getCurrentLongitude())
@@ -95,8 +95,8 @@ public class AnnouncementDriver {
                   .canGoAnotherRegion(dto.isGoAnotherRegion())
                   .canGoAnotherCountry(dto.isGoAnotherCountry())
                   .createdAt(LocalDateTime.now())
-                  .isActive(true)
-                  .isDeleted(false)
+                  .active(true)
+                  .deleted(false)
                   .build();
      }
 

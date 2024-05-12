@@ -12,6 +12,6 @@ public interface CityRepository extends JpaRepository<City, Integer> {
 
     boolean existsByNameAndRegionId(String name, Integer region_id);
 
-    List<City> findAllByRegionIdAndIsActiveTrue(Integer region_id);
+    List<City> findAllByRegionIdAndActiveTrue(Integer region_id);
     Page<City> findAllByRegionId(Integer region_id , Pageable pageable);
 }

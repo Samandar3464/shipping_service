@@ -29,7 +29,7 @@ public class RegionService {
         if (regionRepository.existsByNameAndCountryId(dto.getName() , dto.getCountryId())) {
             throw new RecordAlreadyExistException(REGION_ALREADY_EXIST);
         }
-        Country country = countryRepository.findByIdAndIsActiveTrue(dto.getCountryId())
+        Country country = countryRepository.findByIdAndActiveTrue(dto.getCountryId())
                 .orElseThrow(() -> new RecordNotFoundException(COUNTRY_NOT_FOUND));
         regionRepository.save(Region.toEntity(dto, country));
         return new ApiResponse(SUCCESSFULLY, true);
@@ -53,7 +53,7 @@ public class RegionService {
 
     public ApiResponse deleteRegionById(Integer id) {
         Region region = regionRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(REGION_NOT_FOUND));
-        region.setIsActive(false);
+        region.setActive(false);
         regionRepository.save(region);
         return new ApiResponse(DELETED, true);
     }
@@ -63,10 +63,10 @@ public class RegionService {
             throw new RecordAlreadyExistException(REGION_ALREADY_EXIST);
         }
         Region region = regionRepository.findById(dto.getId()).orElseThrow(() -> new RecordNotFoundException(REGION_NOT_FOUND));
-        Country country = countryRepository.findByIdAndIsActiveTrue(dto.getCountryId())
+        Country country = countryRepository.findByIdAndActiveTrue(dto.getCountryId())
                 .orElseThrow(() -> new RecordNotFoundException(COUNTRY_NOT_FOUND));
         region.setCountry(country);
-        region.setIsActive(dto.getActive());
+        region.setActive(dto.getActive());
         regionRepository.save(region);
         return new ApiResponse(SUCCESSFULLY, true);
     }

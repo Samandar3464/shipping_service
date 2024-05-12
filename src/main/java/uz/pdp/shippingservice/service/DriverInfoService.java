@@ -58,7 +58,7 @@ public class DriverInfoService {
 
     public ApiResponse getAllDeActiveDriverList(PageRequestFilter requestFilter) {
         PageRequest pageRequest = PageRequest.of(requestFilter.getPageNumber(), requestFilter.getPageSize());
-        Page<DriverEntity> pageList = driverInfoRepository.findAllByActiveIsFalseOrderByCreatedAtDesc(pageRequest);
+        Page<DriverEntity> pageList = driverInfoRepository.findAllByActiveFalseOrderByCreatedAtDesc(pageRequest);
         List<DriverInfoResponseDto> responseDtoList = new ArrayList<>();
         pageList.getContent().forEach(entity -> {
             DriverInfoResponseDto dto = DriverInfoResponseDto.toDto(entity);

@@ -24,8 +24,8 @@ public class Region {
     @Column(unique = true, name = "name")
     private String name;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @Column(name = "active")
+    private Boolean active;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -42,7 +42,7 @@ public class Region {
         return Region.builder()
                 .name(regionRegisterRequestDto.getName())
                 .country(country)
-                .isActive(true)
+                .active(true)
                 .createdAt(LocalDateTime.now())
                 .build();
     }

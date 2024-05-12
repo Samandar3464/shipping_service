@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uz.pdp.shippingservice.service.AdvertisingService;
 import uz.pdp.shippingservice.service.AnnouncementClientService;
+import uz.pdp.shippingservice.service.AnnouncementDriverService;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +16,7 @@ public class CronJobs {
 
     private final AdvertisingService advertisingService;
     private final AnnouncementClientService announcementClientService;
+    private final AnnouncementDriverService announcementDriverService;
 
 //    @Scheduled(cron = "0 0 23 * * *")
     public void deactivateAdvertisingWhenExpire() {
@@ -29,5 +31,13 @@ public class CronJobs {
         announcementClientService.deactivateAllOldClientAnnouncement();
         System.out.println("end   deactivateAllOldClientAnnouncement :" + LocalDateTime.now());
     }
+
+    //    @Scheduled(cron = "0 0 23 * * *")
+    public void deactivateAllOldDriverAnnouncement() {
+        System.out.println("start deactivateAllOldDriverAnnouncement :" + LocalDateTime.now());
+        announcementDriverService.deactivateAllDriverAnnouncement();
+        System.out.println("end   deactivateAllOldDriverAnnouncement :" + LocalDateTime.now());
+    }
+
 
 }

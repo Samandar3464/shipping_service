@@ -21,8 +21,8 @@ public class Country {
     @Column(unique = true ,name = "name")
     private String name;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @Column(name = "active")
+    private Boolean active;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -33,7 +33,7 @@ public class Country {
     public static Country toEntity(CountryDto countryDto){
         return Country.builder()
                 .name(countryDto.getName())
-                .isActive(true)
+                .active(true)
                 .createdAt(LocalDateTime.now())
                 .build();
     }

@@ -8,7 +8,7 @@ import uz.pdp.shippingservice.entity.user.DriverEntity;
 import java.util.Optional;
 public interface DriverInfoRepository extends JpaRepository<DriverEntity, Long> {
 
-    Page<DriverEntity> findAllByActiveIsFalseOrderByCreatedAtDesc(Pageable pageable);
+    Page<DriverEntity> findAllByActiveFalseOrderByCreatedAtDesc(Pageable pageable);
 
     Optional<DriverEntity> findFirstByUserIdAndActiveTrue(Long user_id);
 }

@@ -35,7 +35,7 @@ public class CityService {
      }
      @ResponseStatus(HttpStatus.OK)
      public ApiResponse getCityList(Integer id) {
-          return new ApiResponse(cityRepository.findAllByRegionIdAndIsActiveTrue(id),true);
+          return new ApiResponse(cityRepository.findAllByRegionIdAndActiveTrue(id),true);
      }
 
      @ResponseStatus(HttpStatus.OK)
@@ -55,7 +55,7 @@ public class CityService {
      @ResponseStatus(HttpStatus.OK)
      public ApiResponse deleteCityById(Integer id) {
           City city = cityRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(CITY_NOT_FOUND));
-          city.setIsActive(false);
+          city.setActive(false);
           cityRepository.save(city);
           return new ApiResponse(DELETED,true);
      }

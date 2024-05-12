@@ -87,7 +87,7 @@ public class DriverEntity implements Serializable {
     @Column(name = "car_photos")
     private List<Attachment> carPhotos;
 
-    @Column(name = "is_active")
+    @Column(name = "active")
     private boolean active;
 
     @Column(name = "created_at")

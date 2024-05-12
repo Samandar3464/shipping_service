@@ -37,7 +37,7 @@ public class AnnouncementDriverCriteriaRepository {
         List<String> conditions = new ArrayList<>();
         ArrayList params = new ArrayList<>();
 
-        conditions.add(" ac.is_active = true and ac.is_deleted = false ");
+        conditions.add(" ac.active = true and ac.deleted = false ");
         if (Objects.nonNull(searchCriteria.getCountryId())) {
             params.add(searchCriteria.getCountryId());
             conditions.add(" ad.country_id = ? ");
@@ -109,12 +109,12 @@ public class AnnouncementDriverCriteriaRepository {
         StringBuilder query = new StringBuilder(queryString);
         List<String> conditions = new ArrayList<>();
         ArrayList params = new ArrayList<>();
-        conditions.add(" ad.is_deleted = false ");
+        conditions.add(" ad.deleted = false ");
         conditions.add(" ad.user_entity_id = ?");
         params.add(userEntity.getId());
         if (Objects.nonNull(active)) {
             params.add(active);
-            conditions.add(" ad.is_active = ? ");
+            conditions.add(" ad.active = ? ");
         }
         if (!conditions.isEmpty()) {
             query.append(String.join(" and ", conditions));

@@ -71,7 +71,7 @@ public class AttachmentService {
                     .contentType(file.getContentType())
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
-                    .isDeleted(false)
+                    .deleted(false)
                     .build();
 
             return attachmentRepository.save(entity);

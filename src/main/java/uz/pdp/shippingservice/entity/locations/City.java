@@ -24,8 +24,8 @@ public class City {
 
     private String name;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @Column(name = "active")
+    private Boolean active;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -39,7 +39,7 @@ public class City {
         return City.builder()
                 .name(cityRequestDto.getName())
                 .region(region)
-                .isActive(true)
+                .active(true)
                 .createdAt(LocalDateTime.now())
                 .build();
     }

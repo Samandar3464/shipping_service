@@ -7,6 +7,4 @@ import java.util.Collection;
 
 public interface RegionRepository extends JpaRepository<Region, Integer> {
     boolean existsByNameAndCountryId(String name , Integer id);
-    boolean existsByIdAndName(Integer id, String name);
-    boolean existsByNameIn(Collection<String> name);
 }

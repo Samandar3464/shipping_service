@@ -86,7 +86,7 @@ public class AnnouncementClientService {
         AnnouncementClient announcementClient = announcementClientRepository.findById(id).orElseThrow(() -> new AnnouncementNotFoundException(CLIENT_ANNOUNCEMENT_NOT_FOUND));
         announcementClient.setActive(false);
         announcementClientRepository.save(announcementClient);
-        return new ApiResponse(DELETED, true);
+        return new ApiResponse(SUCCESSFULLY, true);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -96,7 +96,7 @@ public class AnnouncementClientService {
             announcementClient.setActive(true);
             announcementClientRepository.save(announcementClient);
         });
-        return new ApiResponse(DELETED, true);
+        return new ApiResponse(SUCCESSFULLY, true);
     }
 
 

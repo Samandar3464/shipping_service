@@ -31,7 +31,7 @@ public class CountryService {
     public ApiResponse editCountry(CountryDto countryDto) {
         Country country = countryRepository.findByIdAndName(countryDto.getId(), countryDto.getName()).orElseThrow(() -> new RecordAlreadyExistException(COUNTRY_ALREADY_EXIST));
         country.setName(countryDto.getName());
-        country.setIsActive(countryDto.getActive());
+        country.setActive(countryDto.getActive());
         countryRepository.save(country);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -43,7 +43,7 @@ public class CountryService {
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse getActiveCountryList() {
-        return new ApiResponse(countryRepository.findAllByIsActiveTrue(), true);
+        return new ApiResponse(countryRepository.findAllByActiveTrue(), true);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -53,7 +53,7 @@ public class CountryService {
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse deleteRegionById(Integer id) {
         Country country = countryRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(COUNTRY_NOT_FOUND));
-        country.setIsActive(false);
+        country.setActive(false);
         countryRepository.save(country);
         return new ApiResponse(DELETED, true);
     }

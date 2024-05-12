@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.dto.announcementDriver.AnnouncementDriverCreateDto;
-import uz.pdp.shippingservice.service.notcomplated.AnnouncementDriverService;
+import uz.pdp.shippingservice.service.AnnouncementDriverService;
 import uz.pdp.shippingservice.specifacation.AnnouncementPageRequest;
 import uz.pdp.shippingservice.specifacation.driver.AnnouncementDriverSearchCriteria;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,15 +36,15 @@ public class AnnouncementDriverController {
         return announcementDriverService.getDriverOwnAnnouncements(page, active);
     }
 
-//    @DeleteMapping("/deactivateDriverAnnouncements/{id}")
-////    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-//    public ApiResponse deleteDriverAnnouncement(@PathVariable UUID id){
-//        return announcementDriverService.deactivateDriverAnnouncement(id);
-//    }
-//
-//    @DeleteMapping("/deleteDriverAnnouncements/{id}")
-////    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
-//    public ApiResponse deleteDriverAnnouncement(@PathVariable UUID id){
-//        return announcementDriverService.deleteDriverAnnouncement(id);
-//    }
+    @DeleteMapping("/deactivateDriverAnnouncements/{id}")
+//    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
+    public ApiResponse deactivateDriverAnnouncement(@PathVariable UUID id){
+        return announcementDriverService.deactivateDriverAnnouncement(id);
+    }
+
+    @DeleteMapping("/deleteDriverAnnouncements/{id}")
+//    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
+    public ApiResponse deleteDriverAnnouncement(@PathVariable UUID id){
+        return announcementDriverService.deleteDriverAnnouncement(id);
+    }
 }
