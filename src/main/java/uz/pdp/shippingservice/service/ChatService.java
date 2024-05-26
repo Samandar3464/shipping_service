@@ -1,14 +1,13 @@
-package uz.pdp.shippingservice.service.notcomplated;
+package uz.pdp.shippingservice.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import uz.pdp.shippingservice.dto.ChatMessageDto;
+import uz.pdp.shippingservice.dto.chat.ChatListDto;
+import uz.pdp.shippingservice.dto.chat.ChatMessageDto;
 import uz.pdp.shippingservice.dto.NotificationRequestDto;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.entity.Chat;
@@ -16,8 +15,6 @@ import uz.pdp.shippingservice.entity.user.UserEntity;
 import uz.pdp.shippingservice.enums.TypeClients;
 import uz.pdp.shippingservice.exception.RecordNotFoundException;
 import uz.pdp.shippingservice.exception.UserNotFoundException;
-import uz.pdp.shippingservice.repository.AnnouncementClientRepository;
-import uz.pdp.shippingservice.repository.AnnouncementDriverRepository;
 import uz.pdp.shippingservice.repository.ChatRepository;
 import uz.pdp.shippingservice.service.AnnouncementClientService;
 import uz.pdp.shippingservice.service.AnnouncementDriverService;
@@ -85,18 +82,27 @@ public class ChatService {
         UserEntity userEntity = userService.checkUserExistByContext();
         String query = getMessagesForDriver;
         if (typeClients.equals(CLIENT)) {
-            query =getMessagesForClient;
+            query = getMessagesForClient;
         }
-        List<Map<String, Object>> maps = jdbcTemplate.queryForList(query, userEntity.getId() , typeClients);
-        TypeReference<List<T>> typeReference = new TypeReference<List<T>>() {
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList(query, userEntity.getId(), typeClients);
+        TypeReference<List<ChatListDto>> typeReference = new TypeReference<List<ChatListDto>>() {
         };
         return new ApiResponse(SUCCESSFULLY, true, AppUtils.convertWithJackson(maps, typeReference));
     }
 
-    public ApiResponse getMessage(UUID announcementId, TypeClients typeClients) {
-        return null;
+    public ApiResponse getMessage(UUID chatId) {
+        Chat chat = chatRepository.findFirstById(chatId).orElseThrow(() -> new RecordNotFoundException(CHAT_NOT_FOUND));
+        return new ApiResponse(chat, true);
     }
 
-    private String getMessagesForClient ="";
-    private String getMessagesForDriver ="";
+    private String getMessagesForClient = "select c.id as chat_id, c.sender_id  as sender_id, c.updated_at,\n" +
+            "       c.messages->0 ->> 'messages' as last_message,\n" +
+            "       u.surname || ' ' || u.name as sender_name\n" +
+            "from chat c, users u where  u.id = c.receiver_id and c.type_clients = 'CLIENT'  \n" +
+            "and c.sender_id = ?    order by c.updated_at desc";
+    private String getMessagesForDriver = "select c.id as chat_id, c.receiver_id as sender_id , c.updated_at,\n" +
+            "       c.messages->0 ->> 'messages' as last_message,\n" +
+            "       u.surname || ' ' || u.name as sender_name\n" +
+            "from chat c, users u where  u.id = c.sender_id and c.type_clients = 'DRIVER'\n" +
+            "  and c.receiver_id = ?    order by c.updated_at desc";
 }

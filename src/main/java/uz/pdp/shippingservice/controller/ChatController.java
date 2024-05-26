@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.dto.NotificationRequestDto;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.enums.TypeClients;
-import uz.pdp.shippingservice.service.notcomplated.ChatService;
+import uz.pdp.shippingservice.service.ChatService;
 
 import java.util.UUID;
 
@@ -29,8 +29,8 @@ public class ChatController {
     }
     //    @PreAuthorize("hasAnyRole('DRIVER','ADMIN')")
     @GetMapping("/getMessage")
-    public ApiResponse getMessage(@RequestParam(name = "announcement_id")UUID announcement_id, TypeClients typeClients) {
-        return chatService.getMessage(announcement_id,typeClients);
+    public ApiResponse getMessage(@RequestParam(name = "chatId")UUID chatId) {
+        return chatService.getMessage(chatId);
     }
 //
 //    @PreAuthorize("hasAnyRole('DRIVER','CLIENT','ADMIN')")

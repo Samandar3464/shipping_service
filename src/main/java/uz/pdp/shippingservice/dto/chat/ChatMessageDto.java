@@ -1,4 +1,4 @@
-package uz.pdp.shippingservice.dto;
+package uz.pdp.shippingservice.dto.chat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

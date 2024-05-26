@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface ChatRepository extends JpaRepository<Chat, UUID> {
 
    Optional<Chat> findFirstByTypeClientAndAnnouncementIdAndReceiverIdAndAndSenderId(TypeClients typeClient , UUID announcementId , Long receiverId , Long senderId);
+
+   Optional<Chat> findFirstById(UUID id);
    }

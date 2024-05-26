@@ -10,6 +10,7 @@ public class Constants {
     public static final String CANNOT_FIND_DRIVER="CANNOT FIND DRIVER";
 
     public static final String SUCCESSFULLY="SUCCESSFULLY";
+    public static final String CHAT_NOT_FOUND="CHAT NOT FOUND";
     public static final String DRIVER_ANNOUNCEMENT_NOT_FOUND="DRIVER ANNOUNCEMENT NOT FOUND";
     public static final String DRIVER_CAR_NOT_FOUND_NOT_ACTIVATED="DRIVER_CAR_NOT_FOUND_NOT_ACTIVATED";
     public static final String ANNOUNCEMENT_CLIENT_ALREADY_EXIST="ANNOUNCEMENT CLIENT ALREADY EXIST";

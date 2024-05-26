@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
 import lombok.*;
-import uz.pdp.shippingservice.dto.ChatMessageDto;
+import uz.pdp.shippingservice.dto.chat.ChatMessageDto;
 import uz.pdp.shippingservice.dto.NotificationRequestDto;
 import uz.pdp.shippingservice.enums.TypeClients;
 
