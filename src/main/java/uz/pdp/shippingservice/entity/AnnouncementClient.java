@@ -60,7 +60,7 @@ public class AnnouncementClient {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @PrimaryKeyJoinColumn(name = "created_by")
+    @PrimaryKeyJoinColumn(name = "created_by_id")
     private UserEntity createdBy;
 
     @Column(name = "from_latitude")
@@ -96,6 +96,7 @@ public class AnnouncementClient {
     private double price;
 
     @OneToMany
+    @Column(name = "announcement_client_photos")
     private List<Attachment> photos;
 
     public static AnnouncementClient toEntity(AnnouncementClientCreateDto announcementRequestDto) {

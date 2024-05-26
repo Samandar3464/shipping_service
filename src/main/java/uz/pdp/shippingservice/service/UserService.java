@@ -56,7 +56,7 @@ public class UserService {
         }
         String code = verificationCodeGenerator().toString();
         String message = "Tasdiqlash kodi: " + code + ". Yo'linggiz bexatar  bo'lsin.";
-        smsService.send(dto.getPhone(), message, code);
+//        smsService.send(dto.getPhone(), message, code);
         System.out.println("code ->" + code);
         UserEntity entity = UserEntity.toEntity(dto);
         entity.setPassword(passwordEncoder.encode(dto.getPassword()));

@@ -94,8 +94,8 @@ public class AnnouncementDriverService {
 
     private AnnouncementDriver toEntity(AnnouncementDriverCreateDto dto, UserEntity userEntity, DriverEntity driverEntity) {
         AnnouncementDriver announcementDriver = AnnouncementDriver.toEntity(dto);
-        announcementDriver.setUserEntity(userEntity);
-        announcementDriver.setDriverEntity(driverEntity);
+        announcementDriver.setCreatedBy(userEntity);
+        announcementDriver.setCreatedDriver(driverEntity);
         announcementDriver.setTimeToDrive(converter.convert(dto.getTimeToDrive()));
         announcementDriver.setCountry(countryRepository.getById(dto.getCountryId()));
         announcementDriver.setRegion(dto.getRegionId() == null ? null : regionRepository.getById(dto.getRegionId()));

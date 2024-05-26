@@ -1,0 +1,112 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="15" author="Samandar">
+        <createTable tableName="announcement_client">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="from_latitude" type="double"/>
+            <column name="from_longitude" type="double"/>
+            <column name="to_longitude" type="double"/>
+            <column name="to_latitude" type="double"/>
+            <column name="active" type="boolean"/>
+            <column name="deleted" type="boolean"/>
+            <column name="time_to_send" type="TIMESTAMP" />
+            <column name="created_at" type="TIMESTAMP" />
+            <column name="info" type="VARCHAR(255)"/>
+            <column name="price" type="double"/>
+            <column name="created_by_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="from_country" type="INT">
+            </column>
+            <column name="to_country" type="INT">
+            </column>
+            <column name="from_region" type="INT">
+            </column>
+            <column name="to_region" type="INT">
+            </column>
+            <column name="from_city" type="INT">
+            </column>
+            <column name="to_city" type="INT">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="announcement_client"
+                                 baseColumnNames="created_by_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_announcement_client"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="announcement_client"
+                                 baseColumnNames="from_country"
+                                 referencedTableName="country"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_announcement_client_country"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="announcement_client"
+                                 baseColumnNames="to_country"
+                                 referencedTableName="country"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_announcement_client_country2"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="announcement_client"
+                                 baseColumnNames="from_region"
+                                 referencedTableName="region"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_announcement_client_region"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="announcement_client"
+                                 baseColumnNames="to_region"
+                                 referencedTableName="region"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_announcement_client_region2"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="announcement_client"
+                                 baseColumnNames="from_city"
+                                 referencedTableName="city"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_announcement_client_city"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="announcement_client"
+                                 baseColumnNames="to_city"
+                                 referencedTableName="city"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_announcement_client_city2"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+
+
+    </changeSet>
+
+    <changeSet id="15.1" author="samandar">
+        <createTable tableName="announcement_client_photos">
+            <column name="photos" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_announcement_client_photos_id" referencedTableName="attachment"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="attachment_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_announcement_client_photoss_id" referencedTableName="announcement_client"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+</databaseChangeLog>

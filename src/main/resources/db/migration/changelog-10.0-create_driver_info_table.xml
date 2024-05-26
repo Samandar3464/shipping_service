@@ -19,7 +19,7 @@
             <column name="drive_to_country_to_country" type="BOOLEAN"/>
             <column name="drive_To_region_to_region" type="BOOLEAN"/>
             <column name="drive_only_city" type="BOOLEAN"/>
-            <column name="is_active" type="BOOLEAN"/>
+            <column name="active" type="BOOLEAN"/>
             <column name="created_at" type="TIMESTAMP" />
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -36,12 +36,12 @@
     </changeSet>
 
     <changeSet id="10.1" author="samandar">
-        <createTable tableName="driver_documents">
-            <column name="driver_info_id" type="BIGINT">
+        <createTable tableName="driver_info_driver_passport_photos">
+            <column name="driver_entity_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_driver_documents_id" referencedTableName="attachment"
                              referencedColumnNames="id"/>
             </column>
-            <column name="attachment_id" type="BIGINT">
+            <column name="driver_passport_photos_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_driver_documents2_id" referencedTableName="driver_info"
                              referencedColumnNames="id"/>
             </column>
@@ -49,12 +49,12 @@
     </changeSet>
 
     <changeSet id="10.2" author="samandar">
-        <createTable tableName="driver_car_documents">
-            <column name="driver_info_id" type="BIGINT">
+        <createTable tableName="driver_info_car_documents_photos">
+            <column name="driver_entity_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_car_documents_id" referencedTableName="attachment"
                              referencedColumnNames="id"/>
             </column>
-            <column name="attachment_id" type="BIGINT">
+            <column name="car_documents_photos_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_car_documents2_id" referencedTableName="driver_info"
                              referencedColumnNames="id"/>
             </column>
@@ -62,12 +62,12 @@
     </changeSet>
 
     <changeSet id="10.3" author="samandar">
-        <createTable tableName="driver_license">
-            <column name="driver_info_id" type="BIGINT">
+        <createTable tableName="driver_info_driver_license_photos">
+            <column name="driver_entity_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_driver_license_id" referencedTableName="attachment"
                              referencedColumnNames="id"/>
             </column>
-            <column name="attachment_id" type="BIGINT">
+            <column name="driver_license_photos_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_driver_licens2_id" referencedTableName="driver_info"
                              referencedColumnNames="id"/>
             </column>
@@ -75,12 +75,12 @@
     </changeSet>
 
     <changeSet id="10.4" author="samandar">
-        <createTable tableName="driver_car_photos">
-            <column name="driver_info_id" type="BIGINT">
+        <createTable tableName="driver_info_car_photos">
+            <column name="driver_entity_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_car_photos_id" referencedTableName="attachment"
                              referencedColumnNames="id"/>
             </column>
-            <column name="attachment_id" type="BIGINT">
+            <column name="car_photos_id" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_car_photos2_id" referencedTableName="driver_info"
                              referencedColumnNames="id"/>
             </column>

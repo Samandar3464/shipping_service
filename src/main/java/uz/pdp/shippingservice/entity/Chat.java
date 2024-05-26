@@ -51,9 +51,9 @@ public class Chat {
     @Column(name="messages", columnDefinition = "jsonb")
     private Object messages;
 
-    @Column(name = "chat_created_at")
+    @Column(name = "created_at")
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
-    private LocalDateTime chatCreatedAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
@@ -66,7 +66,7 @@ public class Chat {
                 .receiverId(dto.getReceiverId())
                 .senderId(dto.getSenderId())
                 .announcementId(dto.getAnnouncementId())
-                .chatCreatedAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now())
                 .typeClient(dto.getType())
                 .read(false)
                 .deleted(false)

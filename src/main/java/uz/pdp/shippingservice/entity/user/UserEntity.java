@@ -45,7 +45,6 @@ public class UserEntity implements UserDetails, Serializable {
     @Column(name = "phone" ,unique = true)
     private String phone;
 
-    @NotBlank
     @Column(name = "name")
     private String name;
 

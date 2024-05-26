@@ -25,7 +25,7 @@ public class SmsEntity {
 
     @NotBlank
     @Size(min = 13, max = 13)
-    @Column(name = "user_name", unique = true)
+    @Column(name = "phone", unique = true)
     private String phone;
 
     @Column(name = "message")

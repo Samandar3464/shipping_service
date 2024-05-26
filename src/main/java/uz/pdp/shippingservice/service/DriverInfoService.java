@@ -47,7 +47,7 @@ public class DriverInfoService {
             entity.setCarPhotos(carPhotos);
             entity.setDriverPassportPhotos(driverPassportPhotos);
             entity.setDriverLicensePhotos(driverLicensePhotos);
-            entity.setCarTexPassport(carTexPassport);
+            entity.setCarDocumentsPhotos(carTexPassport);
             driverInfoRepository.save(entity);
             userService.addUserRole(user, "driver");
         } catch (Exception e) {
@@ -69,7 +69,7 @@ public class DriverInfoService {
             }
             dto.setMe(getMe);
             dto.setCarPhotos(attachmentService.getUrlList(entity.getCarPhotos()));
-            dto.setCarTexPassport(attachmentService.getUrlList(entity.getCarTexPassport()));
+            dto.setCarTexPassport(attachmentService.getUrlList(entity.getCarDocumentsPhotos()));
             dto.setDriverPassportPhotos(attachmentService.getUrlList(entity.getDriverPassportPhotos()));
             dto.setDriverLicensePhotos(attachmentService.getUrlList(entity.getDriverLicensePhotos()));
             responseDtoList.add(dto);
@@ -91,7 +91,7 @@ public class DriverInfoService {
             }
             dto.setMe(getMe);
             dto.setCarPhotos(attachmentService.getUrlList(entity.getCarPhotos()));
-            dto.setCarTexPassport(attachmentService.getUrlList(entity.getCarTexPassport()));
+            dto.setCarTexPassport(attachmentService.getUrlList(entity.getCarDocumentsPhotos()));
             dto.setDriverPassportPhotos(attachmentService.getUrlList(entity.getDriverPassportPhotos()));
             dto.setDriverLicensePhotos(attachmentService.getUrlList(entity.getDriverLicensePhotos()));
             responseDtoList.add(dto);

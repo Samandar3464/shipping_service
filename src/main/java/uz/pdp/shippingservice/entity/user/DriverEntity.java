@@ -80,11 +80,11 @@ public class DriverEntity implements Serializable {
     private List<Attachment> driverLicensePhotos;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @Column(name = "car_tex_passport")
-    private List<Attachment> carTexPassport;
+    @Column(name = "driver_car_documents")
+    private List<Attachment> carDocumentsPhotos;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @Column(name = "car_photos")
+    @Column(name = "driver_car_photos")
     private List<Attachment> carPhotos;
 
     @Column(name = "active")

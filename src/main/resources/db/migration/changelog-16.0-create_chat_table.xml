@@ -1,0 +1,23 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="16" author="Samandar">
+        <createTable tableName="chat">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="sender_id" type="BIGINT"/>
+            <column name="receiver_id" type="BIGINT"/>
+            <column name="type_clients" type="VARCHAR(255)"/>
+            <column name="announcement_id" type="UUID"/>
+            <column name="read" type="boolean"/>
+            <column name="deleted" type="boolean"/>
+            <column name="messages" type="jsonb"/>
+            <column name="created_at" type="TIMESTAMP" />
+            <column name="updated_at" type="TIMESTAMP" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

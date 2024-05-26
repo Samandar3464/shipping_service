@@ -74,14 +74,14 @@ public class AnnouncementDriver {
 
      @ManyToOne
      @OnDelete(action = OnDeleteAction.CASCADE)
-     @JoinColumn(name = "user_entity_id")
-     private UserEntity userEntity;
+     @JoinColumn(name = "created_by_id")
+     private UserEntity createdBy;
 
      @ManyToOne
      @JsonIgnore
      @OnDelete(action = OnDeleteAction.CASCADE)
-     @JoinColumn(name = "driver_entity_id")
-     private DriverEntity driverEntity;
+     @JoinColumn(name = "created_driver_id")
+     private DriverEntity createdDriver;
 
      @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
      @Column(name = "created_at")
