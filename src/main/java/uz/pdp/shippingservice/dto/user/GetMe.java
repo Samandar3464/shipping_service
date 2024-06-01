@@ -74,7 +74,7 @@ public class GetMe implements Serializable {
                 .createdAt(entity.getCreatedAt())
                 .firebaseToken(entity.getFirebaseToken())
                 .gender(entity.getGender())
-                .roles(entity.getRoles())
+                .roles(entity.getRole())
                 .build();
     }
 

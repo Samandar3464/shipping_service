@@ -43,7 +43,7 @@ public class SmsEntity {
     private LocalDateTime expireAt;
 
     public static SmsEntity toEntity(String phone, String message , String code) {
-        return SmsEntity.builder().phone(phone).message(message).createdAt(LocalDateTime.now())
+        return SmsEntity.builder().phone(phone).message(message).createdAt(LocalDateTime.now()).code(code)
                 .expireAt(LocalDateTime.now().plusMinutes(3)).build();
     }
 }

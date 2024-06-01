@@ -22,9 +22,9 @@
             <column name="gender" type="VARCHAR(255)" />
             <column name="birth_date" type="DATE" />
             <column name="created_at" type="TIMESTAMP" />
-            <column name="is_blocked" type="BOOLEAN" />
-            <column name="is_deleted" type="BOOLEAN" />
-            <column name="firebase_token" type="VARCHAR(255)" />
+            <column name="blocked" type="BOOLEAN" />
+            <column name="deleted" type="BOOLEAN" />
+            <column name="firebase_token" type="text" />
             <column name="avatar_id" type="BIGINT">
                 <constraints
                              foreignKeyName="fk_avatar_id"
@@ -36,12 +36,12 @@
 
     <!-- Define changeset for Many-to-Many relationship with user_role table -->
     <changeSet id="3.1" author="samandar">
-        <createTable tableName="user_roles">
-            <column name="user_id" type="INT">
-                <constraints nullable="false" foreignKeyName="fk_user_id" referencedTableName="users"  referencedColumnNames="id"/>
+        <createTable tableName="users_role">
+            <column name="user_entity_id" type="INT">
+                <constraints nullable="false" foreignKeyName="fk67uipc0lhsr8bh7s8s369r8a5" referencedTableName="users"  referencedColumnNames="id"/>
             </column>
             <column name="role_id" type="INT">
-                <constraints nullable="false" foreignKeyName="fk_role_id" referencedTableName="roles"  referencedColumnNames="id"/>
+                <constraints nullable="false" foreignKeyName="fkeejqlb4gq1av9540jg66ju2pi" referencedTableName="roles"  referencedColumnNames="id"/>
             </column>
         </createTable>
     </changeSet>

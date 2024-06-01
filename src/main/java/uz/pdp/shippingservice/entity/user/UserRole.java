@@ -1,10 +1,15 @@
 package uz.pdp.shippingservice.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.shippingservice.dto.user.UserRoleDto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,7 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "roles")
-public class UserRole {
+public class UserRole implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +34,8 @@ public class UserRole {
     @Column(name = "deleted")
     private boolean deleted;
     @JsonFormat(pattern = "YYYY-MM-DD HH:mm:ss")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public static UserRole toEntity(UserRoleDto dto){

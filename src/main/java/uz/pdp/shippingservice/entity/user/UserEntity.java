@@ -68,11 +68,11 @@ public class UserEntity implements UserDetails, Serializable {
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdAt;
 
-    @Column(name = "is_blocked")
-    private boolean isBlocked;
+    @Column(name = "blocked")
+    private boolean blocked;
 
-    @Column(name = "is_deleted")
-    private boolean isDeleted;
+    @Column(name = "deleted")
+    private boolean deleted;
 
     @Column(name = "firebase_token" ,columnDefinition="TEXT")
     private String firebaseToken;
@@ -81,19 +81,20 @@ public class UserEntity implements UserDetails, Serializable {
     @Column(name = "gender")
     private Gender gender;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "avatar_id")
     private Attachment avatar;
 
 
     @ManyToMany(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
-    @Column(name = "roles")
-    private List<UserRole> roles;
+    @Column(name = "role")
+    private List<UserRole> role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-        roles.forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
+        role.forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
         return authorityList;
     }
 
@@ -119,15 +120,15 @@ public class UserEntity implements UserDetails, Serializable {
 
     @Override
     public boolean isEnabled() {
-        return isBlocked;
+        return blocked;
     }
 
     public static UserEntity toEntity(UserRegisterDto dto){
         return UserEntity.builder()
                 .phone(dto.getPhone())
                 .createdAt(LocalDateTime.now())
-                .isDeleted(false)
-                .isBlocked(true)
+                .deleted(false)
+                .blocked(false)
                 .build();
     }
 

@@ -73,6 +73,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 .requestMatchers(WHITE_LIST).permitAll()
                                 .requestMatchers(HttpMethod.POST ,WHITE_LIST).permitAll()
+                                .requestMatchers(HttpMethod.GET ,WHITE_LIST).permitAll()
                                 .requestMatchers("/gs-guide-websocket/**").permitAll()
                                 .anyRequest().authenticated()
                 )

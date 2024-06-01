@@ -5,8 +5,8 @@
 
     <changeSet id="12" author="Samandar">
         <createTable tableName="sms">
-            <column name="id" type="BIGINT">
-                <constraints primaryKey="true" nullable="false"/>
+            <column name="id" type="BIGINT"  autoIncrement="true">
+                <constraints primaryKey="true"  nullable="false"/>
             </column>
             <column name="phone" type="VARCHAR(20)"/>
             <column name="code" type="VARCHAR(255)"/>

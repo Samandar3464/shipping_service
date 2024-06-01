@@ -164,7 +164,7 @@ public class CommonExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ApiResponse notEnoughNotException(SmsException e) {
         return new ApiResponse(
-                CAN_NOT_TAKE_SMS_SENDING_SERVICE_TOKEN
+                e.getMessage()
                 , false
                 , null);
     }

@@ -148,7 +148,7 @@ public class AnnouncementDriverCriteriaRepository {
             " u.id as user_id, u.phone as phone, u.surname || ' ' || u.name as fullname,\n" +
             " di.id as driver_info_id, di.model , di.car_length ,di.car_width ,di.max_load,\n" +
             " di.has_freezer, di.has_wrapped_fully \n" +
-            " from announcement_driver ad ,users u ,driver_info di where u.id = ad.user_entity_id and di.user_id = u.id and di.is_active = true ";
+            " from announcement_driver ad ,users u ,driver_info di where u.id = ad.user_entity_id and di.user_id = u.id and di.active = true ";
 
 
 }

@@ -56,11 +56,11 @@ public class UserService {
         }
         String code = verificationCodeGenerator().toString();
         String message = "Tasdiqlash kodi: " + code + ". Yo'linggiz bexatar  bo'lsin.";
-//        smsService.send(dto.getPhone(), message, code);
+        smsService.send(dto.getPhone(), message, code);
         System.out.println("code ->" + code);
         UserEntity entity = UserEntity.toEntity(dto);
         entity.setPassword(passwordEncoder.encode(dto.getPassword()));
-        entity.setRoles(roleRepository.findAllByName("users"));
+        entity.setRole(roleRepository.findAllByName("users"));
         userRepository.save(entity);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -70,7 +70,7 @@ public class UserService {
         UserEntity userEntity = userRepository.findByPhone(dto.getPhone())
                 .orElseThrow(() -> new UserException(USER_NOT_FOUND));
         if (smsService.findByPhoneAndCheck(dto)) {
-            userEntity.setBlocked(false);
+            userEntity.setBlocked(true);
             userRepository.save(userEntity);
         }
         return new ApiResponse(USER_VERIFIED_SUCCESSFULLY, true);
@@ -235,7 +235,7 @@ public class UserService {
     public void addUserRole(UserEntity user, String roleName) {
         Optional<UserRole> role = roleRepository.findByName(roleName);
         if (role.isEmpty()) {
-            user.getRoles().add(role.get());
+            user.getRole().add(role.get());
         }
         userRepository.save(user);
     }

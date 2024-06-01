@@ -67,15 +67,16 @@ public class SmsService {
 
     public SmsResponse send(String phone, String message, String code) {
         SmsEntity smsEntity = SmsEntity.toEntity(phone, message, code);
-        SmsResponse smsResponse = sendSms(SmsModel.builder()
-                .phone(phone)
-                .message(message)
-                .from(4546)
-                .callback_url("http://0000.uz/test.php")
-                .build());
+//        SmsResponse smsResponse = sendSms(SmsModel.builder()
+//                .phone(phone)
+//                .message(message)
+//                .from(4546)
+//                .callback_url("http://0000.uz/test.php")
+//                .build());
 
         smsRepository.save(smsEntity);
-        return smsResponse;
+//        return smsResponse;
+        return null;
     }
 
     public SmsResponse sendSms(SmsModel smsModel) {

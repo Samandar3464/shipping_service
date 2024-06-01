@@ -21,7 +21,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="deleted_at" type="TIMESTAMP"/>
-            <column name="is_deleted" type="BOOLEAN"/>
+            <column name="deleted" type="BOOLEAN"/>
         </createTable>
     </changeSet>
 

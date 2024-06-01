@@ -2,12 +2,14 @@ package uz.pdp.shippingservice.dto.base;
 
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ApiResponse {
+public class ApiResponse implements Serializable {
 
     private String message;
 
