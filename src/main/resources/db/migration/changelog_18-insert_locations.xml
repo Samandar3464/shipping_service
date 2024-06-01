@@ -1,0 +1,1333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="18" author="samandar">
+        <insert tableName="country">
+            <column name="name" value="O'zbekistan" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+        </insert>
+
+    </changeSet>
+    <changeSet id="18.1" author="samandar">
+        <insert tableName="region">
+            <column name="name" value="Toshkent shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Toshkent viloyati" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Andijon" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Buxoro" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Farg`ona" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Qoraqalpog‘iston" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Jizzax" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Qashqadaryo" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Navoiy" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Namangan" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Samarqand" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Surxondaryo" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Sirdaryo" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+        <insert tableName="region">
+            <column name="name" value="Xorazm" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="country_id" value="1" />
+        </insert>
+    </changeSet>
+
+    <!--        toshkent shaxar-->
+    <changeSet id="18.2" author="samandar">
+        <insert tableName="city">
+            <column name="name" value="Bektemir tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Mirzo Ulug‘bek tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Mirobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Olmazor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Sirg‘ali tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Uchtepa tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Chilonzor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Shayxontohur tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yunusobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yakkasaroy tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yashnobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="1" />
+        </insert>
+<!--        toshkent viloyat-->
+        <insert tableName="city">
+            <column name="name" value="Nurafshon shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Angren shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Bekobod shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Olmaliq shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Ohangaron shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Chirchiq shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yangiyo‘l shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Bekobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Bo‘ka tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Bo‘stonliq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Zangiota tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qibray tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Quyichirchiq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Oqqo‘rg‘on tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Ohangaron tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Parkent tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Piskent tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Toshkent tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="O‘rtachirchiq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Chinoz tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yuqorichirchiq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yangiyo‘l tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="2" />
+        </insert>
+<!--       andijon-->
+        <insert tableName="city">
+            <column name="name" value="Andijon shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Xonabod shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Andijon tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Asaka tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Baliqchi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Bo‘z tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Buloqboshi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Jalaquduq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Izboskan tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qo‘rg‘ontepa tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Marhamat t." />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Oltinko‘l tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Paxtaobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Ulug‘nor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Xo‘jaobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Shxon tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="3" />
+        </insert>
+ <!--    buxoro-->
+        <insert tableName="city">
+            <column name="name" value="Buxoro shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Kogon shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Buxoro tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Vobkent tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Jondor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Kogon tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Olot tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Peshku tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Romitan tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Shofirkon tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qorovulbozor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qorako‘l tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="G‘ijduvon tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="4" />
+        </insert>
+
+
+<!--        Farg`ona-->
+        <insert tableName="city">
+            <column name="name" value="Farg‘ona shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Marg‘ilon shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Quvasoy shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qo‘qon shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Beshariq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Bog‘dod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Buvayda tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Dang‘ara tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yozyovon tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Quva tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qo‘shtepa tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Oltiariq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Rishton tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="So‘x tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Toshloq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="O‘zbekiston tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Uchko‘prik tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Farg‘ona tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Furqat tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="5" />
+        </insert>
+
+<!--        Qoraqalpog‘iston-->
+        <insert tableName="city">
+            <column name="name" value="Nukus shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Amudaryo tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Beruniy tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Kegeyli tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qanliko‘l tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qorao‘zak tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qo‘ng‘irot tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Mo‘ynoq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Nukus tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Taxiatosh tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Taxtako‘pir tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="To‘rtko‘l tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Xo‘jayli tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Chimboy tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Sho‘manoy tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Ellikqal’a tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="6" />
+        </insert>
+
+<!--        Jizzax-->
+
+        <insert tableName="city">
+            <column name="name" value="Jizzax shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>        <insert tableName="city">
+        <column name="name" value="Arnasoy tumani" />
+        <column name="active" value="true" />
+        <column name="created_at" value="2024-06-01 12:00:00" />
+        <column name="region_id" value="7" />
+    </insert>
+        <insert tableName="city">
+            <column name="name" value="Baxmal tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Do‘stlik tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Zarbdor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Zafarobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Zomin tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Mirzacho‘l tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Paxtakor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Forish tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Sharof Rashidov tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="G‘allaorol tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yangiobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="7" />
+        </insert>
+
+<!--        Qashqadaryo-->
+
+        <insert tableName="city">
+            <column name="name" value="Qarshi shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Shsabz shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Dehqonobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Kasbi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Kitob tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Koson tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Mirishkor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Muborak tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Nishon tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Chiroqchi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Shsabz tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yakkabog‘ tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qamashi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qarshi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="G‘uzor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="8" />
+        </insert>
+
+<!--        Navoiy-->
+        <insert tableName="city">
+            <column name="name" value="Navoiy shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Zarafshon shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Karmana tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Konimex tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Navbahor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Nurota tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Tomdi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Uchquduq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Xatirchi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qiziltepa tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="9" />
+        </insert>
+
+<!--        Namangan-->
+        <insert tableName="city">
+            <column name="name" value="Namangan shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Kosonsoy tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Mingbuloq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Namangan tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Norin tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Pop tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="To‘raqo‘rg‘on tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Uychi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Uchqo‘rg‘on tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Chortoq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Chust tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yangiqo‘rg‘on tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="10" />
+        </insert>
+
+<!--        Samarqand-->
+        <insert tableName="city">
+            <column name="name" value="Samarqand shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Kattaqo‘rg‘on shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Bulung‘ur tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Jomboy tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Ishtixon tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Kattaqo‘rg‘on tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Narpay tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Nurobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Oqdaryo tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Payariq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Pastdarg‘om tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Paxtachi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Samarqand tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Toyloq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Urgut tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qo‘shrabot tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="11" />
+        </insert>
+
+<!--        Surxondaryo-->
+        <insert tableName="city">
+            <column name="name" value="Termiz shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Angor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Boysun tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Denov tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Jarqo‘rg‘on tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Muzrobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Oltinsoy tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Sariosiyo tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Termiz tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Uzun tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Sherobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Sho‘rchi tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qiziriq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qumqo‘rg‘on tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="12" />
+        </insert>
+
+<!--        Sirdaryo-->
+        <insert tableName="city">
+            <column name="name" value="Guliston shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yangiyer shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Shirin shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Boyovut tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Guliston tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Mirzaobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Oqoltin tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Sardoba tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Sayxunobod tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Sirdaryo tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Xovos tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="13" />
+        </insert>
+
+<!--        Xorazm-->
+
+        <insert tableName="city">
+            <column name="name" value="Urganch shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Xiva shahri" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Bog‘ot tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Gurlan tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Urganch tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Xiva tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Xonqa tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Hazorasp tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Shovot tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yangiariq tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Yangibozor tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+        <insert tableName="city">
+            <column name="name" value="Qo‘shko‘pir tumani" />
+            <column name="active" value="true" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="region_id" value="14" />
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

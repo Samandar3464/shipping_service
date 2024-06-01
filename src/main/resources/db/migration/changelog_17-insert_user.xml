@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="17" author="samandar">
+        <insert tableName="users">
+            <column name="phone" value="+998906163464" />
+            <column name="password" value="$2a$10$IGB42qIVSWt7GNBbvl1lZe3zedHhDm72F10oUlszhLgfAaxO5VfGO" />
+            <column name="name" value="Samandar" />
+            <column name="surname" value="Shodmonov" />
+            <column name="gender" value="MAN" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="is_blocked" value="false" />
+            <column name="is_deleted" value="false" />
+        </insert>
+
+        <insert tableName="users">
+            <column name="phone" value="+111111111111" />
+            <column name="password" value="$2a$10$IGB42qIVSWt7GNBbvl1lZe3zedHhDm72F10oUlszhLgfAaxO5VfGO" />
+            <column name="name" value="Client" />
+            <column name="surname" value="Client" />
+            <column name="gender" value="MAN" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="is_blocked" value="false" />
+            <column name="is_deleted" value="false" />
+        </insert>
+        <insert tableName="users">
+            <column name="phone" value="+222222222222" />
+            <column name="password" value="$2a$10$IGB42qIVSWt7GNBbvl1lZe3zedHhDm72F10oUlszhLgfAaxO5VfGO" />
+            <column name="name" value="Driver" />
+            <column name="surname" value="Driver" />
+            <column name="gender" value="MAN" />
+            <column name="created_at" value="2024-06-01 12:00:00" />
+            <column name="is_blocked" value="false" />
+            <column name="is_deleted" value="false" />
+        </insert>
+
+    </changeSet>
+    <changeSet id="17.1" author="samandar">
+        <insert tableName="user_roles">
+            <column name="role_id" value="1"/>
+            <column name="user_id" value="1"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="role_id" value="2"/>
+            <column name="user_id" value="2"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="role_id" value="2"/>
+            <column name="user_id" value="2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

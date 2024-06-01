@@ -12,7 +12,7 @@
             <column name="name" type="VARCHAR(55)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="is_active" type="BOOLEAN" />
+            <column name="active" type="BOOLEAN" />
             <column name="created_at" type="TIMESTAMP" />
             <column name="country_id" type="INT">
                 <constraints nullable="false"

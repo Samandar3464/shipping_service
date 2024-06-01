@@ -12,7 +12,7 @@
             <column name="name" type="VARCHAR(55)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="is_active" type="BOOLEAN" />
+            <column name="active" type="BOOLEAN" />
             <column name="created_at" type="TIMESTAMP" />
             <column name="region_id" type="INT">
                 <constraints nullable="false" foreignKeyName="fk_region_id" referencedTableName="region"  referencedColumnNames="id"/>

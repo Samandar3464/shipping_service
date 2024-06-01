@@ -11,10 +11,12 @@
 //import uz.pdp.shippingservice.entity.locations.Region;
 //import uz.pdp.shippingservice.entity.user.UserEntity;
 //import uz.pdp.shippingservice.dto.location.CountryDto;
+//import uz.pdp.shippingservice.entity.user.UserRole;
 //import uz.pdp.shippingservice.repository.*;
 //
 //import java.time.LocalDateTime;
 //import java.util.List;
+//import java.util.Optional;
 //
 //@Component
 //@RequiredArgsConstructor
@@ -25,7 +27,6 @@
 //    private final PasswordEncoder passwordEncoder;
 //    private final RegionRepository regionRepository;
 //    private final CityRepository cityRepository;
-//    private final StatusRepository statusRepository;
 //    private final CountryRepository countryRepository;
 //    @Value("${spring.sql.init.mode}")
 //    private String initMode;
@@ -36,15 +37,15 @@
 //        if (initMode.equals("always")) {
 //            //admin
 //            UserEntity adminUser = UserEntity.builder()
-//                    .userName("998906163464")
+//                    .phone("998906163464")
 //                    .createdAt(LocalDateTime.now())
-//                    .password(passwordEncoder.encode("123456"))
+//                    .password(passwordEncoder.encode("12345678"))
 //                    .isBlocked(false)
 //                    .isDeleted(false)
 //                    .build();
 //            UserEntity save = userRepository.save(adminUser);
-//            UserRole adminRole = roleRepository.findByName("admin");
-//            save.setAuthroles(List.of(adminRole));
+//            Optional<UserRole> adminRole = roleRepository.findByName("admin");
+//            save.setRoles(List.of(adminRole.get()));
 //            userRepository.save(save);
 //
 //

@@ -1,3 +1,5 @@
 spring:
   profiles:
     active: dev
+
+#    $2a$10$IGB42qIVSWt7GNBbvl1lZe3zedHhDm72F10oUlszhLgfAaxO5VfGO
