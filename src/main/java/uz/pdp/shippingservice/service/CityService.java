@@ -39,8 +39,8 @@ public class CityService {
      }
 
      @ResponseStatus(HttpStatus.OK)
-     public ApiResponse getCityListForAdmin(Integer id , PageRequestFilter reuest) {
-          PageRequest pageRequest = PageRequest.of(reuest.getPageNumber(), reuest.getPageSize());
+     public ApiResponse getCityListForAdmin(Integer id , PageRequestFilter request) {
+          PageRequest pageRequest = PageRequest.of(request.getPageNumber(), request.getPageSize());
           if (id == null){
                return new ApiResponse(cityRepository.findAll(pageRequest),true);
           }

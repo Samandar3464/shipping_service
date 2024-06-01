@@ -15,13 +15,13 @@ public class CountryController {
     private final CountryService countryService;
 
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('admin')")
     public ApiResponse addCountry(@RequestBody CountryDto countryDto) {
         return countryService.addCountry(countryDto);
     }
 
     @PutMapping("/edit")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('admin')")
     public ApiResponse addEdit(@RequestBody CountryDto countryDto) {
         return countryService.editCountry(countryDto);
     }
@@ -42,7 +42,7 @@ public class CountryController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+//    @PreAuthorize("hasAnyRole('admin')")
     public ApiResponse deleteRegionById(@PathVariable Integer id) {
         return countryService.deleteRegionById(id);
     }

@@ -160,18 +160,16 @@ public class UserService {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    public ApiResponse getToken(HttpServletRequest request) throws Exception {
-        String accessTokenByRefresh = jwtGenerate.checkRefreshTokenValidAndGetAccessToken(request);
+    public ApiResponse getToken(String refresh) throws Exception {
+        String accessTokenByRefresh = jwtGenerate.checkRefreshTokenValidAndGetAccessToken(refresh);
         return new ApiResponse("NEW ACCESS TOKEN ", true, new TokenResponse(accessTokenByRefresh));
     }
 
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse addBlockUserByID(Long id) {
         UserEntity userEntity = checkUserExistById(id);
-        userEntity.setBlocked(true);
+        userEntity.setBlocked(false);
         userRepository.save(userEntity);
-//        NotificationMessageResponse notificationMessageResponse = NotificationMessageResponse.from(userEntity.getFirebaseToken(), BLOCKED, new HashMap<>());
-//        fireBaseMessagingService.sendNotificationByToken(notificationMessageResponse);
         return new ApiResponse(BLOCKED, true);
     }
 
@@ -179,9 +177,7 @@ public class UserService {
     public ApiResponse openToBlockUserByID(Long id) {
         UserEntity userEntity = checkUserExistById(id);
         userEntity.setBlocked(true);
-        userRepository.save(userEntity);
-//        NotificationMessageResponse notificationMessageResponse = NotificationMessageResponse.from(userEntity.getFirebaseToken(), OPEN, new HashMap<>());
-//        fireBaseMessagingService.sendNotificationByToken(notificationMessageResponse);
+        userRepository.save(userEntity);;
         return new ApiResponse(OPEN, true);
     }
 

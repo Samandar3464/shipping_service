@@ -46,10 +46,8 @@ public class JwtGenerate {
             Claims body = Jwts.parser().setSigningKey(JWT_ACCESS_KEY).parseClaimsJws(token).getBody();
             return body != null;
         } catch (ExpiredJwtException | SignatureException | UnsupportedJwtException | MalformedJwtException | IllegalArgumentException e) {
-//            throw new TimeExceededException(TOKEN_TIME_OUT);
-            e.printStackTrace();
+            throw new TimeExceededException(TOKEN_TIME_OUT);
         }
-        return false;
     }
 
     public  synchronized Claims isValidRefreshToken(String token) {
@@ -60,12 +58,11 @@ public class JwtGenerate {
         }
     }
 
-    public String checkRefreshTokenValidAndGetAccessToken(HttpServletRequest request) throws Exception {
-        String requestHeader = request.getHeader(AUTHORIZATION);
-        if (requestHeader == null || !requestHeader.startsWith(REFRESH_TOKEN)) {
+    public String checkRefreshTokenValidAndGetAccessToken(String refresh) throws Exception {
+        if (refresh == null || !refresh.startsWith(REFRESH_TOKEN)) {
             throw new RefreshTokeNotFound(REFRESH_TOKEN_NOT_FOUND);
         }
-        String token = requestHeader.replace(REFRESH_TOKEN, "");
+        String token = refresh.replace(REFRESH_TOKEN, "");
         Claims claims = isValidRefreshToken(token);
         if (claims == null) {
             throw new Exception();

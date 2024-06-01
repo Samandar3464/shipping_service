@@ -51,6 +51,7 @@ public class SecurityConfiguration {
             "/images/**",
             "webapp/**",
             "/v1/user/**",
+            "/v1/user/get-token-by-refresh-token",
             "/v1/advertising/**",
     };
 

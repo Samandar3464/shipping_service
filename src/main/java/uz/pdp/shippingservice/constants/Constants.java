@@ -40,7 +40,7 @@ public class Constants {
     public static final String YOU_COME_TO_MESSAGE_FROM_DRIVER="SIZGA HAYDOVCHIDAN HABAR KELDI";
     public static final String PASSENGER_AGREE="Klent yukni olib borib berishinggizga  rozi bo'ldi.";
     public static final String FIREBASE_EXCEPTION="FIREBASE EXCEPTION";
-    public static final String REFRESH_TOKEN_NOT_FOUND="FIREBASE EXCEPTION";
+    public static final String REFRESH_TOKEN_NOT_FOUND="REFRESH_TOKEN_NOT_FOUND";
     public static final String REFRESH_TOKEN="RefreshToken ";
     public static final String REFRESH_TOKEN_TIME_OUT="REFRESH TOKEN TIME OUT";
     public static final String AUTHORITIES="authorities";

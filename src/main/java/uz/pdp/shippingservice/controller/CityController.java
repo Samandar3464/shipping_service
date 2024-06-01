@@ -1,7 +1,7 @@
 package uz.pdp.shippingservice.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.shippingservice.dto.base.PageRequestFilter;
 import uz.pdp.shippingservice.dto.base.ApiResponse;
@@ -15,7 +15,7 @@ public class CityController {
      private final CityService cityService;
 
      @PostMapping("/add")
-     @PreAuthorize("hasRole('ADMIN')")
+//     @PreAuthorize("hasRole('ADMIN')")
      public ApiResponse addRegion(@RequestBody CityRequestDto cityRequestDto) {
           return cityService.saveCity(cityRequestDto);
      }
@@ -36,7 +36,7 @@ public class CityController {
      }
 
      @DeleteMapping("/delete/{id}")
-     @PreAuthorize("hasAnyRole('ADMIN')")
+//     @PreAuthorize("hasAnyRole('ADMIN')")
      public ApiResponse deleteCityById(@PathVariable Integer id) {
           return cityService.deleteCityById(id);
      }

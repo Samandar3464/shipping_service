@@ -59,13 +59,14 @@ public class RegionService {
     }
 
     public ApiResponse editRegion(RegionRegisterRequestDto dto) {
-        if (regionRepository.existsByNameAndCountryId(dto.getName(),dto.getCountryId())) {
+        if (dto.getName()!=null && regionRepository.existsByNameAndCountryId(dto.getName(),dto.getCountryId())) {
             throw new RecordAlreadyExistException(REGION_ALREADY_EXIST);
         }
         Region region = regionRepository.findById(dto.getId()).orElseThrow(() -> new RecordNotFoundException(REGION_NOT_FOUND));
         Country country = countryRepository.findByIdAndActiveTrue(dto.getCountryId())
                 .orElseThrow(() -> new RecordNotFoundException(COUNTRY_NOT_FOUND));
         region.setCountry(country);
+        region.setName(dto.getName() != null ? dto.getName() : region.getName());
         region.setActive(dto.getActive());
         regionRepository.save(region);
         return new ApiResponse(SUCCESSFULLY, true);

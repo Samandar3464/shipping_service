@@ -15,13 +15,13 @@ public class RegionController {
 
      private final RegionService regionService;
      @PostMapping("/add")
-     @PreAuthorize("hasRole('ADMIN')")
+//     @PreAuthorize("hasRole('ADMIN')")
      public ApiResponse addRegion(@RequestBody RegionRegisterRequestDto regionRegisterRequestDto) {
           return regionService.addRegion(regionRegisterRequestDto);
      }
 
      @PutMapping("/edit")
-     @PreAuthorize("hasRole('ADMIN')")
+//     @PreAuthorize("hasRole('ADMIN')")
      public ApiResponse editRegion(@RequestBody RegionRegisterRequestDto regionRegisterRequestDto) {
           return regionService.editRegion(regionRegisterRequestDto);
      }
@@ -42,7 +42,7 @@ public class RegionController {
      }
 
      @DeleteMapping("/delete/{id}")
-     @PreAuthorize("hasAnyRole('ADMIN')")
+//     @PreAuthorize("hasAnyRole('ADMIN')")
      public ApiResponse deleteRegionById(@PathVariable Integer id) {
           return regionService.deleteRegionById(id);
      }

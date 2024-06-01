@@ -27,11 +27,12 @@ public class CountryService {
         countryRepository.save(Country.toEntity(countryDto));
         return new ApiResponse(SUCCESSFULLY, true);
     }
-    @ResponseStatus(HttpStatus.CREATED)
+
+    @ResponseStatus(HttpStatus.OK)
     public ApiResponse editCountry(CountryDto countryDto) {
         Country country = countryRepository.findByIdAndName(countryDto.getId(), countryDto.getName()).orElseThrow(() -> new RecordAlreadyExistException(COUNTRY_ALREADY_EXIST));
-        country.setName(countryDto.getName());
-        country.setActive(countryDto.getActive());
+        country.setName(countryDto.getName() != null ? countryDto.getName() : country.getName());
+        country.setActive(countryDto.getActive() != null ? countryDto.getActive() : country.getActive());
         countryRepository.save(country);
         return new ApiResponse(SUCCESSFULLY, true);
     }
@@ -50,6 +51,7 @@ public class CountryService {
     public ApiResponse getCountryById(Integer id) {
         return new ApiResponse(countryRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(COUNTRY_NOT_FOUND)), true);
     }
+
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse deleteRegionById(Integer id) {
         Country country = countryRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(COUNTRY_NOT_FOUND));

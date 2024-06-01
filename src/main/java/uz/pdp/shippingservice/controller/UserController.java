@@ -48,8 +48,8 @@ public class UserController {
     }
 
     @PostMapping("/forget-password")
-    public ApiResponse forgetPassword(@RequestBody String number) {
-        return userService.forgetPassword(number);
+    public ApiResponse forgetPassword(@RequestParam("phone") String phone) {
+        return userService.forgetPassword(phone);
     }
 
 
@@ -63,9 +63,9 @@ public class UserController {
         return userService.changePasswordToNew(dto);
     }
 
-    @PostMapping("get/token/refresh-token")
-    public ApiResponse refreshToken(HttpServletRequest httpServletRequest) throws Exception {
-        return userService.getToken(httpServletRequest);
+    @PostMapping("/get-token-by-refresh-token")
+    public ApiResponse refreshToken(@RequestParam(name = "refresh") String refresh) throws Exception {
+        return userService.getToken(refresh);
     }
 
     @GetMapping("/getById/{id}")
