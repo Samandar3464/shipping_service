@@ -2,11 +2,11 @@ package uz.pdp.shippingservice.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import uz.pdp.shippingservice.dto.base.ApiResponse;
 import uz.pdp.shippingservice.dto.language.CreateTranslateTextDto;
 import uz.pdp.shippingservice.dto.language.LanguageEnum;
 import uz.pdp.shippingservice.entity.language.LanguageBaseWords;
@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static uz.pdp.shippingservice.constants.Constants.SUCCESSFULLY;
+
 @Service
 @RequiredArgsConstructor
 public class LanguageService {
@@ -30,7 +32,7 @@ public class LanguageService {
     @Value("${languages.primaryLang}")
     String primaryLang;
 
-    public void createMainText(HashMap<String, String> dto) {
+    public ApiResponse createMainText(HashMap<String, String> dto) {
         String newWord = "";
         for (Map.Entry<String, String> entry : dto.entrySet()) {
             newWord = entry.getValue();
@@ -43,10 +45,11 @@ public class LanguageService {
                     .build();
             languageRepository.save(languageBaseWords);
         }
+        return new ApiResponse(SUCCESSFULLY , true);
     }
 
 
-    public void createTranslation(CreateTranslateTextDto dto) {
+    public ApiResponse createTranslation(CreateTranslateTextDto dto) {
         try {
             Optional<LanguageBaseWords> byId = languageRepository.findById(dto.getId());
             if (byId.isPresent()) {
@@ -66,7 +69,7 @@ public class LanguageService {
                     en.setLanguage("En");
 
                     languageSourceRepository.saveAll(allByIdId);
-                    return;
+                    return new ApiResponse(SUCCESSFULLY , true);
                 }
                 HashMap<LanguageEnum, String> translations = dto.getTranslations();
 
@@ -75,19 +78,20 @@ public class LanguageService {
                 languageSourceRepository.save(new LanguageSource(languageBaseWords, "En", translations.get(LanguageEnum.En)!=null ? translations.get(LanguageEnum.En) : null));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
+        return new ApiResponse(SUCCESSFULLY , true);
     }
 
-    public Page<LanguageBaseWords> getAllPaginated(int page, int size , String content) {
+    public ApiResponse getAllPaginated(int page, int size , String content) {
         Pageable pageable = PageRequest.of(page, size);
         if (content.equals("null")) {
-            return languageRepository.findAll(pageable);
+            return  new ApiResponse(languageRepository.findAll(pageable),true);
         }
-        return languageRepository.findAllByTextContainingIgnoreCase(pageable, content);
+        return  new ApiResponse(languageRepository.findAllByTextContainingIgnoreCase(pageable, content),true);
     }
 
-    public Map<String , String> getAllByLanguage(String language) {
+    public ApiResponse getAllByLanguage(String language) {
         List<LanguageBaseWords> allByLanguageBaseWords = languageRepository.findAll();
         Map<String , String> languageSourceMap = new HashMap<String, String>();
         if (!allByLanguageBaseWords.isEmpty()){
@@ -102,7 +106,7 @@ public class LanguageService {
                 }
             }
         }
-        return languageSourceMap;
+        return new ApiResponse(languageSourceMap,true);
     }
 
 }
